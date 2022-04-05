@@ -1,0 +1,9 @@
+.test {
+    -fx-background-color: blue
+}
+
+Key {
+    -fx-border-color: brown;
+    -fx-rotate: 100;
+
+}
