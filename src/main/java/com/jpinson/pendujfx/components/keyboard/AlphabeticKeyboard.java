@@ -1,14 +1,12 @@
 package com.jpinson.pendujfx.components.keyboard;
 import com.jpinson.pendujfx.utils.Alphabet;
-import java.util.List;
 
 public class AlphabeticKeyboard extends Keyboard {
     public AlphabeticKeyboard (KeyboardKeyListener listener) {
-        super(generateList(), listener);
+        super(listener, Alphabet.array);
     }
 
-    private static List<Character> generateList() {
-        Alphabet alphabet = new Alphabet();
-        return alphabet.getCharactersList();
+    public AlphabeticKeyboard (KeyboardKeyListener listener, boolean disableKeyOnUse) {
+        super(listener, Alphabet.array, disableKeyOnUse);
     }
 }

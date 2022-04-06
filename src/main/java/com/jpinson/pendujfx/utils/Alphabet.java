@@ -1,27 +1,22 @@
 package com.jpinson.pendujfx.utils;
 
-import java.util.ArrayList;
-import java.util.List;
+public class Alphabet { ;
+    private static char[] letters;
 
-public class Alphabet {
-    private final List<Character> charactersList = new ArrayList<>();
+    static {
+        char start = 'A';
+        char end = 'Z';
+        letters = new char[end-start+1];
 
-    public Alphabet() {
-        this.buildList();
-    }
-
-    public List<Character> getCharactersList() {
-        return charactersList;
-    }
-
-    private void buildList() {
-        for (char c = 'A'; c <= 'Z'; ++c) {
-            this.charactersList.add(c);
+        for (char c = start; c <= end; ++c) {
+            letters[c-start] = c;
         }
     }
 
-    public boolean isAlphabetic(Character c) {
-        c = Character.toUpperCase(c);
-        return this.charactersList.contains(c);
+    public static char[] array = letters;
+    public static String string = String.valueOf(letters);
+
+    public static boolean isAlpha(char c) {
+        return Character.isAlphabetic(c);
     }
 }

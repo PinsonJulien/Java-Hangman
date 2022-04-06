@@ -4,30 +4,36 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.layout.FlowPane;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Keyboard extends FlowPane {
     private final KeyboardKeyListener listener;
-    private final List<Character> charactersList = new ArrayList<>();
     private final Map<Character, Key> keys = new HashMap<>();
+    private final boolean disableKeyOnUse;
 
-    public Keyboard(List<Character> charactersList, KeyboardKeyListener listener) {
+    public Keyboard(KeyboardKeyListener listener, char[] characters) {
         this.listener = listener;
-        this.charactersList.addAll(charactersList);
-        this.initComponents();
+        this.disableKeyOnUse = false;
+        this.init();
+        this.initComponents(characters);
     }
 
-    public Map<Character, Key> getKeys() {
-        return keys;
+    public Keyboard(KeyboardKeyListener listener, char[] characters, boolean disableKeyOnUse) {
+        this.listener = listener;
+        this.disableKeyOnUse = disableKeyOnUse;
+        this.init();
+        this.initComponents(characters);
     }
 
-    private void initComponents() {
+    private void init() {}
+
+    private void initComponents(char[] characters) {
         ObservableList<Node> childrenList = this.getChildren();
 
-        for (Character c : charactersList) {
+        int len = characters.length;
+        for (int i = 0; i < len; ++i) {
+            char c = characters[i];
             Key key = new Key(c);
             key.setOnAction(buttonHandler);
 
@@ -36,12 +42,28 @@ public class Keyboard extends FlowPane {
         }
     }
 
+    public void reset() {
+        // enable all keys
+        this.keys.forEach((c, key) -> {
+            key.setDisable(false);
+        });
+    }
+
+    public void disableKey(char c) {
+        this.keys.get(c).setDisable(true);
+    }
+
+    public void disableKey(Key key) {
+        this.keys.get(key).setDisable(true);
+    }
+
     private final EventHandler<ActionEvent> buttonHandler = new EventHandler<>() {
         @Override
         public void handle(ActionEvent actionEvent) {
             Key key = (Key) actionEvent.getSource();
+            if (disableKeyOnUse) key.setDisable(true);
+
             listener.KeyboardPressedKey(key.getValue());
-            key.setDisable(true);
         }
     };
 

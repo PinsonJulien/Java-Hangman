@@ -8,6 +8,4 @@ module com.jpinson.pendujfx {
 
     opens com.jpinson.pendujfx to javafx.fxml;
     exports com.jpinson.pendujfx;
-    exports com.jpinson.pendujfx.controllers;
-    opens com.jpinson.pendujfx.controllers to javafx.fxml;
 }

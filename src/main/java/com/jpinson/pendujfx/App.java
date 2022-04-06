@@ -1,9 +1,7 @@
 package com.jpinson.pendujfx;
 
 import com.jpinson.pendujfx.components.layout.Layout;
-import com.jpinson.pendujfx.controllers.GameController;
-import com.jpinson.pendujfx.controllers.MenuController;
-import com.jpinson.pendujfx.views.GameView;
+import com.jpinson.pendujfx.presenters.MainPresenter;
 import com.jpinson.pendujfx.views.View;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -18,13 +16,13 @@ public class App extends Application {
     private final String styleFileName = "app.css";
     private final Layout layout;
 
-    private final MenuController menuController;
-    private final GameController gameController;
+    //private final MenuController menuController;
+    //private final GameController gameController;
 
     public App() {
         this.layout = new Layout();
-        this.menuController = new MenuController();
-        this.gameController = new GameController();
+        //this.menuController = new MenuController();
+        //this.gameController = new GameController();
     }
 
     public static void main(String[] args) {
@@ -35,14 +33,15 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // Insert menu view inside the layout
-        GameView view = this.gameController.getView();
-        this.changeView(view);
+
+        MainPresenter mainPresenter = new MainPresenter();
+
 
         //AlphabeticKeyboard kb = view.getKeyboard();
         //kb.getKeys().get('A').setDisable(true);
 
         // Show the window
-        Scene scene = new Scene(this.layout, 320, 240);
+        Scene scene = new Scene(mainPresenter.getView(), 320, 240);
         stage.setScene(scene);
         stage.show();
 

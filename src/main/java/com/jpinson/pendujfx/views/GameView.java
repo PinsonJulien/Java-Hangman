@@ -1,18 +1,14 @@
 package com.jpinson.pendujfx.views;
 import com.jpinson.pendujfx.components.keyboard.AlphabeticKeyboard;
 import com.jpinson.pendujfx.components.word.Word;
-import com.jpinson.pendujfx.controllers.GameController;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 
-public class GameView extends View {
+public class GameView extends ListenableView<GameViewListener> implements GameViewListener {
     private final AlphabeticKeyboard keyboard;
     private final Word word;
 
-    public GameView(GameController controller) {
-        this.keyboard = new AlphabeticKeyboard(controller);
-        this.word = new Word("Banane");
+    public GameView() {
+        this.keyboard = new AlphabeticKeyboard(this, true);
+        this.word = new Word("");
         this.initComponents();
     }
 
@@ -25,8 +21,17 @@ public class GameView extends View {
     }
 
     public void initComponents() {
-        ObservableList<Node> childrenList = this.getChildren();
-        childrenList.add(this.keyboard);
-        childrenList.add(this.word);
+        this.addNode(this.keyboard);
+        this.addNode(this.word);
+    }
+
+    // -------------------------------------------------------------------------------
+    // Listeners
+    // -------------------------------------------------------------------------------
+    @Override
+    public void KeyboardPressedKey(char c) {
+        for (GameViewListener listener : this.getListeners()) {
+            listener.KeyboardPressedKey(c);
+        }
     }
 }

@@ -4,21 +4,21 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 public class Key extends Button {
-    private final Character value;
+    private final char value;
 
-    public Key(Character c) {
-        super("" + c);
+    public Key(char c) {
+        super(String.valueOf(c));
         this.value = c;
         this.init();
     }
 
-    public Key(Character c, Node graphic) {
-        super("" + c, graphic);
+    public Key(char c, Node graphic) {
+        super(String.valueOf(c), graphic);
         this.value = c;
         this.init();
     }
 
-    public Character getValue() {
+    public char getValue() {
         return this.value;
     }
 
@@ -26,5 +26,4 @@ public class Key extends Button {
         this.getStyleClass().add("test");
         this.setDisable(false);
     }
-
 }
