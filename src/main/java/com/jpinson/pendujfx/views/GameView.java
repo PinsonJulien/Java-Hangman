@@ -1,12 +1,14 @@
 package com.jpinson.pendujfx.views;
 import com.jpinson.pendujfx.components.keyboard.AlphabeticKeyboard;
 import com.jpinson.pendujfx.components.word.Word;
+import javafx.scene.layout.Pane;
 
-public class GameView extends ListenableView<GameViewListener> implements GameViewListener {
+public class GameView extends View<Pane, GameViewListener> implements GameViewListener {
     private final AlphabeticKeyboard keyboard;
     private final Word word;
 
     public GameView() {
+        super(new Pane());
         this.keyboard = new AlphabeticKeyboard(this, true);
         this.word = new Word("");
         this.initComponents();
@@ -21,8 +23,7 @@ public class GameView extends ListenableView<GameViewListener> implements GameVi
     }
 
     public void initComponents() {
-        this.addNode(this.keyboard);
-        this.addNode(this.word);
+        this.insertNode(this.keyboard, this.word);
     }
 
     // -------------------------------------------------------------------------------

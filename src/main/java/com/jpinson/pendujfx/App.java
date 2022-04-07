@@ -41,7 +41,7 @@ public class App extends Application {
         //kb.getKeys().get('A').setDisable(true);
 
         // Show the window
-        Scene scene = new Scene(mainPresenter.getView(), 320, 240);
+        Scene scene = new Scene(mainPresenter.getView().getPane(), 320, 240);
         stage.setScene(scene);
         stage.show();
 
@@ -56,12 +56,5 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();*/
     }
-
-    private void changeView (View view) {
-        ObservableList<Node> childrenList = this.layout.getBody().getChildren();
-        childrenList.clear();
-        childrenList.add(view);
-    }
-
 
 }

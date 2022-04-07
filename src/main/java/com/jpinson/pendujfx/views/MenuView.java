@@ -3,8 +3,9 @@ package com.jpinson.pendujfx.views;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 
-public class MenuView extends View {
+public class MenuView extends View<Pane, Void> {
     // Sert de hub aux options etc.
 
     // sélection de difficulté
@@ -15,9 +16,9 @@ public class MenuView extends View {
     private final Button button;
 
     public MenuView() {
+        super(new Pane());
         this.button = new Button("bonjour");
         Button button2 = new Button("Pinçon");
-        ObservableList<Node> childrenList = this.getChildren();
-        childrenList.addAll(this.button, button2);
+        this.insertNode(this.button, button2);
     }
 }

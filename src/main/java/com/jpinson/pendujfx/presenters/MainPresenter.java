@@ -24,27 +24,27 @@ public class MainPresenter extends Presenter<MainView> implements MainPresenterL
     }
 
     private void insertGamePresenter() {
-        this.getView().addNode(gamePresenter.getView());
+        this.getView().insertNode(gamePresenter.getView().getPane());
     }
 
     private void insertPresenter(Node node) {
-        this.getView().addNode(node);
+        this.getView().insertNode(node);
     }
 
     private void removeCurrentPresenter() {
-        this.getView().removeAllNodes();
+        this.getView().removeNodes();
     }
 
     @Override
     public void selectPresenter(PresenterAlias alias) {
         removeCurrentPresenter();
         Node node = switch (alias) {
-            case GAME -> this.gamePresenter.getView();
+            case GAME -> this.gamePresenter.getView().getPane();
         };
 
         switch (alias) {
             case GAME :
-                node = this.gamePresenter.getView();
+                node = this.gamePresenter.getView().getPane();
                 break;
         }
 

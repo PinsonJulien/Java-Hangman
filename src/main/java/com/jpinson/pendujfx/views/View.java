@@ -2,22 +2,42 @@ package com.jpinson.pendujfx.views;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
 
-public class View extends VBox {
+import java.util.ArrayList;
 
-    public void addNode(Node node) {
-        ObservableList<Node> childrenList = this.getChildren();
-        childrenList.add(node);
+public abstract class View<P extends Pane, L> {
+    private final P pane;
+    private final ArrayList<L> listeners = new ArrayList<>();
+
+    public View (P pane) {
+        this.pane = pane;
     }
 
-    public void removeNode(Node node) {
-        ObservableList<Node> childrenList = this.getChildren();
-        childrenList.remove(node);
+    public P getPane() {
+        return pane;
     }
 
-    public void removeAllNodes() {
-        ObservableList<Node> childrenList = this.getChildren();
+    public void insertNode (Node... node) {
+        ObservableList<Node> childrenList = this.pane.getChildren();
+        childrenList.addAll(node);
+    }
+
+    public void removeNode (Node... node) {
+        ObservableList<Node> childrenList = this.pane.getChildren();
+        childrenList.removeAll(node);
+    }
+
+    public void removeNodes () {
+        ObservableList<Node> childrenList = this.pane.getChildren();
         childrenList.clear();
+    }
+
+    public final ArrayList<L> getListeners() {
+        return this.listeners;
+    }
+
+    public void addListener(L listener) {
+        this.listeners.add(listener);
     }
 }
