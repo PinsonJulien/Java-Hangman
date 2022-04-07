@@ -42,19 +42,14 @@ public class Keyboard extends FlowPane {
         }
     }
 
-    public void reset() {
-        // enable all keys
+    public void toggleAllKeys(boolean active) {
         this.keys.forEach((c, key) -> {
-            key.setDisable(false);
+            key.setDisable(!active);
         });
     }
 
-    public void disableKey(char c) {
-        this.keys.get(c).setDisable(true);
-    }
-
-    public void disableKey(Key key) {
-        this.keys.get(key).setDisable(true);
+    public void toggleKey(char c, boolean active) {
+        this.keys.get(c).setDisable(!active);
     }
 
     private final EventHandler<ActionEvent> buttonHandler = new EventHandler<>() {

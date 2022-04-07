@@ -1,4 +1,4 @@
 package com.jpinson.pendujfx.models;
 
-public class Model {
+public abstract class Model {
 }

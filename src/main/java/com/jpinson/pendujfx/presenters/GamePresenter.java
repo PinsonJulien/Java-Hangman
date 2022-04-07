@@ -9,6 +9,7 @@ public class GamePresenter extends Presenter<GameView> implements GameViewListen
     private final GameModel gameModel;
 
     private static final char encryptingCharacter = '?';
+    private static final int maxHealth = 5;
 
     public GamePresenter(MainPresenter mainPresenter) {
         super(new GameView());
@@ -31,16 +32,13 @@ public class GamePresenter extends Presenter<GameView> implements GameViewListen
         String encryptedWord = this.encryptWord(word);
         this.gameModel.setEncryptedWord(encryptedWord);
 
+        // Set health to max
+        this.gameModel.setHealth(maxHealth);
+
         // Setup view
         GameView view = this.getView();
         view.getWord().set(encryptedWord);
-    }
-
-    public void resetView() {
-        GameView view = this.getView();
-
-        // Reset keyboard
-        view.getKeyboard().reset();
+        view.getHealthBar().setFullHealth();
     }
 
     public String encryptWord(String word) {
@@ -65,47 +63,35 @@ public class GamePresenter extends Presenter<GameView> implements GameViewListen
     @Override
     public void KeyboardPressedKey(char c) {
         String word = this.gameModel.getWord();
+        GameView view = this.getView();
 
         // Incorrect letter
         if (word.indexOf(c) < 0 ) {
             // remove health
-            System.out.println("Outch -1 vie !");
+            int health = this.gameModel.getHealth() - 1;
+
+            if (health <= 0) {
+                System.out.printf("GAME OVER !");
+                view.gameOver();
+                return;
+            }
+
+            this.gameModel.setHealth(health);
+            // Set health in percentage.
+            double percentage = ((double) health/maxHealth)*100;
+            view.getHealthBar().setHealth(percentage);
             return;
         }
 
         // Reveal letter in view
         decryptWord(c);
         String encryptedWord = this.gameModel.getEncryptedWord();
-        this.getView().getWord().set(encryptedWord);
+        view.getWord().set(encryptedWord);
 
         // All letters are revealed : game over, win
         if ( word.equals(encryptedWord) ) {
-            this.resetView();
+            view.reset();
             System.out.println("You won");
         }
-
-
-        //Word word = this.view.getWord();
-        // word.contains();
-
-        // Comparer avec string.contains();
-        /*String wordBeforeSwap = word.getLettersToString();
-        word.swapLetters(c);
-        String wordAfterSwap = word.getLettersToString();
-
-        // Letters have been uncovered
-        if (!(wordBeforeSwap.equals(wordAfterSwap))) {
-
-            // All the letters are uncovered, end the game
-            if (word.getWord().equals(wordAfterSwap)) {
-                System.out.println("You won !");
-            }
-        }
-
-        // No letter was unconvered, lose life
-        else {
-            System.out.println("-1 vie !");
-        }*/
-
     }
 }

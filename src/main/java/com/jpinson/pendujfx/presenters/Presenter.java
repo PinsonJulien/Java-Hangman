@@ -2,7 +2,7 @@ package com.jpinson.pendujfx.presenters;
 
 import com.jpinson.pendujfx.views.View;
 
-public class Presenter<V extends View<?,?>> {
+public abstract class Presenter<V extends View<?,?>> {
     private V view;
 
     public Presenter (V view) {

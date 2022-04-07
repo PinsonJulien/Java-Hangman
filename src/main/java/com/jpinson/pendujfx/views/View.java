@@ -40,4 +40,7 @@ public abstract class View<P extends Pane, L> {
     public void addListener(L listener) {
         this.listeners.add(listener);
     }
+
+    public abstract void init();
+    public abstract void reset();
 }

@@ -21,4 +21,14 @@ public class MenuView extends View<Pane, Void> {
         Button button2 = new Button("Pinçon");
         this.insertNode(this.button, button2);
     }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void reset() {
+
+    }
 }

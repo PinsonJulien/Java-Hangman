@@ -22,5 +22,12 @@ public class GameModel extends Model {
         this.encryptedWord = encryptedWord;
     }
 
+    public int getHealth() {
+        return this.health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
 
 }

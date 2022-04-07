@@ -1,14 +1,20 @@
 package com.jpinson.pendujfx.views;
 
-import org.kordamp.bootstrapfx.scene.layout.Panel;
+import javafx.scene.layout.Pane;
 
-public class MainView extends View<Panel, Void> {
+public class MainView extends View<Pane, Void> {
     public MainView() {
-        super(new Panel());
-        this.initComponents();
+        super(new Pane());
+        this.init();
     }
 
-    public void initComponents () {
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void reset() {
 
     }
 }
