@@ -33,7 +33,7 @@ public class MenuPresenter extends Presenter<MenuView> implements MenuViewListen
 
     @Override
     public void optionButtonPressed() {
-        // this.mainPresenter.selectPresenter(PresenterAlias.OPTION);
+        this.mainPresenter.selectPresenter(PresenterAlias.OPTION);
     }
 
     // Methods

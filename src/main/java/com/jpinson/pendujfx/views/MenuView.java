@@ -23,16 +23,6 @@ public class MenuView extends View<VBox, MenuViewListener> implements MenuViewLi
 
     // Getters / Setters
 
-    // Events
-    private final EventHandler<ActionEvent> newGameButtonHandler = actionEvent -> {
-        this.playButtonPressed();
-    };
-
-    private final EventHandler<ActionEvent> menuButtonHandler = actionEvent -> {
-        this.optionButtonPressed();
-    };
-
-
     // Interfaces
     @Override
     public void init() {
@@ -59,6 +49,15 @@ public class MenuView extends View<VBox, MenuViewListener> implements MenuViewLi
             listener.optionButtonPressed();
         }
     }
+
+    // Events
+    private final EventHandler<ActionEvent> newGameButtonHandler = actionEvent -> {
+        this.playButtonPressed();
+    };
+
+    private final EventHandler<ActionEvent> menuButtonHandler = actionEvent -> {
+        this.optionButtonPressed();
+    };
 
     // Methods
 }

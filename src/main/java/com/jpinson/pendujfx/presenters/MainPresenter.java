@@ -10,6 +10,7 @@ public class MainPresenter extends Presenter<MainView> implements MainPresenterL
 
     // Presenters
     private final MenuPresenter menuPresenter = new MenuPresenter(this);
+    private final OptionPresenter optionPresenter = new OptionPresenter(this);
     private final GamePresenter gamePresenter =  new GamePresenter(this);
     private final GameOverPresenter gameOverPresenter = new GameOverPresenter(this);
 
@@ -38,6 +39,7 @@ public class MainPresenter extends Presenter<MainView> implements MainPresenterL
         removeCurrentPresenter();
         Presenter<?> presenter = switch (alias) {
             case MENU -> this.menuPresenter;
+            case OPTION -> this.optionPresenter;
             case GAME -> this.gamePresenter;
             case GAMEOVER -> this.gameOverPresenter;
         };
