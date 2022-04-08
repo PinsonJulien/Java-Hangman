@@ -15,10 +15,15 @@ public abstract class View<P extends Pane, L> implements InitResetInterface {
         this.pane = pane;
     }
 
+    // Getters / Setters
     public P getPane() {
         return pane;
     }
+    public ArrayList<L> getListeners() {
+        return this.listeners;
+    }
 
+    // Methods
     public void insertNode (Node... node) {
         ObservableList<Node> childrenList = this.pane.getChildren();
         childrenList.addAll(node);
@@ -32,10 +37,6 @@ public abstract class View<P extends Pane, L> implements InitResetInterface {
     public void removeNodes () {
         ObservableList<Node> childrenList = this.pane.getChildren();
         childrenList.clear();
-    }
-
-    public final ArrayList<L> getListeners() {
-        return this.listeners;
     }
 
     public void addListener(L listener) {

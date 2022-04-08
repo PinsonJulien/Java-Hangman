@@ -8,6 +8,9 @@ public class MainView extends View<Pane, Void> {
         this.init();
     }
 
+    // Getters / Setters
+
+    // Interfaces
     @Override
     public void init() {
 
@@ -17,4 +20,8 @@ public class MainView extends View<Pane, Void> {
     public void reset() {
 
     }
+
+    // Listeners
+
+    // Methods
 }

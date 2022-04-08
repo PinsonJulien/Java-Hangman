@@ -5,30 +5,25 @@ import com.jpinson.pendujfx.models.GameModel;
 import com.jpinson.pendujfx.views.MainView;
 
 public class MainPresenter extends Presenter<MainView> implements MainPresenterListener {
-    private final GameModel gameModel;
-    private final GamePresenter gamePresenter;
-    private final GameOverPresenter gameOverPresenter;
+    private final GameModel gameModel = new GameModel();
+    private final GamePresenter gamePresenter =  new GamePresenter(this);
+    private final GameOverPresenter gameOverPresenter = new GameOverPresenter(this);
 
     public MainPresenter() {
         super(new MainView());
-        this.gameModel = new GameModel();
-        this.gamePresenter = new GamePresenter(this);
-        this.gameOverPresenter = new GameOverPresenter(this);
-
-        this.selectPresenter(PresenterAlias.GAME);
+        this.init();
     }
 
+    // Getters / Setters
     public GameModel getGameModel() {
         return gameModel;
     }
 
-    private void removeCurrentPresenter() {
-        this.getView().removeNodes();
-    }
-
     // Interfaces
     @Override
-    public void init() {}
+    public void init() {
+        this.selectPresenter(PresenterAlias.GAME);
+    }
 
     @Override
     public void reset() {}
@@ -45,4 +40,10 @@ public class MainPresenter extends Presenter<MainView> implements MainPresenterL
         presenter.reset();
         this.getView().insertNode(presenter.getView().getPane());
     }
+
+    // Methods
+    private void removeCurrentPresenter() {
+        this.getView().removeNodes();
+    }
+
 }

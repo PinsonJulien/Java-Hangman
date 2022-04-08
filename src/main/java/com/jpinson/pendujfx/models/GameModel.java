@@ -6,6 +6,7 @@ public class GameModel extends Model {
     private String word;
     private String encryptedWord;
 
+    // Getters / Setters
     public String getWord() {
         return this.word;
     }

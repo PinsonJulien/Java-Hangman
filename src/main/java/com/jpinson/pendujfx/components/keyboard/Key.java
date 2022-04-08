@@ -1,9 +1,10 @@
 package com.jpinson.pendujfx.components.keyboard;
 
+import com.jpinson.pendujfx.interfaces.InitResetInterface;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 
-public class Key extends Button {
+public class Key extends Button implements InitResetInterface {
     private final char value;
 
     public Key(char c) {
@@ -18,12 +19,17 @@ public class Key extends Button {
         this.init();
     }
 
+    // Getters / Setters
     public char getValue() {
         return this.value;
     }
 
-    private void init() {
-        this.getStyleClass().add("test");
-        this.setDisable(false);
-    }
+    // Interfaces
+    @Override
+    public void init() {}
+
+    @Override
+    public void reset() {}
+
+    // Methods
 }

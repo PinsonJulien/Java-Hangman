@@ -1,12 +1,30 @@
 package com.jpinson.pendujfx.components.healthBar;
 
+import com.jpinson.pendujfx.interfaces.InitResetInterface;
 import javafx.scene.control.ProgressBar;
 
-public class HealthBar extends ProgressBar {
+public class HealthBar extends ProgressBar implements InitResetInterface {
     public HealthBar() {
+        this.init();
+    }
+
+    // Getters / Setters
+
+    // Interfaces
+    @Override
+    public void init() {
         this.setFullHealth();
         this.setStyle("-fx-background-color: purple");
-        this.init();
+    }
+
+    @Override
+    public void reset() {
+
+    }
+
+    // Methods
+    public void setFullHealth() {
+        this.setHealth(100);
     }
 
     public void setHealth(double percentage) {
@@ -25,11 +43,4 @@ public class HealthBar extends ProgressBar {
         }
     }
 
-    public void setFullHealth() {
-        this.setHealth(100);
-    }
-
-    public void init() {
-
-    }
 }

@@ -1,7 +1,5 @@
 package com.jpinson.pendujfx.views;
 
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
@@ -20,8 +18,12 @@ public class MenuView extends View<Pane, Void> {
         this.button = new Button("bonjour");
         Button button2 = new Button("Pinçon");
         this.insertNode(this.button, button2);
+        this.init();
     }
 
+    // Getters / Setters
+
+    // Interfaces
     @Override
     public void init() {
 
@@ -31,4 +33,8 @@ public class MenuView extends View<Pane, Void> {
     public void reset() {
 
     }
+
+    // Listeners
+
+    // Methods
 }

@@ -5,18 +5,16 @@ import com.jpinson.pendujfx.components.healthBar.HealthBar;
 import javafx.scene.layout.VBox;
 
 public class GameView extends View<VBox, GameViewListener> implements GameViewListener {
-    private final AlphabeticKeyboard keyboard;
-    private final Word word;
-    private final HealthBar healthBar;
+    private final AlphabeticKeyboard keyboard = new AlphabeticKeyboard(this, true);
+    private final Word word = new Word();
+    private final HealthBar healthBar = new HealthBar();
 
     public GameView() {
         super(new VBox());
-        this.keyboard = new AlphabeticKeyboard(this, true);
-        this.word = new Word("");
-        this.healthBar = new HealthBar();
         this.init();
     }
 
+    // Getters / setters
     public AlphabeticKeyboard getKeyboard() {
         return keyboard;
     }
@@ -27,6 +25,7 @@ public class GameView extends View<VBox, GameViewListener> implements GameViewLi
         return healthBar;
     }
 
+    // Interfaces
     @Override
     public void init() {
         this.insertNode(this.keyboard, this.word, this.healthBar);
@@ -38,13 +37,13 @@ public class GameView extends View<VBox, GameViewListener> implements GameViewLi
         this.healthBar.setFullHealth();
     }
 
-    // -------------------------------------------------------------------------------
     // Listeners
-    // -------------------------------------------------------------------------------
     @Override
     public void KeyboardPressedKey(char c) {
         for (GameViewListener listener : this.getListeners()) {
             listener.KeyboardPressedKey(c);
         }
     }
+
+    // Methods
 }

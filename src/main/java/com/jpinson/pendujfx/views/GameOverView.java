@@ -7,18 +7,18 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class GameOverView extends View<VBox, GameOverViewListener> implements GameOverViewListener {
-    private final Label text;
-    private final Button newGameButton;
-    private final Button menuButton;
+    private final Label text = new Label("GAME OVER");
+    private final Button newGameButton = new Button("NEW GAME");
+    private final Button menuButton =  new Button("MENU");
 
     public GameOverView () {
         super(new VBox());
-        this.text = new Label("GAME OVER");
-        this.newGameButton = new Button("NEW GAME");
-        this.menuButton = new Button("MENU");
         this.init();
     }
 
+    // Getters / Setters
+
+    // Interfaces
     @Override
     public void init() {
         this.newGameButton.setOnAction(this.newGameButtonHandler);
@@ -60,4 +60,6 @@ public class GameOverView extends View<VBox, GameOverViewListener> implements Ga
             listener.MenuButtonPressed();
         }
     }
+
+    // Methods
 }

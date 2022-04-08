@@ -1,4 +1,5 @@
 package com.jpinson.pendujfx.components.keyboard;
+import com.jpinson.pendujfx.interfaces.InitResetInterface;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,33 +8,34 @@ import javafx.scene.layout.FlowPane;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Keyboard extends FlowPane {
+public class Keyboard extends FlowPane implements InitResetInterface {
     private final KeyboardKeyListener listener;
+    private final char[] characters;
     private final Map<Character, Key> keys = new HashMap<>();
     private final boolean disableKeyOnUse;
 
     public Keyboard(KeyboardKeyListener listener, char[] characters) {
         this.listener = listener;
         this.disableKeyOnUse = false;
+        this.characters = characters;
         this.init();
-        this.initComponents(characters);
     }
 
     public Keyboard(KeyboardKeyListener listener, char[] characters, boolean disableKeyOnUse) {
         this.listener = listener;
         this.disableKeyOnUse = disableKeyOnUse;
+        this.characters = characters;
         this.init();
-        this.initComponents(characters);
     }
 
-    private void init() {}
+    // Getters / Setters
 
-    private void initComponents(char[] characters) {
+    // Interfaces
+    @Override
+    public void init() {
         ObservableList<Node> childrenList = this.getChildren();
 
-        int len = characters.length;
-        for (int i = 0; i < len; ++i) {
-            char c = characters[i];
+        for (char c : this.characters) {
             Key key = new Key(c);
             key.setOnAction(buttonHandler);
 
@@ -42,16 +44,21 @@ public class Keyboard extends FlowPane {
         }
     }
 
+    @Override
+    public void reset() {
+        toggleAllKeys(true);
+    }
+
+    // Methods
     public void toggleAllKeys(boolean active) {
-        this.keys.forEach((c, key) -> {
-            key.setDisable(!active);
-        });
+        this.keys.forEach((c, key) -> key.setDisable(!active));
     }
 
     public void toggleKey(char c, boolean active) {
         this.keys.get(c).setDisable(!active);
     }
 
+    // Events
     private final EventHandler<ActionEvent> buttonHandler = new EventHandler<>() {
         @Override
         public void handle(ActionEvent actionEvent) {

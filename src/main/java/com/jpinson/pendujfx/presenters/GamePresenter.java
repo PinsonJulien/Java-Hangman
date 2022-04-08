@@ -14,59 +14,17 @@ public class GamePresenter extends Presenter<GameView> implements GameViewListen
 
     public GamePresenter(MainPresenter mainPresenter) {
         super(new GameView());
-        this.getView().addListener(this);
-
         this.mainPresenter = mainPresenter;
         this.gameModel = this.mainPresenter.getGameModel();
+        this.init();
     }
 
-    public void newGame() {
-        // Get a random word depending from difficulty
-        String word = "Patate";
-
-        // Register and crypt
-        word = word.toUpperCase();
-        this.gameModel.setWord(word);
-        String encryptedWord = this.encryptWord(word);
-        this.gameModel.setEncryptedWord(encryptedWord);
-
-        // Set health to max
-        this.gameModel.setHealth(maxHealth);
-
-        // Setup view
-        GameView view = this.getView();
-        view.getWord().set(encryptedWord);
-        view.getHealthBar().setFullHealth();
-    }
-
-    public void gameOver() {
-        // Reset the view
-        this.getView().reset();
-
-        // Switch to game over view.
-        this.mainPresenter.selectPresenter(PresenterAlias.GAMEOVER);
-    }
-
-    public String encryptWord(String word) {
-        return word.replaceAll("[a-zA-Z]", String.valueOf(encryptingCharacter));
-    }
-
-    public void decryptWord(char c) {
-        String word = this.gameModel.getWord();
-        char[] encryptedWord = this.gameModel.getEncryptedWord().toCharArray();
-
-        int len = word.length();
-        for (int i = 0 ; i < len; ++i) {
-            if (word.charAt(i) == c) encryptedWord[i] = c;
-        }
-
-        this.gameModel.setEncryptedWord(String.valueOf(encryptedWord));
-    }
+    // Getters / Setters
 
     // Interfaces
     @Override
     public void init() {
-
+        this.getView().addListener(this);
     }
 
     @Override
@@ -75,9 +33,7 @@ public class GamePresenter extends Presenter<GameView> implements GameViewListen
         this.getView().reset();
     }
 
-    // ----------------------------------------------
     // Listeners
-    // ----------------------------------------------
     @Override
     public void KeyboardPressedKey(char c) {
         String word = this.gameModel.getWord();
@@ -111,4 +67,49 @@ public class GamePresenter extends Presenter<GameView> implements GameViewListen
             System.out.println("You won");
         }
     }
+
+    // Methods
+    public void newGame() {
+        // Get a random word, difficulty increases length and complexity
+        String word = "Potato";
+
+        // Register and crypt
+        word = word.toUpperCase();
+        this.gameModel.setWord(word);
+        String encryptedWord = this.encryptWord(word);
+        this.gameModel.setEncryptedWord(encryptedWord);
+
+        // Set health to max
+        this.gameModel.setHealth(maxHealth);
+
+        // Setup view
+        GameView view = this.getView();
+        view.getWord().set(encryptedWord);
+        view.getHealthBar().setFullHealth();
+    }
+
+    public void gameOver() {
+        // Reset the view
+        this.getView().reset();
+
+        // Switch to game-over view.
+        this.mainPresenter.selectPresenter(PresenterAlias.GAMEOVER);
+    }
+
+    public String encryptWord(String word) {
+        return word.replaceAll("[a-zA-Z]", String.valueOf(encryptingCharacter));
+    }
+
+    public void decryptWord(char c) {
+        String word = this.gameModel.getWord();
+        char[] encryptedWord = this.gameModel.getEncryptedWord().toCharArray();
+
+        int len = word.length();
+        for (int i = 0 ; i < len; ++i) {
+            if (word.charAt(i) == c) encryptedWord[i] = c;
+        }
+
+        this.gameModel.setEncryptedWord(String.valueOf(encryptedWord));
+    }
+
 }

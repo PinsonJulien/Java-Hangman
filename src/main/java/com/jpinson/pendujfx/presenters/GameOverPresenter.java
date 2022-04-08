@@ -9,21 +9,20 @@ public class GameOverPresenter extends Presenter<GameOverView> implements GameOv
 
     public GameOverPresenter (MainPresenter mainPresenter) {
         super(new GameOverView());
-        this.getView().addListener(this);
         this.mainPresenter = mainPresenter;
+        this.init();
     }
+
+    // Getters / Setters
 
     // Interfaces
     @Override
     public void init() {
-
+        this.getView().addListener(this);
     }
 
     @Override
-    public void reset() {
-
-    }
-
+    public void reset() {}
 
     // Listeners
     @Override
@@ -35,4 +34,6 @@ public class GameOverPresenter extends Presenter<GameOverView> implements GameOv
     public void MenuButtonPressed() {
 
     }
+
+    // Methods
 }

@@ -10,11 +10,13 @@ public abstract class Presenter<V extends View<?,?>> implements InitResetInterfa
         this.setView(view);
     }
 
+    // Getters / Setters
     public V getView() {
         return this.view;
     }
-
     public void setView(V view) {
         this.view = view;
     }
+
+    // Methods
 }

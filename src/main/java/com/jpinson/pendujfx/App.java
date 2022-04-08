@@ -1,26 +1,16 @@
 package com.jpinson.pendujfx;
 
-import com.jpinson.pendujfx.components.layout.Layout;
 import com.jpinson.pendujfx.presenters.MainPresenter;
-import com.jpinson.pendujfx.views.View;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class App extends Application {
     private final String viewFileName = "app.fxml";
     private final String styleFileName = "app.css";
-    private final Layout layout;
-
-    //private final MenuController menuController;
-    //private final GameController gameController;
 
     public App() {
-        this.layout = new Layout();
         //this.menuController = new MenuController();
         //this.gameController = new GameController();
     }
