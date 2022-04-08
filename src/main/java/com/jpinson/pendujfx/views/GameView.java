@@ -38,11 +38,6 @@ public class GameView extends View<VBox, GameViewListener> implements GameViewLi
         this.healthBar.setFullHealth();
     }
 
-    public void gameOver() {
-        this.keyboard.toggleAllKeys(false);
-        this.healthBar.setHealth(0);
-    }
-
     // -------------------------------------------------------------------------------
     // Listeners
     // -------------------------------------------------------------------------------
@@ -52,6 +47,4 @@ public class GameView extends View<VBox, GameViewListener> implements GameViewLi
             listener.KeyboardPressedKey(c);
         }
     }
-
-
 }

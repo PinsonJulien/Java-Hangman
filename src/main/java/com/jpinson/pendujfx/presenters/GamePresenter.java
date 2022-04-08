@@ -1,5 +1,6 @@
 package com.jpinson.pendujfx.presenters;
 
+import com.jpinson.pendujfx.enums.PresenterAlias;
 import com.jpinson.pendujfx.models.GameModel;
 import com.jpinson.pendujfx.views.GameView;
 import com.jpinson.pendujfx.views.GameViewListener;
@@ -17,9 +18,6 @@ public class GamePresenter extends Presenter<GameView> implements GameViewListen
 
         this.mainPresenter = mainPresenter;
         this.gameModel = this.mainPresenter.getGameModel();
-
-        // Setup new game
-        this.newGame();
     }
 
     public void newGame() {
@@ -41,6 +39,14 @@ public class GamePresenter extends Presenter<GameView> implements GameViewListen
         view.getHealthBar().setFullHealth();
     }
 
+    public void gameOver() {
+        // Reset the view
+        this.getView().reset();
+
+        // Switch to game over view.
+        this.mainPresenter.selectPresenter(PresenterAlias.GAMEOVER);
+    }
+
     public String encryptWord(String word) {
         return word.replaceAll("[a-zA-Z]", String.valueOf(encryptingCharacter));
     }
@@ -57,6 +63,18 @@ public class GamePresenter extends Presenter<GameView> implements GameViewListen
         this.gameModel.setEncryptedWord(String.valueOf(encryptedWord));
     }
 
+    // Interfaces
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void reset() {
+        this.newGame();
+        this.getView().reset();
+    }
+
     // ----------------------------------------------
     // Listeners
     // ----------------------------------------------
@@ -71,8 +89,7 @@ public class GamePresenter extends Presenter<GameView> implements GameViewListen
             int health = this.gameModel.getHealth() - 1;
 
             if (health <= 0) {
-                System.out.printf("GAME OVER !");
-                view.gameOver();
+                this.gameOver();
                 return;
             }
 
