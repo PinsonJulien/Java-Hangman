@@ -1,14 +1,14 @@
 package com.jpinson.pendujfx.presenters;
 
 import com.jpinson.pendujfx.enums.PresenterAlias;
-import com.jpinson.pendujfx.views.GameOverView;
-import com.jpinson.pendujfx.views.GameOverViewListener;
+import com.jpinson.pendujfx.views.MenuView;
+import com.jpinson.pendujfx.views.MenuViewListener;
 
-public class GameOverPresenter extends Presenter<GameOverView> implements GameOverViewListener {
+public class MenuPresenter extends Presenter<MenuView> implements MenuViewListener {
     private final MainPresenter mainPresenter;
 
-    public GameOverPresenter (MainPresenter mainPresenter) {
-        super(new GameOverView());
+    public MenuPresenter(MainPresenter mainPresenter) {
+        super(new MenuView());
         this.mainPresenter = mainPresenter;
         this.init();
     }
@@ -25,14 +25,15 @@ public class GameOverPresenter extends Presenter<GameOverView> implements GameOv
     public void reset() {}
 
     // Listeners
+
     @Override
-    public void NewGameButtonPressed() {
+    public void playButtonPressed() {
         this.mainPresenter.selectPresenter(PresenterAlias.GAME);
     }
 
     @Override
-    public void MenuButtonPressed() {
-        this.mainPresenter.selectPresenter(PresenterAlias.MENU);
+    public void optionButtonPressed() {
+        // this.mainPresenter.selectPresenter(PresenterAlias.OPTION);
     }
 
     // Methods

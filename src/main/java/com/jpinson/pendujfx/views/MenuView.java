@@ -1,9 +1,11 @@
 package com.jpinson.pendujfx.views;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
-public class MenuView extends View<Pane, Void> {
+public class MenuView extends View<VBox, MenuViewListener> implements MenuViewListener {
     // Sert de hub aux options etc.
 
     // sélection de difficulté
@@ -11,30 +13,52 @@ public class MenuView extends View<Pane, Void> {
 
     // tableau des scores (autre vue)
 
-    private final Button button;
+    private final Button playButton = new Button("Play");
+    private final Button optionButton = new Button("Options");
 
     public MenuView() {
-        super(new Pane());
-        this.button = new Button("bonjour");
-        Button button2 = new Button("Pinçon");
-        this.insertNode(this.button, button2);
+        super(new VBox());
         this.init();
     }
 
     // Getters / Setters
 
+    // Events
+    private final EventHandler<ActionEvent> newGameButtonHandler = actionEvent -> {
+        this.playButtonPressed();
+    };
+
+    private final EventHandler<ActionEvent> menuButtonHandler = actionEvent -> {
+        this.optionButtonPressed();
+    };
+
+
     // Interfaces
     @Override
     public void init() {
-
+        this.playButton.setOnAction(this.newGameButtonHandler);
+        this.optionButton.setOnAction(this.menuButtonHandler);
+        this.insertNode(this.playButton, this.optionButton);
     }
 
     @Override
-    public void reset() {
-
-    }
+    public void reset() {}
 
     // Listeners
+
+    @Override
+    public void playButtonPressed() {
+        for (MenuViewListener listener : getListeners()) {
+            listener.playButtonPressed();
+        }
+    }
+
+    @Override
+    public void optionButtonPressed() {
+        for (MenuViewListener listener : getListeners()) {
+            listener.optionButtonPressed();
+        }
+    }
 
     // Methods
 }

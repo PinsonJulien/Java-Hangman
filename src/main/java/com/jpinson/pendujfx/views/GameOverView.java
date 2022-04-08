@@ -32,18 +32,12 @@ public class GameOverView extends View<VBox, GameOverViewListener> implements Ga
     }
 
     // Events
-    private final EventHandler<ActionEvent> newGameButtonHandler = new EventHandler<>() {
-        @Override
-        public void handle(ActionEvent actionEvent) {
-            NewGameButtonPressed();
-        }
+    private final EventHandler<ActionEvent> newGameButtonHandler = actionEvent -> {
+        NewGameButtonPressed();
     };
 
-    private final EventHandler<ActionEvent> menuButtonHandler = new EventHandler<>() {
-        @Override
-        public void handle(ActionEvent actionEvent) {
-            MenuButtonPressed();
-        }
+    private final EventHandler<ActionEvent> menuButtonHandler = actionEvent -> {
+        MenuButtonPressed();
     };
 
     // Listeners
