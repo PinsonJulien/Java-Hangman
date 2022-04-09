@@ -1,4 +1,4 @@
-package com.jpinson.pendujfx.views;
+package com.jpinson.pendujfx.app.menu;
 
 public interface MenuViewListener {
     void playButtonPressed();

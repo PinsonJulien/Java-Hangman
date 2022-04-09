@@ -1,6 +1,7 @@
 package com.jpinson.pendujfx;
 
-import com.jpinson.pendujfx.presenters.MainPresenter;
+import com.jpinson.pendujfx.app.AppPresenter;
+import com.jpinson.pendujfx.enums.PresenterEnum;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,10 +11,7 @@ public class App extends Application {
     private final String viewFileName = "app.fxml";
     private final String styleFileName = "app.css";
 
-    public App() {
-        //this.menuController = new MenuController();
-        //this.gameController = new GameController();
-    }
+    public App() {}
 
     public static void main(String[] args) {
         new App();
@@ -22,16 +20,14 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        // Insert menu view inside the layout
-
-        MainPresenter mainPresenter = new MainPresenter();
-
+        AppPresenter appPresenter = new AppPresenter();
 
         //AlphabeticKeyboard kb = view.getKeyboard();
         //kb.getKeys().get('A').setDisable(true);
 
         // Show the window
-        Scene scene = new Scene(mainPresenter.getView().getPane(), 320, 240);
+        //Scene scene = new Scene(mainPresenter.getView().getPane(), 320, 240);
+        Scene scene = new Scene(appPresenter.getView().getPane(), 320, 240);
         stage.setScene(scene);
         stage.show();
 

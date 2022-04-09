@@ -1,15 +1,16 @@
-package com.jpinson.pendujfx.views;
+package com.jpinson.pendujfx.app.options;
 
+import com.jpinson.pendujfx.framework.view.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-public class OptionView extends View<VBox, OptionViewListener> implements OptionViewListener {
+public class OptionsView extends View<VBox, OptionsViewListener> implements OptionsViewListener {
     private final Button validateButton = new Button("Validate");
     private final Button menuButton = new Button("Return to menu");
 
-    public OptionView() {
+    public OptionsView() {
         super(new VBox());
         this.init();
     }
@@ -34,14 +35,14 @@ public class OptionView extends View<VBox, OptionViewListener> implements Option
 
     @Override
     public void validateButtonPressed() {
-        for (OptionViewListener listener : getListeners()) {
+        for (OptionsViewListener listener : getListeners()) {
             listener.validateButtonPressed();
         }
     }
 
     @Override
     public void menuButtonPressed() {
-        for (OptionViewListener listener : getListeners()) {
+        for (OptionsViewListener listener : getListeners()) {
             listener.menuButtonPressed();
         }
     }

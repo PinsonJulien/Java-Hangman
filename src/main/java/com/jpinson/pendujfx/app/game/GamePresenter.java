@@ -1,21 +1,21 @@
-package com.jpinson.pendujfx.presenters;
+package com.jpinson.pendujfx.app.game;
 
-import com.jpinson.pendujfx.enums.PresenterAlias;
+import com.jpinson.pendujfx.app.AppPresenterListener;
+import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.models.GameModel;
-import com.jpinson.pendujfx.views.GameView;
-import com.jpinson.pendujfx.views.GameViewListener;
+import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
 
-public class GamePresenter extends Presenter<GameView> implements GameViewListener {
-    private final MainPresenter mainPresenter;
+public class GamePresenter
+    extends ChildPresenter<AppPresenterListener, GameView>
+    implements GameViewListener
+{
     private final GameModel gameModel;
-
     private static final char encryptingCharacter = '?';
     private static final int maxHealth = 5;
 
-    public GamePresenter(MainPresenter mainPresenter) {
-        super(new GameView());
-        this.mainPresenter = mainPresenter;
-        this.gameModel = this.mainPresenter.getGameModel();
+    public GamePresenter(AppPresenterListener listener, GameModel gameModel) {
+        super(listener, new GameView());
+        this.gameModel = gameModel;
         this.init();
     }
 
@@ -93,7 +93,7 @@ public class GamePresenter extends Presenter<GameView> implements GameViewListen
         this.getView().reset();
 
         // Switch to game-over view.
-        this.mainPresenter.selectPresenter(PresenterAlias.GAMEOVER);
+        this.getParentListener().selectPresenter(PresenterEnum.GAMEOVER);
     }
 
     public String encryptWord(String word) {

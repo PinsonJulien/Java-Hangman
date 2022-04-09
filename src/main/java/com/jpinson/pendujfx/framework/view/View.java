@@ -1,4 +1,4 @@
-package com.jpinson.pendujfx.views;
+package com.jpinson.pendujfx.framework.view;
 
 import com.jpinson.pendujfx.interfaces.InitResetInterface;
 import javafx.collections.ObservableList;
@@ -7,7 +7,13 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
-public abstract class View<P extends Pane, L> implements InitResetInterface {
+public abstract class View
+<
+    P extends Pane,
+    L
+>
+implements InitResetInterface
+{
     private final P pane;
     private final ArrayList<L> listeners = new ArrayList<>();
 

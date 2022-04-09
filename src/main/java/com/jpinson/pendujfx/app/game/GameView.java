@@ -1,10 +1,14 @@
-package com.jpinson.pendujfx.views;
+package com.jpinson.pendujfx.app.game;
 import com.jpinson.pendujfx.components.keyboard.AlphabeticKeyboard;
 import com.jpinson.pendujfx.components.word.Word;
 import com.jpinson.pendujfx.components.healthBar.HealthBar;
+import com.jpinson.pendujfx.framework.view.View;
 import javafx.scene.layout.VBox;
 
-public class GameView extends View<VBox, GameViewListener> implements GameViewListener {
+public class GameView
+        extends View<VBox, GameViewListener>
+        implements GameViewListener
+{
     private final AlphabeticKeyboard keyboard = new AlphabeticKeyboard(this, true);
     private final Word word = new Word();
     private final HealthBar healthBar = new HealthBar();

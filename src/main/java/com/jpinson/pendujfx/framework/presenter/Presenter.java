@@ -1,7 +1,7 @@
-package com.jpinson.pendujfx.presenters;
+package com.jpinson.pendujfx.framework.presenter;
 
 import com.jpinson.pendujfx.interfaces.InitResetInterface;
-import com.jpinson.pendujfx.views.View;
+import com.jpinson.pendujfx.framework.view.View;
 
 public abstract class Presenter<V extends View<?,?>> implements InitResetInterface {
     private V view;

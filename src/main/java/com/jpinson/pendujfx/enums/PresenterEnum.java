@@ -1,8 +1,8 @@
 package com.jpinson.pendujfx.enums;
 
-public enum PresenterAlias {
+public enum PresenterEnum {
     MENU,
-    OPTION,
+    OPTIONS,
     GAME,
     GAMEOVER,
 }

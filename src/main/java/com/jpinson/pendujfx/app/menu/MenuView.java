@@ -1,5 +1,6 @@
-package com.jpinson.pendujfx.views;
+package com.jpinson.pendujfx.app.menu;
 
+import com.jpinson.pendujfx.framework.view.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
