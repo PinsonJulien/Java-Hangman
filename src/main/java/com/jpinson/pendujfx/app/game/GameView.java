@@ -6,8 +6,8 @@ import com.jpinson.pendujfx.framework.view.View;
 import javafx.scene.layout.VBox;
 
 public class GameView
-        extends View<VBox, GameViewListener>
-        implements GameViewListener
+    extends View<VBox, GameViewListener>
+    implements GameViewListener
 {
     private final AlphabeticKeyboard keyboard = new AlphabeticKeyboard(this, true);
     private final Word word = new Word();

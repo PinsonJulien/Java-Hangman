@@ -1,6 +1,6 @@
 package com.jpinson.pendujfx.utils;
 
-public class Alphabet {
+public abstract class Alphabet {
     private static final char[] letters;
 
     static {
@@ -14,8 +14,8 @@ public class Alphabet {
     }
 
     // Static variables
-    public static char[] array = letters;
-    public static String string = String.valueOf(letters);
+    public static final char[] array = letters;
+    public static final String string = String.valueOf(letters);
 
     // Methods
     public static boolean isAlpha(char c) {

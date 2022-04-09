@@ -3,7 +3,7 @@ package com.jpinson.pendujfx.utils;
 import junit.framework.TestCase;
 
 public class AlphabetTest extends TestCase {
-    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public void testArray() {
         assertEquals(alphabet, String.valueOf(Alphabet.array));

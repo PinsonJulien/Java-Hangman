@@ -3,7 +3,6 @@ package com.jpinson.pendujfx.models;
 import com.jpinson.pendujfx.framework.model.Model;
 
 public class GameModel extends Model {
-    private String username;
     private int health;
     private String word;
     private String encryptedWord;

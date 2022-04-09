@@ -52,13 +52,8 @@ public class MenuView extends View<VBox, MenuViewListener> implements MenuViewLi
     }
 
     // Events
-    private final EventHandler<ActionEvent> newGameButtonHandler = actionEvent -> {
-        this.playButtonPressed();
-    };
-
-    private final EventHandler<ActionEvent> menuButtonHandler = actionEvent -> {
-        this.optionButtonPressed();
-    };
+    private final EventHandler<ActionEvent> newGameButtonHandler = actionEvent -> this.playButtonPressed();
+    private final EventHandler<ActionEvent> menuButtonHandler = actionEvent -> this.optionButtonPressed();
 
     // Methods
 }

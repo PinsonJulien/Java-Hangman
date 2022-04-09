@@ -1,7 +1,6 @@
 package com.jpinson.pendujfx;
 
 import com.jpinson.pendujfx.app.AppPresenter;
-import com.jpinson.pendujfx.enums.PresenterEnum;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

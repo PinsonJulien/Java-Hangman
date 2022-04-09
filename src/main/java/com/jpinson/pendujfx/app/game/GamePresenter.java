@@ -4,18 +4,31 @@ import com.jpinson.pendujfx.app.AppPresenterListener;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.models.GameModel;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
+import com.jpinson.pendujfx.models.OptionsModel;
+import com.jpinson.pendujfx.models.PlayerModel;
 
 public class GamePresenter
     extends ChildPresenter<AppPresenterListener, GameView>
     implements GameViewListener
 {
     private final GameModel gameModel;
+    private final PlayerModel playerModel;
+    private final OptionsModel optionsModel;
+
     private static final char encryptingCharacter = '?';
     private static final int maxHealth = 5;
 
-    public GamePresenter(AppPresenterListener listener, GameModel gameModel) {
+    public GamePresenter(
+        AppPresenterListener listener,
+        GameModel gameModel,
+        OptionsModel optionsModel,
+        PlayerModel playerModel
+    ) {
         super(listener, new GameView());
         this.gameModel = gameModel;
+        this.playerModel = playerModel;
+        this.optionsModel = optionsModel;
+
         this.init();
     }
 
