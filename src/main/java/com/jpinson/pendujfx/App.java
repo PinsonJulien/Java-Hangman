@@ -21,10 +21,14 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         AppPresenter appPresenter = new AppPresenter();
 
-        // Show the window
+        // Setup scene
         Scene scene = new Scene(appPresenter.getView().getPane(), 320, 240);
+
+        // Setup style
         final URL style = this.getClass().getResource(this.styleFileName);
         scene.getStylesheets().add(style.toString());
+
+        // Show
         stage.setScene(scene);
         stage.show();
     }

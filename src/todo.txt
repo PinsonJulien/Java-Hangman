@@ -14,6 +14,9 @@ UI
 - Styliser barre par défaut de fenêtre
 - Page scores, triable ?
 - Autoriser usage des touches clavier.
+- Ecran de victoire avec chiffres du score qui s'incrémente
+-> Nouvelle partie / Menu / Voir les scores
+
 
 Mode de jeu :
 - Faire le plus de mots dans un temps imparti

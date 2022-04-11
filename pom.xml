@@ -16,6 +16,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20220320</version>
+        </dependency>
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>17.0.0.1</version>
@@ -80,7 +85,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.jpinson.pendujfx/com.jpinson.pendujfx.HelloApplication</mainClass>
+                            <mainClass>com.jpinson.pendujfx/com.jpinson.pendujfx.App</mainClass>
                         </configuration>
                     </execution>
                 </executions>
