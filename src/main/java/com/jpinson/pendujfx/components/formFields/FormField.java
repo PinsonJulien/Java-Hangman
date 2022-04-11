@@ -9,8 +9,8 @@ public abstract class FormField <F extends Control> extends VBox {
     private final Label errorLabel = new Label();
     protected final F field;
 
-    private static final String validColor = "green";
-    private static final String invalidColor = "red";
+    private static final String validColorClass = "valid";
+    private static final String invalidColorClass = "invalid";
 
     public FormField (F field, String label) {
         this.field = field;
@@ -22,28 +22,41 @@ public abstract class FormField <F extends Control> extends VBox {
                 this.errorLabel
         );
 
-        this.errorLabel.setStyle("-fx-text-fill: " + invalidColor);
+        this.errorLabel.getStyleClass().add(invalidColorClass);
         this.errorLabel.setVisible(false);
     }
 
     public void setNeutral() {
-        this.field.setStyle("");
+        this.errorLabel.setVisible(false);
+        this.removeStyleClasses(invalidColorClass);
+        this.removeStyleClasses(validColorClass);
     }
 
     public void setValid() {
-        colorComponents(validColor);
+        this.swapStyleClasses(invalidColorClass, validColorClass);
+        this.field.getStyleClass().add(validColorClass);
+        this.fieldLabel.getStyleClass().add(validColorClass);
         this.errorLabel.setVisible(false);
     }
 
     public void setInvalid(String errorMessage) {
-        colorComponents(invalidColor);
+        this.swapStyleClasses(validColorClass, invalidColorClass);
         this.errorLabel.setText(errorMessage);
         this.errorLabel.setVisible(true);
     }
 
-    private void colorComponents(String color) {
-        this.field.setStyle("-fx-border-color: " + color);
-        this.fieldLabel.setStyle("-fx-text-fill: " + color);
+    private void swapStyleClasses(String oldClass, String newClass) {
+        this.removeStyleClasses(oldClass);
+        this.addStyleClasses(newClass);
     }
 
+    private void addStyleClasses(String cssClass) {
+        this.field.getStyleClass().add(cssClass);
+        this.fieldLabel.getStyleClass().add(cssClass);
+    }
+
+    private void removeStyleClasses(String cssClass) {
+        this.field.getStyleClass().remove(cssClass);
+        this.fieldLabel.getStyleClass().remove(cssClass);
+    }
 }

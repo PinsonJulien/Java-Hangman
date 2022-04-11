@@ -7,3 +7,23 @@ Key {
     -fx-rotate: 100;
 
 }
+
+#options {
+    -fx-background-color: red;
+}
+
+#options Label {
+    -fx-background-color: blue;
+}
+
+#options .valid {
+    -fx-text-fill: green;
+}
+
+#options .invalid {
+    -fx-text-fill: red;
+}
+
+#options ComboBoxFormField {
+    -fx-background-color: purple;
+}

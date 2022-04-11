@@ -10,4 +10,8 @@ public class TextFormField extends FormField<TextField> {
     public String getText() {
         return this.field.getText();
     }
+
+    public void setText(String text) {
+        this.field.setText(text);
+    }
 }

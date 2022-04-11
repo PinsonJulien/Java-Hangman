@@ -7,7 +7,6 @@ import com.jpinson.pendujfx.framework.view.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 
 public class OptionsView extends View<VBox, OptionsViewListener> implements OptionsViewListener {
@@ -15,7 +14,7 @@ public class OptionsView extends View<VBox, OptionsViewListener> implements Opti
     private final Button menuButton = new Button("Return to menu");
 
     private final TextFormField usernameField = new TextFormField("Username");
-    private ComboBoxFormField<DifficultyEnum> difficultyField = new ComboBoxFormField<>("Difficulty");
+    private final ComboBoxFormField<DifficultyEnum> difficultyField = new ComboBoxFormField<>("Difficulty");
 
     public OptionsView() {
         super(new VBox());
@@ -34,6 +33,8 @@ public class OptionsView extends View<VBox, OptionsViewListener> implements Opti
     // Interfaces
     @Override
     public void init() {
+        this.getPane().setId("options");
+
         this.validateButton.setOnAction(this.validateButtonHandler);
         this.menuButton.setOnAction(this.menuButtonHandler);
 
@@ -53,7 +54,8 @@ public class OptionsView extends View<VBox, OptionsViewListener> implements Opti
 
     @Override
     public void reset() {
-
+        this.difficultyField.setNeutral();
+        this.usernameField.setNeutral();
     }
 
     // Listeners

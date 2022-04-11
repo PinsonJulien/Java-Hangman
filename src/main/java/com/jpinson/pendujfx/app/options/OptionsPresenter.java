@@ -31,10 +31,19 @@ public class OptionsPresenter
     @Override
     public void init() {
         this.getView().addListener(this);
+
+        this.optionsModel.setDifficulty(DifficultyEnum.EASY);
+        this.playerModel.setName("JeanRandom");
+        this.reset();
     }
 
     @Override
-    public void reset() {}
+    public void reset() {
+        OptionsView view = this.getView();
+        view.getUsernameField().setText(this.playerModel.getName());
+        view.getDifficultyField().setValue(this.optionsModel.getDifficulty());
+        view.reset();
+    }
 
     // Listeners
 
@@ -54,8 +63,9 @@ public class OptionsPresenter
         TextFormField usernameField = this.getView().getUsernameField();
         String username = usernameField.getText();
 
+        int len = username.length();
         // min 1, max 20
-        if (username.length() < 1 || username.length() > 20) {
+        if (len < 1 || len > 20) {
             usernameField.setInvalid("The username length should be between 1 and 20.");
             return;
         }
@@ -77,5 +87,4 @@ public class OptionsPresenter
         difficultyField.setValid();
         this.optionsModel.setDifficulty(difficulty);
     }
-
 }

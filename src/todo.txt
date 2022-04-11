@@ -13,7 +13,7 @@ UI
 - Bouton quitter sur le menu principal, pas de fenêtre classique
 - Styliser barre par défaut de fenêtre
 - Page scores, triable ?
-
+- Autoriser usage des touches clavier.
 
 Mode de jeu :
 - Faire le plus de mots dans un temps imparti
