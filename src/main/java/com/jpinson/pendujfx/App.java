@@ -1,6 +1,7 @@
 package com.jpinson.pendujfx;
 
 import com.jpinson.pendujfx.app.AppPresenter;
+import com.jpinson.pendujfx.config.Config;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -19,6 +20,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        String test = new Config().getDicolinkKey();
+        System.out.println(test);
+
         AppPresenter appPresenter = new AppPresenter();
 
         // Setup scene
