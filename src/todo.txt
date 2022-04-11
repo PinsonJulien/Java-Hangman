@@ -1,0 +1,33 @@
+
+- Services
+- DB SQLLITE
+
+- Check accès internet
+- Si accès : Fetch
+- Possibilité de ne pas utiliser de connexion internet
+(proposé si connexion seulement)
+
+UI
+- Jouer musique en fonction du menu
+- Design CSS
+- Bouton quitter sur le menu principal, pas de fenêtre classique
+- Styliser barre par défaut de fenêtre
+- Page scores, triable ?
+
+
+Mode de jeu :
+- Faire le plus de mots dans un temps imparti
+
+DB :
+- Score total + difficulté  + nom jour
+- idem pour mode temps imparti
+
+
+
+
+
+
+
+
+
+

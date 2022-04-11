@@ -1,6 +1,8 @@
 package com.jpinson.pendujfx.app.options;
 
 import com.jpinson.pendujfx.app.AppPresenterListener;
+import com.jpinson.pendujfx.components.formFields.ComboBoxFormField;
+import com.jpinson.pendujfx.components.formFields.TextFormField;
 import com.jpinson.pendujfx.enums.DifficultyEnum;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
@@ -42,17 +44,38 @@ public class OptionsPresenter
     }
 
     @Override
-    public void validateButtonPressed(DifficultyEnum difficulty, String username) {
-        this.optionsModel.setDifficulty(difficulty);
-
-        // Username validation, only allow alphanumeric
-        if (!Alphanumeric.validate(username)) {
-            this.getView().setError("The username cannot contains special characters.");
-            return;
-        }
-
-        this.playerModel.setName(username);
+    public void validateButtonPressed() {
+        this.validateUsernameField();
+        this.validateDifficultyField();
     }
 
     // Methods
+    private void validateUsernameField() {
+        TextFormField usernameField = this.getView().getUsernameField();
+        String username = usernameField.getText();
+
+        // min 1, max 20
+        if (username.length() < 1 || username.length() > 20) {
+            usernameField.setInvalid("The username length should be between 1 and 20.");
+            return;
+        }
+
+        // only allow alphanumeric
+        if (!Alphanumeric.validate(username)) {
+            usernameField.setInvalid("The username cannot contains special characters.");
+            return;
+        }
+
+        usernameField.setValid();
+        this.playerModel.setName(username);
+    }
+
+    private void validateDifficultyField() {
+        ComboBoxFormField<DifficultyEnum> difficultyField = this.getView().getDifficultyField();
+        DifficultyEnum difficulty = difficultyField.getValue();
+
+        difficultyField.setValid();
+        this.optionsModel.setDifficulty(difficulty);
+    }
+
 }

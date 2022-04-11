@@ -1,0 +1,13 @@
+package com.jpinson.pendujfx.components.formFields;
+
+import javafx.scene.control.TextField;
+
+public class TextFormField extends FormField<TextField> {
+    public TextFormField (String label) {
+        super(new TextField(), label);
+    }
+
+    public String getText() {
+        return this.field.getText();
+    }
+}
