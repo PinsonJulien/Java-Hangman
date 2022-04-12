@@ -6,6 +6,7 @@ module com.jpinson.pendujfx {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires dotenv.java;
+    requires java.net.http;
 
     opens com.jpinson.pendujfx to javafx.fxml;
     exports com.jpinson.pendujfx;

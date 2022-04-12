@@ -9,8 +9,11 @@ public class MenuPresenter
     implements MenuViewListener
 {
 
-    public MenuPresenter(AppPresenterListener listener) {
-        super(listener, new MenuView());
+    public MenuPresenter(
+        MenuView menuView,
+        AppPresenterListener listener
+    ) {
+        super(menuView, listener);
         this.init();
     }
 
@@ -19,7 +22,6 @@ public class MenuPresenter
     // Interfaces
     @Override
     public void init() {
-        this.getView().addListener(this);
     }
 
     @Override

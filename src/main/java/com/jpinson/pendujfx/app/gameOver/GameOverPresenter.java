@@ -8,8 +8,11 @@ public class GameOverPresenter
     extends ChildPresenter<AppPresenterListener, GameOverView>
     implements GameOverViewListener
 {
-    public GameOverPresenter (AppPresenterListener listener) {
-        super(listener, new GameOverView());
+    public GameOverPresenter (
+        GameOverView gameOverView,
+        AppPresenterListener listener
+    ) {
+        super(gameOverView, listener);
         this.init();
     }
 
@@ -18,7 +21,6 @@ public class GameOverPresenter
     // Interfaces
     @Override
     public void init() {
-        this.getView().addListener(this);
     }
 
     @Override

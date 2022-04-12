@@ -17,8 +17,13 @@ public class OptionsPresenter
     private final OptionsModel optionsModel;
     private final PlayerModel playerModel;
 
-    public OptionsPresenter(AppPresenterListener listener, OptionsModel optionsModel, PlayerModel playerModel) {
-        super(listener, new OptionsView());
+    public OptionsPresenter(
+        OptionsView optionsView,
+        AppPresenterListener listener,
+        OptionsModel optionsModel,
+        PlayerModel playerModel
+    ) {
+        super(optionsView, listener);
         this.optionsModel = optionsModel;
         this.playerModel = playerModel;
 
@@ -30,8 +35,6 @@ public class OptionsPresenter
     // Interfaces
     @Override
     public void init() {
-        this.getView().addListener(this);
-
         this.optionsModel.setDifficulty(DifficultyEnum.EASY);
         this.playerModel.setName("JeanRandom");
         this.reset();

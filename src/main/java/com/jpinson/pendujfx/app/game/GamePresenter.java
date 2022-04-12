@@ -19,15 +19,16 @@ public class GamePresenter
     private static final int maxHealth = 5;
 
     public GamePresenter(
+        GameView gameView,
         AppPresenterListener listener,
         GameModel gameModel,
         OptionsModel optionsModel,
         PlayerModel playerModel
     ) {
-        super(listener, new GameView());
+        super(gameView, listener);
         this.gameModel = gameModel;
-        this.playerModel = playerModel;
         this.optionsModel = optionsModel;
+        this.playerModel = playerModel;
 
         this.init();
     }
@@ -37,7 +38,6 @@ public class GamePresenter
     // Interfaces
     @Override
     public void init() {
-        this.getView().addListener(this);
     }
 
     @Override

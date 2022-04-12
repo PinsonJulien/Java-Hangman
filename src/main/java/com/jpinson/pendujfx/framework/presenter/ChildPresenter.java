@@ -10,7 +10,7 @@ public abstract class ChildPresenter <
 {
     private final L parentListener;
 
-    public ChildPresenter(L parentListener, V view) {
+    public ChildPresenter(V view, L parentListener) {
         super(view);
         this.parentListener = parentListener;
     }
