@@ -3,6 +3,7 @@ package com.jpinson.pendujfx.components.word;
 import com.jpinson.pendujfx.interfaces.InitResetInterface;
 import javafx.scene.control.Label;
 
+// Holds the word of the game
 public class Word extends Label implements InitResetInterface {
     public Word () {
         this.set("");

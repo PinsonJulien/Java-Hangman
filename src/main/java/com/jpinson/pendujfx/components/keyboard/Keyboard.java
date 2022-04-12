@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import java.util.HashMap;
 import java.util.Map;
 
+// Keyboard able to have any set of keys
 public class Keyboard extends FlowPane implements InitResetInterface {
     private final KeyboardKeyListener listener;
     private final char[] characters;

@@ -3,6 +3,9 @@ package com.jpinson.pendujfx.components.healthBar;
 import com.jpinson.pendujfx.interfaces.InitResetInterface;
 import javafx.scene.control.ProgressBar;
 
+// Health bar based on percentage
+// Changes color on specific thresholds.
+
 public class HealthBar extends ProgressBar implements InitResetInterface {
     public HealthBar() {
         this.init();

@@ -4,6 +4,12 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+// Allow to make common looking form fields
+// Have a label holding the name of the field,
+// Have provided field element
+// Have a label dealing with error messages
+// Controls color of elements by CSS when set as successful or error.
+
 public abstract class FormField <F extends Control> extends VBox {
     private final Label fieldLabel = new Label();
     private final Label errorLabel = new Label();

@@ -4,9 +4,11 @@ import com.jpinson.pendujfx.interfaces.InitResetInterface;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-
 import java.util.ArrayList;
 
+// Views hold the visible part of the application and aspect related methods.
+// They have a list of listeners subscribed to it
+// The listeners are not obligatory, they can be Void.
 public abstract class View
 <
     P extends Pane,

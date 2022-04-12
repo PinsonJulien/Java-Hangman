@@ -4,6 +4,7 @@ import com.jpinson.pendujfx.interfaces.InitResetInterface;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 
+// Key of a Keyboard
 public class Key extends Button implements InitResetInterface {
     private final char value;
 

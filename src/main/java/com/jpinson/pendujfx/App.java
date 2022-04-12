@@ -32,7 +32,7 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException, InterruptedException {
+    public void start(Stage stage) throws IOException {
         // Generate all models
         GameModel gameModel = new GameModel();
         OptionsModel optionsModel = new OptionsModel();

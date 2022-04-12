@@ -1,5 +1,6 @@
 package com.jpinson.pendujfx.utils;
 
+// Generate an alphabet inside an array of char.
 public abstract class Alphabet {
     private static final char[] letters;
 

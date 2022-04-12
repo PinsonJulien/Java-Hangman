@@ -2,6 +2,7 @@ package com.jpinson.pendujfx.models;
 
 import com.jpinson.pendujfx.framework.model.Model;
 
+// Model having game related variables
 public class GameModel extends Model {
     private int health;
     private String word;

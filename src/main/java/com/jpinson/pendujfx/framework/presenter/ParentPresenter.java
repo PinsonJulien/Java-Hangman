@@ -4,6 +4,8 @@ import com.jpinson.pendujfx.framework.view.View;
 
 import java.util.EnumMap;
 
+// A ParentPresenter holds several child presenters inside a list
+// Childs can call the parent to insert swap views.
 public abstract class ParentPresenter
 <
     V extends View<?, ?>,

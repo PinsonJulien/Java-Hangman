@@ -2,6 +2,7 @@ package com.jpinson.pendujfx.models;
 
 import com.jpinson.pendujfx.framework.model.Model;
 
+// Model having player related variables.
 public class PlayerModel extends Model {
     private String name;
 
