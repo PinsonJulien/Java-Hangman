@@ -7,6 +7,7 @@ module com.jpinson.pendujfx {
     requires org.kordamp.bootstrapfx.core;
     requires dotenv.java;
     requires java.net.http;
+    requires java.sql;
 
     opens com.jpinson.pendujfx to javafx.fxml;
     exports com.jpinson.pendujfx;

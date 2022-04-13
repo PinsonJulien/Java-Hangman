@@ -13,7 +13,7 @@ import com.jpinson.pendujfx.app.options.OptionsView;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.models.GameModel;
 import com.jpinson.pendujfx.models.OptionsModel;
-import com.jpinson.pendujfx.models.PlayerModel;
+import com.jpinson.pendujfx.models.UserModel;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.net.URL;
 
 public class App extends Application {
-    private final String styleFileName = "app.css";
 
     public App() {}
 
@@ -36,7 +35,7 @@ public class App extends Application {
         // Generate all models
         GameModel gameModel = new GameModel();
         OptionsModel optionsModel = new OptionsModel();
-        PlayerModel playerModel = new PlayerModel();
+        UserModel userModel = new UserModel();
 
         // Generate the main presenter, and all child views / presenters.
         AppView appView = new AppView();
@@ -47,11 +46,11 @@ public class App extends Application {
         menuView.addListener(menuPresenter);
 
         OptionsView optionsView = new OptionsView();
-        OptionsPresenter optionsPresenter = new OptionsPresenter(optionsView, appPresenter, optionsModel, playerModel);
+        OptionsPresenter optionsPresenter = new OptionsPresenter(optionsView, appPresenter, optionsModel, userModel);
         optionsView.addListener(optionsPresenter);
 
         GameView gameView = new GameView();
-        GamePresenter gamePresenter = new GamePresenter(gameView, appPresenter, gameModel, optionsModel, playerModel);
+        GamePresenter gamePresenter = new GamePresenter(gameView, appPresenter, gameModel, optionsModel, userModel);
         gameView.addListener(gamePresenter);
 
         GameOverView gameOverView = new GameOverView();
@@ -71,8 +70,8 @@ public class App extends Application {
         Scene scene = new Scene(appPresenter.getView().getPane(), 320, 240);
 
         // Setup style
-        final URL style = this.getClass().getResource(this.styleFileName);
-        scene.getStylesheets().add(style.toString());
+        final URL style = this.getClass().getResource("app.css");
+        if (style != null ) scene.getStylesheets().add(style.toString());
 
         // Show
         stage.setScene(scene);

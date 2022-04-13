@@ -8,6 +8,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class WordService extends Service {
 
@@ -28,5 +30,10 @@ public class WordService extends Service {
         //String url = "https://api.dicolink.com/v1/mots/motauhasard";
 
         return "word";
+    }
+
+    @Override
+    protected Object generateModel(ResultSet rs) throws SQLException {
+        return null;
     }
 }

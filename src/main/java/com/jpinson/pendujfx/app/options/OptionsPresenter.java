@@ -7,7 +7,7 @@ import com.jpinson.pendujfx.enums.DifficultyEnum;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
 import com.jpinson.pendujfx.models.OptionsModel;
-import com.jpinson.pendujfx.models.PlayerModel;
+import com.jpinson.pendujfx.models.UserModel;
 import com.jpinson.pendujfx.utils.Alphanumeric;
 
 public class OptionsPresenter
@@ -15,17 +15,17 @@ public class OptionsPresenter
     implements OptionsViewListener
 {
     private final OptionsModel optionsModel;
-    private final PlayerModel playerModel;
+    private final UserModel userModel;
 
     public OptionsPresenter(
         OptionsView optionsView,
         AppPresenterListener listener,
         OptionsModel optionsModel,
-        PlayerModel playerModel
+        UserModel userModel
     ) {
         super(optionsView, listener);
         this.optionsModel = optionsModel;
-        this.playerModel = playerModel;
+        this.userModel = userModel;
 
         this.init();
     }
@@ -36,14 +36,14 @@ public class OptionsPresenter
     @Override
     public void init() {
         this.optionsModel.setDifficulty(DifficultyEnum.EASY);
-        this.playerModel.setName("JeanRandom");
+        this.userModel.setName("JeanRandom");
         this.reset();
     }
 
     @Override
     public void reset() {
         OptionsView view = this.getView();
-        view.getUsernameField().setText(this.playerModel.getName());
+        view.getUsernameField().setText(this.userModel.getName());
         view.getDifficultyField().setValue(this.optionsModel.getDifficulty());
         view.reset();
     }
@@ -80,7 +80,7 @@ public class OptionsPresenter
         }
 
         usernameField.setValid();
-        this.playerModel.setName(username);
+        this.userModel.setName(username);
     }
 
     private void validateDifficultyField() {

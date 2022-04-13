@@ -5,14 +5,14 @@ import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.models.GameModel;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
 import com.jpinson.pendujfx.models.OptionsModel;
-import com.jpinson.pendujfx.models.PlayerModel;
+import com.jpinson.pendujfx.models.UserModel;
 
 public class GamePresenter
     extends ChildPresenter<AppPresenterListener, GameView>
     implements GameViewListener
 {
     private final GameModel gameModel;
-    private final PlayerModel playerModel;
+    private final UserModel userModel;
     private final OptionsModel optionsModel;
 
     private static final char encryptingCharacter = '?';
@@ -23,12 +23,12 @@ public class GamePresenter
         AppPresenterListener listener,
         GameModel gameModel,
         OptionsModel optionsModel,
-        PlayerModel playerModel
+        UserModel userModel
     ) {
         super(gameView, listener);
         this.gameModel = gameModel;
         this.optionsModel = optionsModel;
-        this.playerModel = playerModel;
+        this.userModel = userModel;
 
         this.init();
     }
