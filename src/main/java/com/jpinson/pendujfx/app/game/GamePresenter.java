@@ -6,6 +6,7 @@ import com.jpinson.pendujfx.models.GameModel;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
 import com.jpinson.pendujfx.models.OptionsModel;
 import com.jpinson.pendujfx.models.UserModel;
+import com.jpinson.pendujfx.utils.EncryptedWord;
 
 public class GamePresenter
     extends ChildPresenter<AppPresenterListener, GameView>
@@ -49,11 +50,11 @@ public class GamePresenter
     // Listeners
     @Override
     public void KeyboardPressedKey(char c) {
-        String word = this.gameModel.getWord();
+        EncryptedWord encryptedWord = this.gameModel.getEncryptedWord();
         GameView view = this.getView();
 
         // Incorrect letter
-        if (word.indexOf(c) < 0 ) {
+        if (!encryptedWord.contains(c)) {
             // remove health
             int health = this.gameModel.getHealth() - 1;
 
@@ -70,12 +71,11 @@ public class GamePresenter
         }
 
         // Reveal letter in view
-        decryptWord(c);
-        String encryptedWord = this.gameModel.getEncryptedWord();
-        view.getWord().set(encryptedWord);
+        encryptedWord.decrypt(c);
+        view.getWord().set(encryptedWord.get());
 
         // All letters are revealed : game over, win
-        if ( word.equals(encryptedWord) ) {
+        if (encryptedWord.isDecrypted()) {
             view.reset();
             System.out.println("You won");
         }
@@ -85,19 +85,17 @@ public class GamePresenter
     public void newGame() {
         // Get a random word, difficulty increases length and complexity
         String word = "Potato";
-
-        // Register and crypt
         word = word.toUpperCase();
-        this.gameModel.setWord(word);
-        String encryptedWord = this.encryptWord(word);
-        this.gameModel.setEncryptedWord(encryptedWord);
+
+        // Encrypt the word
+        this.gameModel.setEncryptedWord(new EncryptedWord(word, encryptingCharacter));
 
         // Set health to max
         this.gameModel.setHealth(maxHealth);
 
         // Setup view
         GameView view = this.getView();
-        view.getWord().set(encryptedWord);
+        view.getWord().set(this.gameModel.getEncryptedWord().get());
         view.getHealthBar().setFullHealth();
     }
 
@@ -108,21 +106,4 @@ public class GamePresenter
         // Switch to game-over view.
         this.getParentListener().selectPresenter(PresenterEnum.GAMEOVER);
     }
-
-    public String encryptWord(String word) {
-        return word.replaceAll("[a-zA-Z]", String.valueOf(encryptingCharacter));
-    }
-
-    public void decryptWord(char c) {
-        String word = this.gameModel.getWord();
-        char[] encryptedWord = this.gameModel.getEncryptedWord().toCharArray();
-
-        int len = word.length();
-        for (int i = 0 ; i < len; ++i) {
-            if (word.charAt(i) == c) encryptedWord[i] = c;
-        }
-
-        this.gameModel.setEncryptedWord(String.valueOf(encryptedWord));
-    }
-
 }

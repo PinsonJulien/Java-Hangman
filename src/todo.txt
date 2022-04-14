@@ -1,6 +1,11 @@
 
-- Services
-- DB SQLLITE
+- Premier lancement :
+- Menu principal avec seulement bouton  S T A R T
+- Affiche le menu des options,
+- Entrer un pseudo est obligatoire pour commencer la partie,
+- Avant de lancer, vérification, enregistrement du new player si changement de pseudo.
+
+- Menu : Bouton quick game quand les options sont remplies (caché sinon.)
 
 - Check accès internet
 - Si accès : Fetch
@@ -8,15 +13,23 @@
 (proposé si connexion seulement)
 
 UI
-- Jouer musique en fonction du menu
+
 - Design CSS
 - Bouton quitter sur le menu principal, pas de fenêtre classique
 - Styliser barre par défaut de fenêtre
 - Page scores, triable ?
-- Autoriser usage des touches clavier.
+
 - Ecran de victoire avec chiffres du score qui s'incrémente
+- Score négatif si défaite
 -> Nouvelle partie / Menu / Voir les scores
 
+- Autoriser usage des touches clavier.
+ -> Utiliser un changement de focus pour éviter que celà soient impacté sur toutes les vues ?
+ -> Ou retirer le listener de manière temporaire ? removeActionlistener ?
+
+Musique :
+- Jouer musique en fonction du menu
+- les child presenter ont accès aux listeners musique du parent
 
 Mode de jeu :
 - Faire le plus de mots dans un temps imparti
