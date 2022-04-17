@@ -1,20 +1,29 @@
 package com.jpinson.pendujfx.app.game;
-import com.jpinson.pendujfx.components.keyboard.AlphabeticKeyboard;
-import com.jpinson.pendujfx.components.word.Word;
+
 import com.jpinson.pendujfx.components.healthBar.HealthBar;
+import com.jpinson.pendujfx.components.keyboard.AlphabeticKeyboard;
+import com.jpinson.pendujfx.components.panes.constrainedGridPane.ConstrainedGridPane;
+import com.jpinson.pendujfx.components.word.Word;
 import com.jpinson.pendujfx.framework.view.View;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class GameView
-    extends View<VBox, GameViewListener>
+    extends View<ConstrainedGridPane, GameViewListener>
     implements GameViewListener
 {
     private final AlphabeticKeyboard keyboard = new AlphabeticKeyboard(this, true);
     private final Word word = new Word();
     private final HealthBar healthBar = new HealthBar();
+    private final Button forfeitButton = new Button("FORFEIT");
+    private final Label scoreLabel = new Label("SCORE");
+    private final Label scoreValueLabel = new Label("0");
 
     public GameView() {
-        super(new VBox());
+        super(new ConstrainedGridPane());
         this.init();
     }
 
@@ -32,7 +41,44 @@ public class GameView
     // Interfaces
     @Override
     public void init() {
-        this.insertNode(this.keyboard, this.word, this.healthBar);
+        this.pane.setId("game");
+
+        // Set actions
+        this.forfeitButton.setOnAction(this.forfeitButtonHandler);
+
+        // Set Grid
+        this.pane.setColumns(15, 70, 15);
+        this.pane.setRows(70, 30);
+
+        ConstrainedGridPane middleGrid = new ConstrainedGridPane();
+        middleGrid.setColumns(100);
+        middleGrid.setRows(50, 50);
+        this.pane.add(middleGrid, 1, 0);
+
+        VBox wordPane = new VBox();
+        wordPane.getStyleClass().add("word-pane");
+        wordPane.getChildren().add(this.word);
+        middleGrid.add(wordPane, 0,0);
+
+        middleGrid.add(this.keyboard, 0, 1);
+
+        VBox leftPane = new VBox();
+        leftPane.getStyleClass().add("left-pane");
+        leftPane.getChildren().addAll(
+            this.scoreLabel,
+            this.scoreValueLabel
+        );
+        this.pane.add(leftPane, 0, 0);
+
+        VBox rightPane = new VBox();
+        rightPane.getStyleClass().add("right-pane");
+        rightPane.getChildren().add(this.healthBar);
+        this.pane.add(rightPane, 2, 0);
+
+        VBox buttonPane = new VBox();
+        buttonPane.getStyleClass().add("button-pane");
+        buttonPane.getChildren().add(this.forfeitButton);
+        this.pane.add(buttonPane, 1, 1);
     }
 
     @Override
@@ -48,6 +94,17 @@ public class GameView
             listener.KeyboardPressedKey(c);
         }
     }
+
+    @Override
+    public void forfeitButtonPressed() {
+        for (GameViewListener listener : getListeners()) {
+            listener.forfeitButtonPressed();
+        }
+    }
+
+    // Events
+    private final EventHandler<ActionEvent> forfeitButtonHandler = actionEvent -> this.forfeitButtonPressed();
+
 
     // Methods
 }

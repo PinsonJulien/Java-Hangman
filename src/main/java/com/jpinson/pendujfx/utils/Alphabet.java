@@ -17,6 +17,7 @@ public abstract class Alphabet {
     // Static variables
     public static final char[] array = letters;
     public static final String string = String.valueOf(letters);
+    public static final int length = letters.length;
 
     // Methods
     public static boolean isAlpha(char c) {

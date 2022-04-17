@@ -4,6 +4,9 @@ import com.jpinson.pendujfx.interfaces.InitResetInterface;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+
 import java.util.ArrayList;
 
 // Views hold the visible part of the application and aspect related methods.
@@ -16,11 +19,12 @@ public abstract class View
 >
 implements InitResetInterface
 {
-    private final P pane;
-    private final ArrayList<L> listeners = new ArrayList<>();
+    protected final P pane;
+    protected final ArrayList<L> listeners = new ArrayList<>();
 
     public View (P pane) {
         this.pane = pane;
+        VBox.setVgrow(pane, Priority.ALWAYS);
     }
 
     // Getters / Setters

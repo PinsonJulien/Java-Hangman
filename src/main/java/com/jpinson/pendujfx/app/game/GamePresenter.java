@@ -81,6 +81,12 @@ public class GamePresenter
         }
     }
 
+    @Override
+    public void forfeitButtonPressed() {
+        this.gameModel.setHealth(0);
+        this.gameOver();
+    }
+
     // Methods
     public void newGame() {
         // Get a random word, difficulty increases length and complexity

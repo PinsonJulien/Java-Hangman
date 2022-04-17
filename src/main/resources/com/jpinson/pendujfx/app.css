@@ -1,29 +1,173 @@
-.test {
-    -fx-background-color: blue
+Button:hover,
+Key:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #CEAC41;
 }
 
+Button,
 Key {
-    -fx-border-color: brown;
-    -fx-rotate: 100;
-
+    -fx-background-color: #D7AF72;
+    -fx-text-fill: #3B3B3A;
+    -fx-font-family: "Roboto Condensed";
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
 }
 
+/* MENU VIEW */
+#menu {
+    -fx-background-color: #DAC27C;
+}
+
+#menu Button {
+    -fx-font-size: 15;
+    -fx-pref-width: 100;
+    -fx-pref-height: 50;
+}
+
+#menu Label {
+    -fx-font-size: 40;
+    -fx-font-family: "Stencil";
+    -fx-font-weight: 500;
+    -fx-text-fill: #3B3B3A;
+}
+
+#menu .titlePane,
+#menu .buttonPane {
+    -fx-alignment: center;
+}
+
+#menu .buttonPane {
+    -fx-spacing: 10;
+}
+
+/* Options */
 #options {
-    -fx-background-color: red;
+    -fx-background-color: #DAC27C;
 }
 
-#options Label {
-    -fx-background-color: blue;
+#options Button {
+    -fx-font-size: 15;
+    -fx-pref-width: 80;
+    -fx-pref-height: 50;
 }
 
-#options .valid {
-    -fx-text-fill: green;
+#options .bottom-button-pane Button {
+    -fx-border-color: #A8651E;
 }
 
-#options .invalid {
-    -fx-text-fill: red;
+#options .field-pane {
+    -fx-background-color: #EFDEC2;
+    -fx-border-color: #CEAC41;
+    -fx-border-width: 5 0 5 0;
 }
 
-#options ComboBoxFormField {
-    -fx-background-color: purple;
+#options .title-button-pane,
+#options .title-label-pane,
+#options .bottom-button-pane,
+#options .field {
+    -fx-alignment: center;
+}
+
+#options .title-label-pane Label {
+    -fx-font-size: 25;
+    -fx-font-family: "Stencil";
+}
+
+#options TextField,
+#options ComboBox {
+    -fx-max-width: 150px;
+}
+
+#options .field-pane {
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto Condensed";
+}
+
+#options .field {
+    -fx-spacing: 10;
+}
+
+#options .field .valid,
+#options .field .valid .list-cell {
+    -fx-text-fill: #21be25;
+}
+
+#options .field .invalid,
+#options .field .invalid .list-cell {
+    -fx-text-fill: #f44336;
+}
+
+/* GAME */
+#game {
+    -fx-background-color: #DAC27C;
+}
+
+#game AlphabeticKeyboard {
+    -fx-hgap: 5;
+    -fx-vgap: 5;
+}
+
+#game AlphabeticKeyboard Key {
+    -fx-pref-width: 35;
+    -fx-pref-height: 35;
+}
+
+#game .right-pane {
+}
+
+#game HealthBar {
+    -fx-rotate: -90;
+    -fx-padding: -20 -80;
+}
+
+#game HealthBar .bar {
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+}
+
+#game HealthBar .track {
+    -fx-background-radius: 15;
+    -fx-background-insets: 0;
+}
+
+#game HealthBar {
+
+}
+
+#game HealthBar.low {
+    -fx-accent: #f44336;
+}
+
+#game HealthBar.middle {
+    -fx-accent: #ff9116;
+}
+#game HealthBar.high {
+    -fx-accent: #21be25;
+}
+
+#game .left-pane,
+#game .right-pane,
+#game .button-pane,
+#game .word-pane,
+#game AlphabeticKeyboard {
+    -fx-alignment: center;
+}
+
+#game .left-pane {
+    -fx-spacing: 10;
+    -fx-font-size: 20;
+    -fx-font-family: "Roboto Condensed";
+}
+
+#game .left-pane {}
+
+#game Word {
+    -fx-font-size: 35;
+    -fx-font-family: "Roboto Condensed";
+}
+
+#game Button {
+    -fx-font-size: 13;
+    -fx-pref-width: 80;
+    -fx-pref-height: 40;
 }

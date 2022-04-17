@@ -3,10 +3,19 @@ import com.jpinson.pendujfx.utils.Alphabet;
 
 public class AlphabeticKeyboard extends Keyboard {
     public AlphabeticKeyboard (KeyboardKeyListener listener) {
-        super(listener, Alphabet.array);
+        super(
+            listener,
+            Alphabet.array,
+            Alphabet.length/2
+        );
     }
 
     public AlphabeticKeyboard (KeyboardKeyListener listener, boolean disableKeyOnUse) {
-        super(listener, Alphabet.array, disableKeyOnUse);
+        super(
+            listener,
+            Alphabet.array,
+            Alphabet.length/2,
+            disableKeyOnUse
+        );
     }
 }

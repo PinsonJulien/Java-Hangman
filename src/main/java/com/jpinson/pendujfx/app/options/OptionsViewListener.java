@@ -1,6 +1,6 @@
 package com.jpinson.pendujfx.app.options;
 
 public interface OptionsViewListener {
-    void menuButtonPressed();
-    void validateButtonPressed();
+    void returnButtonPressed();
+    void playButtonPressed();
 }

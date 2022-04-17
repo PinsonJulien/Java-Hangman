@@ -67,7 +67,8 @@ public class App extends Application {
         appPresenter.changeView(PresenterEnum.MENU);
 
         // Setup scene
-        Scene scene = new Scene(appPresenter.getView().getPane(), 320, 240);
+        Scene scene = new Scene(appPresenter.getView().getPane(), 896, 414);
+
 
         // Setup style
         final URL style = this.getClass().getResource("app.css");
@@ -75,6 +76,7 @@ public class App extends Application {
 
         // Show
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

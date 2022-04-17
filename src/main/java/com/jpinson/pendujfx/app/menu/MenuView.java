@@ -1,24 +1,23 @@
 package com.jpinson.pendujfx.app.menu;
 
+import com.jpinson.pendujfx.components.panes.constrainedGridPane.ConstrainedGridPane;
 import com.jpinson.pendujfx.framework.view.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
 
-public class MenuView extends View<VBox, MenuViewListener> implements MenuViewListener {
-    // Sert de hub aux options etc.
+public class MenuView extends View<ConstrainedGridPane, MenuViewListener> implements MenuViewListener {
+    private final VBox gameTitlePane = new VBox();
+    private final Label gameTitleLabel = new Label("HANGMAN");
 
-    // sélection de difficulté
-    // internet (afficher si oui ou non connecté), possibilité de désactivé
-
-    // tableau des scores (autre vue)
-
-    private final Button playButton = new Button("Play");
-    private final Button optionButton = new Button("Options");
+    private final VBox buttonPane = new VBox();
+    private final Button playButton = new Button("START");
+    private final Button scoresButton = new Button("SCORES");
 
     public MenuView() {
-        super(new VBox());
+        super(new ConstrainedGridPane());
         this.init();
     }
 
@@ -27,9 +26,31 @@ public class MenuView extends View<VBox, MenuViewListener> implements MenuViewLi
     // Interfaces
     @Override
     public void init() {
+        // Set actions
         this.playButton.setOnAction(this.newGameButtonHandler);
-        this.optionButton.setOnAction(this.menuButtonHandler);
-        this.insertNode(this.playButton, this.optionButton);
+        this.scoresButton.setOnAction(this.menuButtonHandler);
+
+        this.pane.setId("menu");
+
+        // Set placement
+        this.pane.setColumns(100);
+        this.pane.setRows(50, 50);
+        this.pane.add(this.gameTitlePane, 0, 0);
+        this.pane.add(this.buttonPane, 0, 1);
+
+        // Game name panel
+        this.gameTitlePane.getChildren().addAll(
+            this.gameTitleLabel
+        );
+        this.gameTitlePane.getStyleClass().add("titlePane");
+
+        // Buttons panel
+        this.buttonPane.getChildren().addAll(
+            this.playButton,
+            this.scoresButton
+        );
+        this.buttonPane.getStyleClass().add("buttonPane");
+
     }
 
     @Override
@@ -38,22 +59,22 @@ public class MenuView extends View<VBox, MenuViewListener> implements MenuViewLi
     // Listeners
 
     @Override
-    public void playButtonPressed() {
+    public void startButtonPressed() {
         for (MenuViewListener listener : getListeners()) {
-            listener.playButtonPressed();
+            listener.startButtonPressed();
         }
     }
 
     @Override
-    public void optionButtonPressed() {
+    public void scoresButtonPressed() {
         for (MenuViewListener listener : getListeners()) {
-            listener.optionButtonPressed();
+            listener.scoresButtonPressed();
         }
     }
 
     // Events
-    private final EventHandler<ActionEvent> newGameButtonHandler = actionEvent -> this.playButtonPressed();
-    private final EventHandler<ActionEvent> menuButtonHandler = actionEvent -> this.optionButtonPressed();
+    private final EventHandler<ActionEvent> newGameButtonHandler = actionEvent -> this.startButtonPressed();
+    private final EventHandler<ActionEvent> menuButtonHandler = actionEvent -> this.scoresButtonPressed();
 
     // Methods
 }

@@ -30,13 +30,13 @@ public class MenuPresenter
     // Listeners
 
     @Override
-    public void playButtonPressed() {
-        this.getParentListener().selectPresenter(PresenterEnum.GAME);
+    public void startButtonPressed() {
+        this.getParentListener().selectPresenter(PresenterEnum.OPTIONS);
     }
 
     @Override
-    public void optionButtonPressed() {
-        this.getParentListener().selectPresenter(PresenterEnum.OPTIONS);
+    public void scoresButtonPressed() {
+        // to implement.
     }
 
     // Methods

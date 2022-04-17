@@ -1,11 +1,11 @@
 package com.jpinson.pendujfx.app;
 
 import com.jpinson.pendujfx.framework.view.View;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
-public class AppView extends View<Pane, Void> {
+public class AppView extends View<VBox, Void> {
     public AppView() {
-        super(new Pane());
+        super(new VBox());
         this.init();
     }
 
@@ -14,7 +14,7 @@ public class AppView extends View<Pane, Void> {
     // Interfaces
     @Override
     public void init() {
-
+        this.getPane().setFillWidth(true);
     }
 
     @Override

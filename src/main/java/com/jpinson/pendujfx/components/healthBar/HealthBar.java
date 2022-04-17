@@ -1,6 +1,7 @@
 package com.jpinson.pendujfx.components.healthBar;
 
 import com.jpinson.pendujfx.interfaces.InitResetInterface;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ProgressBar;
 
 // Health bar based on percentage
@@ -17,7 +18,6 @@ public class HealthBar extends ProgressBar implements InitResetInterface {
     @Override
     public void init() {
         this.setFullHealth();
-        this.setStyle("-fx-background-color: purple");
     }
 
     @Override
@@ -36,14 +36,29 @@ public class HealthBar extends ProgressBar implements InitResetInterface {
 
         // Change color on specific threshold
         if ( percentage > 60) {
-            this.setStyle("-fx-accent: green");
+            this.changeColorClass("high");
         }
         else if ( percentage > 20) {
-            this.setStyle("-fx-accent: yellow");
+            this.changeColorClass("middle");
         }
         else {
-            this.setStyle("-fx-accent: red");
+            this.changeColorClass("low");
         }
+    }
+
+    private void changeColorClass (String str) {
+        final ObservableList<String> styleClass = this.getStyleClass();
+        String[] classes = new String[] {
+            "low",
+            "middle",
+            "high"
+        };
+
+        for (String cl : classes ) {
+            styleClass.remove(cl);
+        }
+
+        styleClass.add(str);
     }
 
 }

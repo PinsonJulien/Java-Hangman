@@ -51,43 +51,62 @@ public class OptionsPresenter
     // Listeners
 
     @Override
-    public void menuButtonPressed() {
+    public void returnButtonPressed() {
         this.getParentListener().selectPresenter(PresenterEnum.MENU);
     }
 
     @Override
-    public void validateButtonPressed() {
-        this.validateUsernameField();
-        this.validateDifficultyField();
+    public void playButtonPressed() {
+        boolean formValidity = true;
+        final TextFormField usernameField = this.getView().getUsernameField();
+        final String username = usernameField.getText();
+
+        final ComboBoxFormField<DifficultyEnum> difficultyField = this.getView().getDifficultyField();
+        final DifficultyEnum difficulty = difficultyField.getValue();
+
+        String usernameMessage = this.validateUsernameField(username);
+        String difficultyMessage = this.validateDifficultyField(difficulty);
+
+        if (usernameMessage != null) {
+            usernameField.setInvalid(usernameMessage);
+            formValidity = false;
+        } else {
+            usernameField.setValid();
+            this.userModel.setName(username);
+        }
+
+        if (difficultyMessage != null) {
+            difficultyField.setInvalid(difficultyMessage);
+            formValidity = false;
+        } else {
+            difficultyField.setValid();
+            this.optionsModel.setDifficulty(difficulty);
+        }
+
+        // If all fields are validated, show the game.
+        if (formValidity) {
+            this.getParentListener().selectPresenter(PresenterEnum.GAME);
+        }
     }
 
     // Methods
-    private void validateUsernameField() {
-        TextFormField usernameField = this.getView().getUsernameField();
-        String username = usernameField.getText();
+    private String validateUsernameField(String username) {
+        final int len = username.length();
 
-        int len = username.length();
         // min 1, max 20
         if (len < 1 || len > 20) {
-            usernameField.setInvalid("The username length should be between 1 and 20.");
-            return;
+            return "The username length should be between 1 and 20.";
         }
 
         // only allow alphanumeric
         if (!Alphanumeric.validate(username)) {
-            usernameField.setInvalid("The username cannot contains special characters.");
-            return;
+            return "The username cannot contains special characters.";
         }
 
-        usernameField.setValid();
-        this.userModel.setName(username);
+        return null;
     }
 
-    private void validateDifficultyField() {
-        ComboBoxFormField<DifficultyEnum> difficultyField = this.getView().getDifficultyField();
-        DifficultyEnum difficulty = difficultyField.getValue();
-
-        difficultyField.setValid();
-        this.optionsModel.setDifficulty(difficulty);
+    private String validateDifficultyField(DifficultyEnum difficulty) {
+        return null;
     }
 }

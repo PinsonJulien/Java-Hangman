@@ -1,31 +1,34 @@
 package com.jpinson.pendujfx.components.keyboard;
+
 import com.jpinson.pendujfx.interfaces.InitResetInterface;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+
 import java.util.HashMap;
 import java.util.Map;
 
 // Keyboard able to have any set of keys
-public class Keyboard extends FlowPane implements InitResetInterface {
+public class Keyboard extends GridPane implements InitResetInterface {
     private final KeyboardKeyListener listener;
     private final char[] characters;
     private final Map<Character, Key> keys = new HashMap<>();
+    private final int columns;
     private final boolean disableKeyOnUse;
 
-    public Keyboard(KeyboardKeyListener listener, char[] characters) {
+    public Keyboard(KeyboardKeyListener listener, char[] characters, int columns) {
         this.listener = listener;
         this.disableKeyOnUse = false;
         this.characters = characters;
+        this.columns = columns;
         this.init();
     }
 
-    public Keyboard(KeyboardKeyListener listener, char[] characters, boolean disableKeyOnUse) {
+    public Keyboard(KeyboardKeyListener listener, char[] characters, int columns, boolean disableKeyOnUse) {
         this.listener = listener;
         this.disableKeyOnUse = disableKeyOnUse;
         this.characters = characters;
+        this.columns = columns;
         this.init();
     }
 
@@ -34,14 +37,22 @@ public class Keyboard extends FlowPane implements InitResetInterface {
     // Interfaces
     @Override
     public void init() {
-        ObservableList<Node> childrenList = this.getChildren();
+        int x = 0;
+        int y = 0;
 
         for (char c : this.characters) {
             Key key = new Key(c);
             key.setOnAction(buttonHandler);
-
-            childrenList.add(key);
             keys.put(c, key);
+
+            this.add(key, x, y);
+
+            if (x == columns-1) {
+                x = 0;
+                ++y;
+            } else {
+                ++x;
+            }
         }
     }
 
