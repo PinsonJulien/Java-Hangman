@@ -6,7 +6,12 @@ import com.jpinson.pendujfx.models.GameModel;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
 import com.jpinson.pendujfx.models.OptionsModel;
 import com.jpinson.pendujfx.models.UserModel;
+import com.jpinson.pendujfx.models.WordModel;
+import com.jpinson.pendujfx.services.ScoreService;
+import com.jpinson.pendujfx.services.WordService;
 import com.jpinson.pendujfx.utils.EncryptedWord;
+
+import java.sql.SQLException;
 
 public class GamePresenter
     extends ChildPresenter<AppPresenterListener, GameView>
@@ -15,6 +20,9 @@ public class GamePresenter
     private final GameModel gameModel;
     private final UserModel userModel;
     private final OptionsModel optionsModel;
+
+    private final WordService wordService = new WordService();
+    private final ScoreService scoreService = new ScoreService();
 
     private static final char encryptingCharacter = '?';
     private static final int maxHealth = 5;
@@ -59,7 +67,7 @@ public class GamePresenter
             int health = this.gameModel.getHealth() - 1;
 
             if (health <= 0) {
-                this.gameOver();
+                this.gameLost();
                 return;
             }
 
@@ -76,21 +84,32 @@ public class GamePresenter
 
         // All letters are revealed : game over, win
         if (encryptedWord.isDecrypted()) {
-            view.reset();
-            System.out.println("You won");
+            this.gameWon();
         }
     }
 
     @Override
     public void forfeitButtonPressed() {
         this.gameModel.setHealth(0);
-        this.gameOver();
+        this.gameLost();
     }
 
     // Methods
-    public void newGame() {
+    private void newGame() {
         // Get a random word, difficulty increases length and complexity
-        String word = "Potato";
+        String word = "";
+
+        try {
+            // Get a random word and set the score of the game.
+            WordModel wordModel = this.wordService.getRandomWord(5, 6);
+
+            this.gameModel.setScore(wordModel.getScore());
+            word = wordModel.getWord();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
         word = word.toUpperCase();
 
         // Encrypt the word
@@ -105,11 +124,35 @@ public class GamePresenter
         view.getHealthBar().setFullHealth();
     }
 
-    public void gameOver() {
+    private void gameWon() {
+        this.insertScore(this.gameModel.getScore());
+        this.gameOver();
+    }
+
+    private void gameLost() {
+        int score = this.gameModel.getScore();
+        this.gameModel.setScore(-score);
+        this.insertScore(-score);
+        this.gameOver();
+    }
+
+    private void gameOver() {
         // Reset the view
         this.getView().reset();
 
         // Switch to game-over view.
         this.getParentListener().selectPresenter(PresenterEnum.GAMEOVER);
+    }
+
+    private void insertScore(int score) {
+        try {
+            this.scoreService.addScore(
+                score,
+                this.optionsModel.getDifficulty(),
+                this.userModel
+            );
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

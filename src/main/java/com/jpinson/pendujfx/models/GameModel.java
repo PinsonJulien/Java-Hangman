@@ -7,6 +7,7 @@ import com.jpinson.pendujfx.utils.EncryptedWord;
 public class GameModel extends Model {
     private int health;
     private EncryptedWord encryptedWord;
+    private int score;
 
     // Getters / Setters
     public int getHealth() {
@@ -22,5 +23,13 @@ public class GameModel extends Model {
 
     public EncryptedWord getEncryptedWord () {
         return this.encryptedWord;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

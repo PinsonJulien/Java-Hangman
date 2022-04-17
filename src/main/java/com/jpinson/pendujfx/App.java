@@ -42,19 +42,37 @@ public class App extends Application {
         AppPresenter appPresenter = new AppPresenter(appView);
 
         MenuView menuView = new MenuView();
-        MenuPresenter menuPresenter = new MenuPresenter(menuView, appPresenter);
+        MenuPresenter menuPresenter = new MenuPresenter(
+            menuView,
+            appPresenter
+        );
         menuView.addListener(menuPresenter);
 
         OptionsView optionsView = new OptionsView();
-        OptionsPresenter optionsPresenter = new OptionsPresenter(optionsView, appPresenter, optionsModel, userModel);
+        OptionsPresenter optionsPresenter = new OptionsPresenter(
+            optionsView,
+            appPresenter,
+            optionsModel,
+            userModel
+        );
         optionsView.addListener(optionsPresenter);
 
         GameView gameView = new GameView();
-        GamePresenter gamePresenter = new GamePresenter(gameView, appPresenter, gameModel, optionsModel, userModel);
+        GamePresenter gamePresenter = new GamePresenter(
+            gameView,
+            appPresenter,
+            gameModel,
+            optionsModel,
+            userModel
+        );
         gameView.addListener(gamePresenter);
 
         GameOverView gameOverView = new GameOverView();
-        GameOverPresenter gameOverPresenter = new GameOverPresenter(gameOverView, appPresenter);
+        GameOverPresenter gameOverPresenter = new GameOverPresenter(
+            gameOverView,
+            appPresenter,
+            gameModel
+        );
         gameOverView.addListener(gameOverPresenter);
 
         // Adding all child presenters to the parent one.
@@ -68,7 +86,6 @@ public class App extends Application {
 
         // Setup scene
         Scene scene = new Scene(appPresenter.getView().getPane(), 896, 414);
-
 
         // Setup style
         final URL style = this.getClass().getResource("app.css");
