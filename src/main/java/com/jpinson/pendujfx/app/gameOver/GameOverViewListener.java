@@ -1,6 +1,7 @@
 package com.jpinson.pendujfx.app.gameOver;
 
 public interface GameOverViewListener {
-    void NewGameButtonPressed();
+    void ReplayButtonPressed();
     void MenuButtonPressed();
+    void ScoreButtonPressed();
 }

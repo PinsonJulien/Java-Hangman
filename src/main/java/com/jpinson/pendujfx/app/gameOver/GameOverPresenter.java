@@ -28,13 +28,18 @@ public class GameOverPresenter
 
     // Listeners
     @Override
-    public void NewGameButtonPressed() {
+    public void ReplayButtonPressed() {
         this.getParentListener().selectPresenter(PresenterEnum.GAME);
     }
 
     @Override
     public void MenuButtonPressed() {
         this.getParentListener().selectPresenter(PresenterEnum.MENU);
+    }
+
+    @Override
+    public void ScoreButtonPressed() {
+        // To implement
     }
 
     // Methods

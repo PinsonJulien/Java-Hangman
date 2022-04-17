@@ -112,9 +112,6 @@ Key {
     -fx-pref-height: 35;
 }
 
-#game .right-pane {
-}
-
 #game HealthBar {
     -fx-rotate: -90;
     -fx-padding: -20 -80;
@@ -130,10 +127,6 @@ Key {
     -fx-background-insets: 0;
 }
 
-#game HealthBar {
-
-}
-
 #game HealthBar.low {
     -fx-accent: #f44336;
 }
@@ -143,6 +136,10 @@ Key {
 }
 #game HealthBar.high {
     -fx-accent: #21be25;
+}
+
+#game HealthBar .track {
+    -fx-background-color: #CEAC41;
 }
 
 #game .left-pane,
@@ -159,14 +156,43 @@ Key {
     -fx-font-family: "Roboto Condensed";
 }
 
-#game .left-pane {}
-
 #game Word {
     -fx-font-size: 35;
     -fx-font-family: "Roboto Condensed";
 }
 
 #game Button {
+    -fx-font-size: 13;
+    -fx-pref-width: 80;
+    -fx-pref-height: 40;
+}
+
+/* Game Over */
+#game-over {
+    -fx-background-color: #DAC27C;
+}
+
+#game-over .result-pane {
+    -fx-alignment: center;
+    -fx-spacing: 25;
+}
+
+#game-over .result-pane .result-label {
+    -fx-font-size: 35;
+    -fx-font-family: "Stencil";
+}
+
+#game-over .result-pane .score-label {
+    -fx-font-size: 25;
+    -fx-font-family: "Roboto Condensed";
+}
+
+#game-over .button-pane {
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+
+#game-over .button-pane Button {
     -fx-font-size: 13;
     -fx-pref-width: 80;
     -fx-pref-height: 40;

@@ -1,8 +1,4 @@
 
-- Premier lancement :
-- Menu principal avec seulement bouton  S T A R T
-- Affiche le menu des options,
-- Entrer un pseudo est obligatoire pour commencer la partie,
 - Avant de lancer, vérification, enregistrement du new player si changement de pseudo.
 
 - Menu : Bouton quick game quand les options sont remplies (caché sinon.)
