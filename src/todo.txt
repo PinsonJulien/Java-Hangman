@@ -2,19 +2,13 @@
     -> getValueOf
     -> do....
 
-
-- Menu : Bouton quick game quand les options sont remplies (caché sinon.)
-
+- Gestion difficulté
 
 - Check accès internet
 - Si accès : Fetch
 - Possibilité de ne pas utiliser de connexion internet
 (proposé si connexion seulement)
 
-UI
-
-- Bouton quitter sur le menu principal, pas de fenêtre classique
-- Styliser barre par défaut de fenêtre
 
 
 - Autoriser usage des touches clavier.

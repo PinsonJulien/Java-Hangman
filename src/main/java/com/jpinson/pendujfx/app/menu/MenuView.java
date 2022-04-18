@@ -13,10 +13,11 @@ public class MenuView
     extends View<ConstrainedGridPane, MenuViewListener>
     implements MenuViewListener
 {
-
     private final Label gameTitleLabel = new Label("HANGMAN");
+    private final Button quickPlayButton = new Button("QUICK PLAY");
     private final Button playButton = new Button("START");
     private final Button scoresButton = new Button("SCORES");
+    private final Button quitButton = new Button("QUIT");
 
     public MenuView() {
         super(new ConstrainedGridPane());
@@ -31,12 +32,14 @@ public class MenuView
         this.pane.setId("menu");
 
         // Set actions
-        this.playButton.setOnAction(this.newGameButtonHandler);
+        this.quickPlayButton.setOnAction(this.quickPlayButtonHandler);
+        this.playButton.setOnAction(this.startButtonHandler);
         this.scoresButton.setOnAction(this.menuButtonHandler);
+        this.quitButton.setOnAction(this.quitButtonHandler);
 
         // Set placement
         this.pane.setColumns(100);
-        this.pane.setRows(50, 50);
+        this.pane.setRows(30, 70);
 
         // Game name panel
         VBox gameTitlePane = new VBox();
@@ -48,16 +51,28 @@ public class MenuView
         VBox buttonPane = new VBox();
         CssClass.add(buttonPane, "buttonPane");
         buttonPane.getChildren().addAll(
+                this.quickPlayButton,
                 this.playButton,
-                this.scoresButton
+                this.scoresButton,
+                this.quitButton
         );
         this.pane.add(buttonPane, 0, 1);
-    }
+
+        // Hidden when starting the game.
+        this.quickPlayButton.setVisible(false);
+   }
 
     @Override
     public void reset() {}
 
     // Listeners
+
+    @Override
+    public void quickPlayButtonPressed() {
+        for (MenuViewListener listener : getListeners()) {
+            listener.quickPlayButtonPressed();
+        }
+    }
 
     @Override
     public void startButtonPressed() {
@@ -73,9 +88,23 @@ public class MenuView
         }
     }
 
+    @Override
+    public void quitButtonPressed() {
+        for (MenuViewListener listener : getListeners()) {
+            listener.quitButtonPressed();
+        }
+    }
+
     // Events
-    private final EventHandler<ActionEvent> newGameButtonHandler = actionEvent -> this.startButtonPressed();
+    private final EventHandler<ActionEvent> quickPlayButtonHandler = actionEvent -> this.quickPlayButtonPressed();
+    private final EventHandler<ActionEvent> startButtonHandler = actionEvent -> this.startButtonPressed();
     private final EventHandler<ActionEvent> menuButtonHandler = actionEvent -> this.scoresButtonPressed();
+    private final EventHandler<ActionEvent> quitButtonHandler = actionEvent -> this.quitButtonPressed();
+
 
     // Methods
+
+    public void revealQuickPlayButton() {
+        this.quickPlayButton.setVisible(true);
+    }
 }

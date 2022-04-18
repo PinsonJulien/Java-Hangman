@@ -19,6 +19,7 @@ import com.jpinson.pendujfx.models.UserModel;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,7 +47,8 @@ public class App extends Application {
         MenuView menuView = new MenuView();
         MenuPresenter menuPresenter = new MenuPresenter(
             menuView,
-            appPresenter
+            appPresenter,
+            userModel
         );
         menuView.addListener(menuPresenter);
 
@@ -100,6 +102,9 @@ public class App extends Application {
         // Setup style
         final URL style = this.getClass().getResource("app.css");
         if (style != null ) scene.getStylesheets().add(style.toString());
+
+        // remove top bar
+        stage.initStyle(StageStyle.UNDECORATED);
 
         // Show
         stage.setScene(scene);
