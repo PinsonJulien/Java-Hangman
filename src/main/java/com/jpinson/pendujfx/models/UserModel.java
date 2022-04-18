@@ -4,8 +4,8 @@ import com.jpinson.pendujfx.framework.model.Model;
 
 // Model having player related variables.
 public class UserModel extends Model {
-    private int id;
-    private String name;
+    private int id = 0;
+    private String name = "";
 
     public UserModel() {}
     public UserModel(int id, String name) {

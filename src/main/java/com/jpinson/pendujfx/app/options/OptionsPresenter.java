@@ -8,7 +8,10 @@ import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
 import com.jpinson.pendujfx.models.OptionsModel;
 import com.jpinson.pendujfx.models.UserModel;
+import com.jpinson.pendujfx.services.UserService;
 import com.jpinson.pendujfx.utils.Alphanumeric;
+
+import java.sql.SQLException;
 
 public class OptionsPresenter
     extends ChildPresenter<AppPresenterListener, OptionsView>
@@ -16,6 +19,8 @@ public class OptionsPresenter
 {
     private final OptionsModel optionsModel;
     private final UserModel userModel;
+
+    private final UserService userService = new UserService();
 
     public OptionsPresenter(
         OptionsView optionsView,
@@ -72,7 +77,6 @@ public class OptionsPresenter
             formValidity = false;
         } else {
             usernameField.setValid();
-            this.userModel.setName(username);
         }
 
         if (difficultyMessage != null) {
@@ -80,11 +84,17 @@ public class OptionsPresenter
             formValidity = false;
         } else {
             difficultyField.setValid();
-            this.optionsModel.setDifficulty(difficulty);
         }
 
-        // If all fields are validated, show the game.
+        // If all fields are validated, set the data and show the game.
         if (formValidity) {
+            this.optionsModel.setDifficulty(difficulty);
+
+            // Get the user model, if the user doesn't exist yet, create it.
+            UserModel userModel = this.getOrAddUser(username);
+            this.userModel.setName(userModel.getName());
+            this.userModel.setId(userModel.getId());
+
             this.getParentListener().selectPresenter(PresenterEnum.GAME);
         }
     }
@@ -108,5 +118,20 @@ public class OptionsPresenter
 
     private String validateDifficultyField(DifficultyEnum difficulty) {
         return null;
+    }
+
+    private UserModel getOrAddUser(String username) {
+        try {
+            this.userService.addUser(username);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            return this.userService.getUser(username);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return new UserModel();
+        }
     }
 }

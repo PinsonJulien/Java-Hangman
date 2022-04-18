@@ -106,7 +106,7 @@ public class GameOverView extends View<ConstrainedGridPane, GameOverViewListener
         String scoreText =
                 "- " +
                 score +
-                "points";
+                " points";
 
         this.setResults(resultText, scoreText);
     }
