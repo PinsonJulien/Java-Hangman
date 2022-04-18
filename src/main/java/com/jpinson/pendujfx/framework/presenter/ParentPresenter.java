@@ -15,7 +15,7 @@ public abstract class ParentPresenter
     extends Presenter<V>
     implements ParentPresenterListener<E>
 {
-    private final EnumMap<E, P> childrenPresenterList;
+    protected final EnumMap<E, P> childrenPresenterList;
 
     public ParentPresenter(
         V view,

@@ -31,12 +31,12 @@ public class MenuPresenter
 
     @Override
     public void startButtonPressed() {
-        this.getParentListener().selectPresenter(PresenterEnum.OPTIONS);
+        this.parentListener.selectPresenter(PresenterEnum.OPTIONS);
     }
 
     @Override
     public void scoresButtonPressed() {
-        this.getParentListener().selectPresenter(PresenterEnum.SCORES);
+        this.parentListener.selectPresenter(PresenterEnum.SCORES);
     }
 
     // Methods

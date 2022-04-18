@@ -5,12 +5,12 @@ import com.jpinson.pendujfx.components.panes.constrainedGridPane.ConstrainedGrid
 import com.jpinson.pendujfx.enums.DifficultyEnum;
 import com.jpinson.pendujfx.framework.view.View;
 import com.jpinson.pendujfx.models.ScoreModel;
+import com.jpinson.pendujfx.utils.CssClass;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-
 import java.util.ArrayList;
 
 public class ScoresView
@@ -47,23 +47,24 @@ public class ScoresView
 
         // Title grid
         VBox buttonPane = new VBox();
-        buttonPane.getStyleClass().add("button-pane");
+        CssClass.add(buttonPane, "button-pane");
         buttonPane.getChildren().add(this.menuButton);
         this.pane.add(buttonPane, 0,0);
 
         VBox titlePane = new VBox();
-        titlePane.getStyleClass().add("title-pane");
+        CssClass.add(titlePane, "title-pane");
         titlePane.getChildren().add(this.titleLabel);
         this.pane.add(titlePane, 1,0);
 
         VBox comboBoxPane = new VBox();
-        comboBoxPane.getStyleClass().add("combo-box-pane");
+        CssClass.add(comboBoxPane, "combo-box-pane");
         comboBoxPane.getChildren().add(this.difficultyComboBox);
         this.pane.add(comboBoxPane, 2, 0);
 
         // Score grid
-        this.scoreGrid.getStyleClass().add("score-grid");
+        CssClass.add(this.scoreGrid, "score-grid");
         this.scoreGrid.setColumns(50, 50);
+        // table header + 10 rows
         this.scoreGrid.setRows(10, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9);
         this.pane.add(this.scoreGrid, 1, 1);
     }
@@ -97,14 +98,14 @@ public class ScoresView
     // Methods
     private void insertHeader() {
         VBox scoreGridUsername = new VBox();
-        scoreGridUsername.getStyleClass().add("header");
+        CssClass.add(scoreGridUsername, "header");
         scoreGridUsername.getChildren().add(
             new Label("Username")
         );
         this.scoreGrid.add(scoreGridUsername, 0, 0);
 
         VBox scoreGridScore = new VBox();
-        scoreGridScore.getStyleClass().add("header");
+        CssClass.add(scoreGridScore, "header");
         scoreGridScore.getChildren().add(
             new Label("Score")
         );
@@ -123,12 +124,16 @@ public class ScoresView
         String score = String.valueOf(scoreModel.getScore());
 
         VBox usernamePane = new VBox();
-        usernamePane.getStyleClass().add("cell");
-        usernamePane.getChildren().add(new Label(username));
+        CssClass.add(usernamePane, "cell");
+        usernamePane.getChildren().add(
+            new Label(username)
+        );
 
         VBox scorePane = new VBox();
-        scorePane.getStyleClass().add("cell");
-        scorePane.getChildren().add(new Label(score));
+        CssClass.add(scorePane, "cell");
+        scorePane.getChildren().add(
+            new Label(score)
+        );
 
         this.scoreGrid.add(usernamePane, 0, row);
         this.scoreGrid.add(scorePane, 1, row);

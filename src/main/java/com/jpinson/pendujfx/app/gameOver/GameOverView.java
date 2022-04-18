@@ -2,6 +2,7 @@ package com.jpinson.pendujfx.app.gameOver;
 
 import com.jpinson.pendujfx.components.panes.constrainedGridPane.ConstrainedGridPane;
 import com.jpinson.pendujfx.framework.view.View;
+import com.jpinson.pendujfx.utils.CssClass;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -9,7 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class GameOverView extends View<ConstrainedGridPane, GameOverViewListener> implements GameOverViewListener {
+public class GameOverView
+    extends View<ConstrainedGridPane, GameOverViewListener>
+    implements GameOverViewListener
+{
     private final Label resultLabel = new Label();
     private final Label scoreLabel = new Label();
     private final Button replayButton = new Button("REPLAY");
@@ -37,18 +41,20 @@ public class GameOverView extends View<ConstrainedGridPane, GameOverViewListener
         this.pane.setColumns(100);
         this.pane.setRows(70, 30);
 
+        // Result pane
         VBox resultPane = new VBox();
-        resultPane.getStyleClass().add("result-pane");
+        CssClass.add(resultPane, "result-pane");
+        CssClass.add(resultLabel, "result-label");
+        CssClass.add(scoreLabel, "score-label");
         resultPane.getChildren().addAll(
             this.resultLabel,
             this.scoreLabel
         );
-        this.resultLabel.getStyleClass().add("result-label");
-        this.scoreLabel.getStyleClass().add("score-label");
         this.pane.add(resultPane, 0, 0);
 
+        // Button pane
         HBox buttonPane = new HBox();
-        buttonPane.getStyleClass().add("button-pane");
+        CssClass.add(buttonPane, "button-pane");
         buttonPane.getChildren().addAll(
             this.menuButton,
             this.replayButton,
@@ -58,9 +64,7 @@ public class GameOverView extends View<ConstrainedGridPane, GameOverViewListener
     }
 
     @Override
-    public void reset() {
-
-    }
+    public void reset() {}
 
     // Events
     private final EventHandler<ActionEvent> replayButtonHandler = actionEvent -> ReplayButtonPressed();
@@ -96,7 +100,7 @@ public class GameOverView extends View<ConstrainedGridPane, GameOverViewListener
         String scoreText =
                 "+ " +
                 score +
-                "points";
+                " points";
 
         this.setResults(resultText, scoreText);
     }

@@ -52,14 +52,13 @@ public class GamePresenter
     @Override
     public void reset() {
         this.newGame();
-        this.getView().reset();
+        this.view.reset();
     }
 
     // Listeners
     @Override
     public void KeyboardPressedKey(char c) {
         EncryptedWord encryptedWord = this.gameModel.getEncryptedWord();
-        GameView view = this.getView();
 
         // Incorrect letter
         if (!encryptedWord.contains(c)) {
@@ -74,13 +73,13 @@ public class GamePresenter
             this.gameModel.setHealth(health);
             // Set health in percentage.
             double percentage = ((double) health/maxHealth)*100;
-            view.getHealthBar().setHealth(percentage);
+            this.view.getHealthBar().setHealth(percentage);
             return;
         }
 
         // Reveal letter in view
         encryptedWord.decrypt(c);
-        view.getWord().set(encryptedWord.get());
+        this.view.getWord().set(encryptedWord.get());
 
         // All letters are revealed : game over, win
         if (encryptedWord.isDecrypted()) {
@@ -119,9 +118,8 @@ public class GamePresenter
         this.gameModel.setHealth(maxHealth);
 
         // Setup view
-        GameView view = this.getView();
-        view.getWord().set(this.gameModel.getEncryptedWord().get());
-        view.getHealthBar().setFullHealth();
+        this.view.getWord().set(this.gameModel.getEncryptedWord().get());
+        this.view.getHealthBar().setFullHealth();
     }
 
     private void gameWon() {
@@ -137,11 +135,8 @@ public class GamePresenter
     }
 
     private void gameOver() {
-        // Reset the view
-        this.getView().reset();
-
         // Switch to game-over view.
-        this.getParentListener().selectPresenter(PresenterEnum.GAMEOVER);
+        this.parentListener.selectPresenter(PresenterEnum.GAMEOVER);
     }
 
     private void insertScore(int score) {

@@ -11,7 +11,6 @@ import com.jpinson.pendujfx.models.OptionsModel;
 import com.jpinson.pendujfx.models.UserModel;
 import com.jpinson.pendujfx.services.UserService;
 import com.jpinson.pendujfx.utils.Alphanumeric;
-
 import java.sql.SQLException;
 
 public class OptionsPresenter
@@ -47,26 +46,25 @@ public class OptionsPresenter
 
     @Override
     public void reset() {
-        OptionsView view = this.getView();
-        view.getUsernameField().setText(this.userModel.getName());
-        view.getDifficultyField().getField().setValue(this.optionsModel.getDifficulty());
-        view.reset();
+        this.view.getUsernameField().setText(this.userModel.getName());
+        this.view.getDifficultyField().getField().setValue(this.optionsModel.getDifficulty());
+        this.view.reset();
     }
 
     // Listeners
 
     @Override
     public void returnButtonPressed() {
-        this.getParentListener().selectPresenter(PresenterEnum.MENU);
+        this.parentListener.selectPresenter(PresenterEnum.MENU);
     }
 
     @Override
     public void playButtonPressed() {
         boolean formValidity = true;
-        final TextFormField usernameField = this.getView().getUsernameField();
+        final TextFormField usernameField = this.view.getUsernameField();
         final String username = usernameField.getText();
 
-        final ComboBoxFormField<DifficultyComboBox> difficultyField = this.getView().getDifficultyField();
+        final ComboBoxFormField<DifficultyComboBox> difficultyField = this.view.getDifficultyField();
         final DifficultyEnum difficulty = difficultyField.getField().getValue();
 
         String usernameMessage = this.validateUsernameField(username);
@@ -95,7 +93,7 @@ public class OptionsPresenter
             this.userModel.setName(userModel.getName());
             this.userModel.setId(userModel.getId());
 
-            this.getParentListener().selectPresenter(PresenterEnum.GAME);
+            this.parentListener.selectPresenter(PresenterEnum.GAME);
         }
     }
 

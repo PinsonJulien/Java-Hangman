@@ -5,6 +5,7 @@ import com.jpinson.pendujfx.components.keyboard.AlphabeticKeyboard;
 import com.jpinson.pendujfx.components.panes.constrainedGridPane.ConstrainedGridPane;
 import com.jpinson.pendujfx.components.word.Word;
 import com.jpinson.pendujfx.framework.view.View;
+import com.jpinson.pendujfx.utils.CssClass;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -50,20 +51,21 @@ public class GameView
         this.pane.setColumns(15, 70, 15);
         this.pane.setRows(70, 30);
 
+        // Middle pane
         ConstrainedGridPane middleGrid = new ConstrainedGridPane();
         middleGrid.setColumns(100);
         middleGrid.setRows(50, 50);
         this.pane.add(middleGrid, 1, 0);
 
         VBox wordPane = new VBox();
-        wordPane.getStyleClass().add("word-pane");
+        CssClass.add(wordPane, "word-pane");
         wordPane.getChildren().add(this.word);
         middleGrid.add(wordPane, 0,0);
-
         middleGrid.add(this.keyboard, 0, 1);
 
+        // Left pane
         VBox leftPane = new VBox();
-        leftPane.getStyleClass().add("left-pane");
+        CssClass.add(leftPane, "left-pane");
         leftPane.getChildren().addAll(
             this.scoreLabel,
             this.scoreValueLabel
@@ -71,12 +73,12 @@ public class GameView
         this.pane.add(leftPane, 0, 0);
 
         VBox rightPane = new VBox();
-        rightPane.getStyleClass().add("right-pane");
+        CssClass.add(rightPane, "right-pane");
         rightPane.getChildren().add(this.healthBar);
         this.pane.add(rightPane, 2, 0);
 
         VBox buttonPane = new VBox();
-        buttonPane.getStyleClass().add("button-pane");
+        CssClass.add(buttonPane, "button-pane");
         buttonPane.getChildren().add(this.forfeitButton);
         this.pane.add(buttonPane, 1, 1);
     }

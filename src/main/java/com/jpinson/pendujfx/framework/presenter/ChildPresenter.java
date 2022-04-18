@@ -11,7 +11,7 @@ public abstract class ChildPresenter <
 >
     extends Presenter<V>
 {
-    private final L parentListener;
+    protected final L parentListener;
 
     public ChildPresenter(V view, L parentListener) {
         super(view);

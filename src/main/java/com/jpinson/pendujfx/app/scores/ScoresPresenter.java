@@ -28,9 +28,7 @@ public class ScoresPresenter
 
     // Interfaces
     @Override
-    public void init() {
-
-    }
+    public void init() {}
 
     @Override
     public void reset() {
@@ -40,8 +38,8 @@ public class ScoresPresenter
                 this.selectedDifficulty
             );
 
-            this.getView().reset();
-            this.getView().insertRows(scores);
+            this.view.reset();
+            this.view.insertRows(scores);
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -51,12 +49,12 @@ public class ScoresPresenter
     // Listeners
     @Override
     public void menuButtonPressed() {
-        this.getParentListener().selectPresenter(PresenterEnum.MENU);
+        this.parentListener.selectPresenter(PresenterEnum.MENU);
     }
 
     @Override
     public void difficultyComboBoxChanged() {
-        this.selectedDifficulty = this.getView().getDifficultyComboBox().getValue();
+        this.selectedDifficulty = this.view.getDifficultyComboBox().getValue();
         this.reset();
     }
 

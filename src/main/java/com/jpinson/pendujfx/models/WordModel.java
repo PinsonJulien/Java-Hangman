@@ -3,9 +3,9 @@ package com.jpinson.pendujfx.models;
 import com.jpinson.pendujfx.framework.model.Model;
 
 public class WordModel extends Model {
-    private int id;
-    private int score;
-    private String word;
+    private final int id;
+    private final int score;
+    private final String word;
 
     public WordModel(
         int id,

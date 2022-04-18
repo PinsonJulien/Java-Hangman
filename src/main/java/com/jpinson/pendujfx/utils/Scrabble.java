@@ -14,23 +14,23 @@ public abstract class Scrabble {
     }
 
     public static int getLetterScore(char letter) {
-        switch (Character.toUpperCase(letter)) {
-            case 'A', 'E', 'I', 'L', 'N', 'O', 'R', 'S', 'T', 'U' :
-                return 1;
-            case 'D', 'G' :
-                return 2;
-            case 'B', 'C', 'M', 'P' :
-                return 3;
-            case 'F', 'H', 'V', 'W', 'Y' :
-                return 4;
-            case 'K' :
-                return 5;
-            case 'J', 'X' :
-                return 8;
-            case 'Q', 'Z' :
-                return 10;
-            default:
-                return 0;
-        }
+        return switch (Character.toUpperCase(letter)) {
+            case 'A', 'E', 'I', 'L', 'N', 'O', 'R', 'S', 'T', 'U'
+                -> 1;
+            case 'D', 'G'
+                -> 2;
+            case 'B', 'C', 'M', 'P'
+                -> 3;
+            case 'F', 'H', 'V', 'W', 'Y'
+                -> 4;
+            case 'K'
+                -> 5;
+            case 'J', 'X'
+                -> 8;
+            case 'Q', 'Z'
+                -> 10;
+            default
+                -> 0;
+        };
     }
 }

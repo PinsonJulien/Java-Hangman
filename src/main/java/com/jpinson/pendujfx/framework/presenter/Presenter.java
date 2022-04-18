@@ -5,7 +5,7 @@ import com.jpinson.pendujfx.framework.view.View;
 
 // Presenters are the brain of the application, they communicate with both view and models.
 public abstract class Presenter<V extends View<?,?>> implements InitResetInterface {
-    private final V view;
+    protected final V view;
 
     public Presenter (V view) {
         this.view = view;

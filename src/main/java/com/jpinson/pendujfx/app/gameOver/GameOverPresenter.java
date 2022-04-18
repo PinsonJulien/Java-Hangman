@@ -25,32 +25,30 @@ public class GameOverPresenter
 
     // Interfaces
     @Override
-    public void init() {
-    }
+    public void init() {}
 
     @Override
     public void reset() {
-        GameOverView view = this.getView();
         int score = this.gameModel.getScore();
 
-        if (score >= 0) view.setWin(score);
-        else view.setLoose(-score);
+        if (score >= 0) this.view.setWin(score);
+        else this.view.setLoose(-score);
     }
 
     // Listeners
     @Override
     public void ReplayButtonPressed() {
-        this.getParentListener().selectPresenter(PresenterEnum.GAME);
+        this.parentListener.selectPresenter(PresenterEnum.GAME);
     }
 
     @Override
     public void MenuButtonPressed() {
-        this.getParentListener().selectPresenter(PresenterEnum.MENU);
+        this.parentListener.selectPresenter(PresenterEnum.MENU);
     }
 
     @Override
     public void ScoreButtonPressed() {
-        this.getParentListener().selectPresenter(PresenterEnum.SCORES);
+        this.parentListener.selectPresenter(PresenterEnum.SCORES);
     }
 
     // Methods

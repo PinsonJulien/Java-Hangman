@@ -1,5 +1,4 @@
 fix :
-- Cleanup MenuView.
 - Menu : Bouton quick game quand les options sont remplies (caché sinon.)
 
 
