@@ -1,5 +1,6 @@
 package com.jpinson.pendujfx.components.formFields;
 
+import com.jpinson.pendujfx.utils.CssClass;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -33,36 +34,24 @@ public abstract class FormField <F extends Control> extends VBox {
     }
 
     public void setNeutral() {
+        CssClass.remove(this.field, validColorClass, invalidColorClass);
+        CssClass.remove(this.fieldLabel, validColorClass, invalidColorClass);
+
         this.errorLabel.setVisible(false);
-        this.removeStyleClasses(invalidColorClass);
-        this.removeStyleClasses(validColorClass);
     }
 
     public void setValid() {
-        this.swapStyleClasses(invalidColorClass, validColorClass);
-        this.field.getStyleClass().add(validColorClass);
-        this.fieldLabel.getStyleClass().add(validColorClass);
+        CssClass.swap(this.field, invalidColorClass, validColorClass);
+        CssClass.swap(this.fieldLabel, invalidColorClass, validColorClass);
+
         this.errorLabel.setVisible(false);
     }
 
     public void setInvalid(String errorMessage) {
-        this.swapStyleClasses(validColorClass, invalidColorClass);
+        CssClass.swap(this.field, validColorClass, invalidColorClass);
+        CssClass.swap(this.fieldLabel, validColorClass, invalidColorClass);
+
         this.errorLabel.setText(errorMessage);
         this.errorLabel.setVisible(true);
-    }
-
-    private void swapStyleClasses(String oldClass, String newClass) {
-        this.removeStyleClasses(oldClass);
-        this.addStyleClasses(newClass);
-    }
-
-    private void addStyleClasses(String cssClass) {
-        this.field.getStyleClass().add(cssClass);
-        this.fieldLabel.getStyleClass().add(cssClass);
-    }
-
-    private void removeStyleClasses(String cssClass) {
-        this.field.getStyleClass().remove(cssClass);
-        this.fieldLabel.getStyleClass().remove(cssClass);
     }
 }

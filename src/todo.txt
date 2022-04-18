@@ -1,9 +1,7 @@
 fix :
-- Fields pas remis en neutral quand on retourne dans les options.
 - Cleanup MenuView.
-
-
 - Menu : Bouton quick game quand les options sont remplies (caché sinon.)
+
 
 - Check accès internet
 - Si accès : Fetch
