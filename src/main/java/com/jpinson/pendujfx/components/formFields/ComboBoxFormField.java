@@ -2,20 +2,14 @@ package com.jpinson.pendujfx.components.formFields;
 
 import javafx.scene.control.ComboBox;
 
-public class ComboBoxFormField<F> extends FormField<ComboBox<F>> {
-    public ComboBoxFormField (String label) {
-        super(new ComboBox<F>(), label);
+public class ComboBoxFormField<
+    F extends ComboBox<?>
+> extends FormField<F> {
+    public ComboBoxFormField (F element, String label) {
+        super(element, label);
     }
 
-    public F getValue() {
-        return this.field.getValue();
-    }
-
-    public void setValue(F value) {
-        this.field.setValue(value);
-    }
-
-    public void addValue(F value) {
-        this.field.getItems().add(value);
+    public F getField() {
+        return this.field;
     }
 }

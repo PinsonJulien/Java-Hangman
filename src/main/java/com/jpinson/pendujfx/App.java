@@ -10,6 +10,8 @@ import com.jpinson.pendujfx.app.menu.MenuPresenter;
 import com.jpinson.pendujfx.app.menu.MenuView;
 import com.jpinson.pendujfx.app.options.OptionsPresenter;
 import com.jpinson.pendujfx.app.options.OptionsView;
+import com.jpinson.pendujfx.app.scores.ScoresPresenter;
+import com.jpinson.pendujfx.app.scores.ScoresView;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.models.GameModel;
 import com.jpinson.pendujfx.models.OptionsModel;
@@ -75,11 +77,19 @@ public class App extends Application {
         );
         gameOverView.addListener(gameOverPresenter);
 
+        ScoresView scoresView = new ScoresView();
+        ScoresPresenter scoresPresenter = new ScoresPresenter(
+            scoresView,
+            appPresenter
+        );
+        scoresView.addListener(scoresPresenter);
+
         // Adding all child presenters to the parent one.
         appPresenter.addChildPresenter(PresenterEnum.MENU, menuPresenter);
         appPresenter.addChildPresenter(PresenterEnum.OPTIONS, optionsPresenter);
         appPresenter.addChildPresenter(PresenterEnum.GAME, gamePresenter);
         appPresenter.addChildPresenter(PresenterEnum.GAMEOVER, gameOverPresenter);
+        appPresenter.addChildPresenter(PresenterEnum.SCORES, scoresPresenter);
 
         // Setup the first visible presenter
         appPresenter.changeView(PresenterEnum.MENU);

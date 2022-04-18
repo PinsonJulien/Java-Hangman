@@ -1,6 +1,8 @@
 package com.jpinson.pendujfx.app.menu;
 
-public interface MenuViewListener {
+import com.jpinson.pendujfx.framework.view.ViewListener;
+
+public interface MenuViewListener extends ViewListener {
     void startButtonPressed();
     void scoresButtonPressed();
 }

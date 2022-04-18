@@ -1,5 +1,7 @@
+fix :
+- Fields pas remis en neutral quand on retourne dans les options.
+- Cleanup MenuView.
 
-- Avant de lancer, vérification, enregistrement du new player si changement de pseudo.
 
 - Menu : Bouton quick game quand les options sont remplies (caché sinon.)
 
@@ -10,14 +12,9 @@
 
 UI
 
-- Design CSS
 - Bouton quitter sur le menu principal, pas de fenêtre classique
 - Styliser barre par défaut de fenêtre
-- Page scores, triable ?
 
-- Ecran de victoire avec chiffres du score qui s'incrémente
-- Score négatif si défaite
--> Nouvelle partie / Menu / Voir les scores
 
 - Autoriser usage des touches clavier.
  -> Utiliser un changement de focus pour éviter que celà soient impacté sur toutes les vues ?
@@ -26,13 +23,6 @@ UI
 Musique :
 - Jouer musique en fonction du menu
 - les child presenter ont accès aux listeners musique du parent
-
-Mode de jeu :
-- Faire le plus de mots dans un temps imparti
-
-DB :
-- Score total + difficulté  + nom jour
-- idem pour mode temps imparti
 
 
 

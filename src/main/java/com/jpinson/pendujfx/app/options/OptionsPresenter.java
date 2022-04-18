@@ -1,6 +1,7 @@
 package com.jpinson.pendujfx.app.options;
 
 import com.jpinson.pendujfx.app.AppPresenterListener;
+import com.jpinson.pendujfx.components.difficultyComboBox.DifficultyComboBox;
 import com.jpinson.pendujfx.components.formFields.ComboBoxFormField;
 import com.jpinson.pendujfx.components.formFields.TextFormField;
 import com.jpinson.pendujfx.enums.DifficultyEnum;
@@ -41,7 +42,6 @@ public class OptionsPresenter
     @Override
     public void init() {
         this.optionsModel.setDifficulty(DifficultyEnum.EASY);
-        this.userModel.setName("JeanRandom");
         this.reset();
     }
 
@@ -49,7 +49,7 @@ public class OptionsPresenter
     public void reset() {
         OptionsView view = this.getView();
         view.getUsernameField().setText(this.userModel.getName());
-        view.getDifficultyField().setValue(this.optionsModel.getDifficulty());
+        view.getDifficultyField().getField().setValue(this.optionsModel.getDifficulty());
         view.reset();
     }
 
@@ -66,8 +66,8 @@ public class OptionsPresenter
         final TextFormField usernameField = this.getView().getUsernameField();
         final String username = usernameField.getText();
 
-        final ComboBoxFormField<DifficultyEnum> difficultyField = this.getView().getDifficultyField();
-        final DifficultyEnum difficulty = difficultyField.getValue();
+        final ComboBoxFormField<DifficultyComboBox> difficultyField = this.getView().getDifficultyField();
+        final DifficultyEnum difficulty = difficultyField.getField().getValue();
 
         String usernameMessage = this.validateUsernameField(username);
         String difficultyMessage = this.validateDifficultyField(difficulty);

@@ -36,7 +36,7 @@ public class MenuPresenter
 
     @Override
     public void scoresButtonPressed() {
-        // to implement.
+        this.getParentListener().selectPresenter(PresenterEnum.SCORES);
     }
 
     // Methods

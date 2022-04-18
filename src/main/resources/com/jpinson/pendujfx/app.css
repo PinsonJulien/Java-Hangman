@@ -197,3 +197,39 @@ Key {
     -fx-pref-width: 80;
     -fx-pref-height: 40;
 }
+
+#scores {
+    -fx-background-color: #DAC27C;
+}
+
+#scores .button-pane,
+#scores .title-pane,
+#scores .combo-box-pane,
+#scores .score-grid .header,
+#scores .score-grid .cell {
+    -fx-alignment: center;
+}
+
+#scores .score-grid .header,
+#scores .score-grid .cell {
+    -fx-border-width: 1;
+    -fx-border-color: #CEAC41;
+}
+
+#scores .title-pane Label {
+    -fx-font-family: "Stencil";
+    -fx-font-size: 25;
+}
+
+#scores .score-grid .header,
+#scores .score-grid .cell {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 15;
+}
+
+#scores .button-pane Button,
+#scores .combo-box-pane DifficultyComboBox {
+    -fx-font-size: 13;
+    -fx-pref-width: 150;
+    -fx-pref-height: 40;
+}

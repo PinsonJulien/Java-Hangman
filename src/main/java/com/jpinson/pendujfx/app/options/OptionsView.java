@@ -1,5 +1,6 @@
 package com.jpinson.pendujfx.app.options;
 
+import com.jpinson.pendujfx.components.difficultyComboBox.DifficultyComboBox;
 import com.jpinson.pendujfx.components.formFields.ComboBoxFormField;
 import com.jpinson.pendujfx.components.formFields.TextFormField;
 import com.jpinson.pendujfx.components.panes.constrainedGridPane.ConstrainedGridPane;
@@ -16,7 +17,8 @@ public class OptionsView extends View<ConstrainedGridPane, OptionsViewListener> 
     private final Button returnButton = new Button("RETURN");
     private final Label titleLabel = new Label("OPTIONS");
     private final TextFormField usernameField = new TextFormField("Username");
-    private final ComboBoxFormField<DifficultyEnum> difficultyField = new ComboBoxFormField<>("Difficulty");
+    private final ComboBoxFormField<DifficultyComboBox> difficultyField
+        = new ComboBoxFormField<>(new DifficultyComboBox(DifficultyEnum.EASY), "Difficulty");
 
     public OptionsView() {
         super(new ConstrainedGridPane());
@@ -28,20 +30,13 @@ public class OptionsView extends View<ConstrainedGridPane, OptionsViewListener> 
         return usernameField;
     }
 
-    public ComboBoxFormField<DifficultyEnum> getDifficultyField() {
+    public ComboBoxFormField<DifficultyComboBox> getDifficultyField() {
         return difficultyField;
     }
 
     // Interfaces
     @Override
     public void init() {
-        // Set defaults
-        this.difficultyField.setValue(DifficultyEnum.EASY);
-
-        for (DifficultyEnum val: DifficultyEnum.values()) {
-            this.difficultyField.addValue(val);
-        }
-
         // set actions
         this.playButton.setOnAction(this.playButtonHandler);
         this.returnButton.setOnAction(this.returnButtonHandler);

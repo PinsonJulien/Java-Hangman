@@ -5,4 +5,5 @@ public enum PresenterEnum {
     OPTIONS,
     GAME,
     GAMEOVER,
+    SCORES
 }

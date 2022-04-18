@@ -63,9 +63,8 @@ public class ScoreService extends Service<ScoreModel> {
         return this.generateModelList(rs);
     }
 
-    public ArrayList<ScoreModel> getTotalScores() throws SQLException {
-        Statement statement = this.connection.createStatement();
-        ResultSet rs = statement.executeQuery("""
+    public ArrayList<ScoreModel> getTotalScores(int limit, DifficultyEnum difficulty) throws SQLException {
+        PreparedStatement statement = this.connection.prepareStatement("""
             SELECT
                 S.id AS 'score_id',
                 SUM(S.score) AS 'score_score',
@@ -75,15 +74,19 @@ public class ScoreService extends Service<ScoreModel> {
             FROM scores S
             INNER JOIN users U
                 ON U.id = S.user_id
+            WHERE
+                S.difficulty = ?
             GROUP BY
-                U.id,
-                S.difficulty
+                U.id
             ORDER BY
-                S.score DESC,
-                U.name ASC,
-                S.difficulty ASC
+                score_score DESC,
+                U.name ASC
+            LIMIT ?
             ;
         """);
+        statement.setString(1, difficulty.toString());
+        statement.setInt(2, limit);
+        ResultSet rs = statement.executeQuery();
 
         return this.generateModelList(rs);
     }

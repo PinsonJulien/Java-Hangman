@@ -50,7 +50,7 @@ public class GameOverPresenter
 
     @Override
     public void ScoreButtonPressed() {
-        // To implement
+        this.getParentListener().selectPresenter(PresenterEnum.SCORES);
     }
 
     // Methods
