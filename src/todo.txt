@@ -1,4 +1,8 @@
-fix :
+- Views should not allow to use their elements, presenters should only tell them what to do:
+    -> getValueOf
+    -> do....
+
+
 - Menu : Bouton quick game quand les options sont remplies (caché sinon.)
 
 
