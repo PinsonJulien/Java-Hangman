@@ -109,4 +109,8 @@ public class GameView
 
 
     // Methods
+
+    public void setScoreValue (String score) {
+        this.scoreValueLabel.setText(score);
+    }
 }

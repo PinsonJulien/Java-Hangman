@@ -118,6 +118,7 @@ public class GamePresenter
         this.gameModel.setHealth(maxHealth);
 
         // Setup view
+        this.view.setScoreValue(String.valueOf(this.gameModel.getScore()));
         this.view.getWord().set(this.gameModel.getEncryptedWord().get());
         this.view.getHealthBar().setFullHealth();
     }
