@@ -57,7 +57,7 @@ public class GamePresenter
 
     // Listeners
     @Override
-    public void KeyboardPressedKey(char c) {
+    public void keyboardPressedKey(char c) {
         EncryptedWord encryptedWord = this.gameModel.getEncryptedWord();
 
         // Incorrect letter

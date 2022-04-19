@@ -70,6 +70,10 @@ public class Keyboard extends GridPane implements InitResetInterface {
         this.keys.get(c).setDisable(!active);
     }
 
+    public boolean isKeyDisabled (char c) {
+        return this.keys.get(c).isDisabled();
+    }
+
     // Events
     private final EventHandler<ActionEvent> buttonHandler = new EventHandler<>() {
         @Override
@@ -77,7 +81,7 @@ public class Keyboard extends GridPane implements InitResetInterface {
             Key key = (Key) actionEvent.getSource();
             if (disableKeyOnUse) key.setDisable(true);
 
-            listener.KeyboardPressedKey(key.getValue());
+            listener.keyboardPressedKey(key.getValue());
         }
     };
 

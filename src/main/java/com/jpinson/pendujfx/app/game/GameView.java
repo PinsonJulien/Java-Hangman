@@ -5,11 +5,13 @@ import com.jpinson.pendujfx.components.keyboard.AlphabeticKeyboard;
 import com.jpinson.pendujfx.components.panes.constrainedGridPane.ConstrainedGridPane;
 import com.jpinson.pendujfx.components.word.Word;
 import com.jpinson.pendujfx.framework.view.View;
+import com.jpinson.pendujfx.utils.Alphabet;
 import com.jpinson.pendujfx.utils.CssClass;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
 public class GameView
@@ -34,6 +36,7 @@ public class GameView
         this.pane.setId("game");
 
         // Set actions
+        this.pane.setOnKeyReleased(this.keyReleasedHandler);
         this.forfeitButton.setOnAction(this.forfeitButtonHandler);
 
         // Set Grid
@@ -80,9 +83,9 @@ public class GameView
 
     // Listeners
     @Override
-    public void KeyboardPressedKey(char c) {
+    public void keyboardPressedKey(char c) {
         for (GameViewListener listener : this.getListeners()) {
-            listener.KeyboardPressedKey(c);
+            listener.keyboardPressedKey(c);
         }
     }
 
@@ -95,7 +98,21 @@ public class GameView
 
     // Events
     private final EventHandler<ActionEvent> forfeitButtonHandler = actionEvent -> this.forfeitButtonPressed();
+    private final EventHandler<KeyEvent> keyReleasedHandler = keyEvent -> {
+        final String key = keyEvent.getCode().toString();
 
+        // Must be a single letter.
+        if (key.length() > 1) return;
+
+        final char c = key.charAt(0);
+
+        if (!Alphabet.isAlpha(c)) return;
+
+        // Must not have been used yet.
+        if (this.keyboard.isKeyDisabled(c)) return;
+
+        this.keyboardPressedKey(c);
+    };
 
     // Methods
 
