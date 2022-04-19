@@ -29,14 +29,6 @@ public class OptionsView
         this.init();
     }
 
-    // Getters / Setters
-    public TextFormField getUsernameField() {
-        return usernameField;
-    }
-    public ComboBoxFormField<DifficultyComboBox> getDifficultyField() {
-        return difficultyField;
-    }
-
     // Interfaces
     @Override
     public void init() {
@@ -114,4 +106,35 @@ public class OptionsView
     private final EventHandler<ActionEvent> returnButtonHandler = actionEvent -> this.returnButtonPressed();
 
     // Methods
+    public void setUsername(String username) {
+        this.usernameField.setText(username);
+    }
+
+    public String getUsername() {
+        return this.usernameField.getText();
+    }
+
+    public void setDifficulty(DifficultyEnum difficulty) {
+        this.difficultyField.getField().setValue(difficulty);
+    }
+
+    public DifficultyEnum getDifficulty () {
+        return this.difficultyField.getField().getValue();
+    }
+
+    public void setDifficultyValid () {
+        this.difficultyField.setValid();
+    }
+
+    public void setDifficultyInvalid (String message) {
+        this.difficultyField.setInvalid(message);
+    }
+
+    public void setUsernameValid () {
+        this.usernameField.setValid();
+    }
+
+    public void setUsernameInvalid (String message) {
+        this.usernameField.setInvalid(message);
+    }
 }

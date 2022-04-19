@@ -73,13 +73,13 @@ public class GamePresenter
             this.gameModel.setHealth(health);
             // Set health in percentage.
             double percentage = ((double) health/maxHealth)*100;
-            this.view.getHealthBar().setHealth(percentage);
+            this.view.setHealth(percentage);
             return;
         }
 
         // Reveal letter in view
         encryptedWord.decrypt(c);
-        this.view.getWord().set(encryptedWord.get());
+        this.view.setWord(encryptedWord.get());
 
         // All letters are revealed : game over, win
         if (encryptedWord.isDecrypted()) {
@@ -119,8 +119,8 @@ public class GamePresenter
 
         // Setup view
         this.view.setScoreValue(String.valueOf(this.gameModel.getScore()));
-        this.view.getWord().set(this.gameModel.getEncryptedWord().get());
-        this.view.getHealthBar().setFullHealth();
+        this.view.setWord(this.gameModel.getEncryptedWord().get());
+        this.view.setFullHealth();
     }
 
     private void gameWon() {

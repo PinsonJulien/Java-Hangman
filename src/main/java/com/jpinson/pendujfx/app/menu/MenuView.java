@@ -24,8 +24,6 @@ public class MenuView
         this.init();
     }
 
-    // Getters / Setters
-
     // Interfaces
     @Override
     public void init() {

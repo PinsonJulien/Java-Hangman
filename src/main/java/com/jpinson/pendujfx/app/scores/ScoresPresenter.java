@@ -54,7 +54,7 @@ public class ScoresPresenter
 
     @Override
     public void difficultyComboBoxChanged() {
-        this.selectedDifficulty = this.view.getDifficultyComboBox().getValue();
+        this.selectedDifficulty = this.view.getDifficulty();
         this.reset();
     }
 

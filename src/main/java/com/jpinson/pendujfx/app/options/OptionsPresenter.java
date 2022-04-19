@@ -1,9 +1,6 @@
 package com.jpinson.pendujfx.app.options;
 
 import com.jpinson.pendujfx.app.AppPresenterListener;
-import com.jpinson.pendujfx.components.difficultyComboBox.DifficultyComboBox;
-import com.jpinson.pendujfx.components.formFields.ComboBoxFormField;
-import com.jpinson.pendujfx.components.formFields.TextFormField;
 import com.jpinson.pendujfx.enums.DifficultyEnum;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
@@ -11,6 +8,7 @@ import com.jpinson.pendujfx.models.OptionsModel;
 import com.jpinson.pendujfx.models.UserModel;
 import com.jpinson.pendujfx.services.UserService;
 import com.jpinson.pendujfx.utils.Alphanumeric;
+
 import java.sql.SQLException;
 
 public class OptionsPresenter
@@ -46,8 +44,8 @@ public class OptionsPresenter
 
     @Override
     public void reset() {
-        this.view.getUsernameField().setText(this.userModel.getName());
-        this.view.getDifficultyField().getField().setValue(this.optionsModel.getDifficulty());
+        this.view.setUsername(this.userModel.getName());
+        this.view.setDifficulty(this.optionsModel.getDifficulty());
         this.view.reset();
     }
 
@@ -61,27 +59,24 @@ public class OptionsPresenter
     @Override
     public void playButtonPressed() {
         boolean formValidity = true;
-        final TextFormField usernameField = this.view.getUsernameField();
-        final String username = usernameField.getText();
 
-        final ComboBoxFormField<DifficultyComboBox> difficultyField = this.view.getDifficultyField();
-        final DifficultyEnum difficulty = difficultyField.getField().getValue();
-
-        String usernameMessage = this.validateUsernameField(username);
-        String difficultyMessage = this.validateDifficultyField(difficulty);
+        final String username = this.view.getUsername();
+        final DifficultyEnum difficulty = this.view.getDifficulty();
+        final String usernameMessage = this.validateUsernameField(username);
+        final String difficultyMessage = this.validateDifficultyField(difficulty);
 
         if (usernameMessage != null) {
-            usernameField.setInvalid(usernameMessage);
+            this.view.setUsernameInvalid(usernameMessage);
             formValidity = false;
         } else {
-            usernameField.setValid();
+            this.view.setUsernameValid();
         }
 
         if (difficultyMessage != null) {
-            difficultyField.setInvalid(difficultyMessage);
+            this.view.setDifficultyInvalid(difficultyMessage);
             formValidity = false;
         } else {
-            difficultyField.setValid();
+            this.view.setDifficultyValid();
         }
 
         // If all fields are validated, set the data and show the game.

@@ -25,8 +25,6 @@ public class GameOverView
         this.init();
     }
 
-    // Getters / Setters
-
     // Interfaces
     @Override
     public void init() {

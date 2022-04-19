@@ -26,8 +26,7 @@ public class MenuPresenter
 
     // Interfaces
     @Override
-    public void init() {
-    }
+    public void init() {}
 
     @Override
     public void reset() {

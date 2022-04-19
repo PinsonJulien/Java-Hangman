@@ -28,17 +28,6 @@ public class GameView
         this.init();
     }
 
-    // Getters / setters
-    public AlphabeticKeyboard getKeyboard() {
-        return keyboard;
-    }
-    public Word getWord() {
-        return word;
-    }
-    public HealthBar getHealthBar() {
-        return healthBar;
-    }
-
     // Interfaces
     @Override
     public void init() {
@@ -112,5 +101,17 @@ public class GameView
 
     public void setScoreValue (String score) {
         this.scoreValueLabel.setText(score);
+    }
+
+    public void setWord(String word) {
+        this.word.set(word);
+    }
+
+    public void setHealth(double percentage) {
+        this.healthBar.setHealth(percentage);
+    }
+
+    public void setFullHealth() {
+        this.healthBar.setFullHealth();
     }
 }

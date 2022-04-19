@@ -27,12 +27,6 @@ public class ScoresView
         this.init();
     }
 
-    // Getters / Setters
-
-    public DifficultyComboBox getDifficultyComboBox() {
-        return difficultyComboBox;
-    }
-
     // Interfaces
     @Override
     public void init() {
@@ -96,6 +90,10 @@ public class ScoresView
     private final EventHandler<ActionEvent> comboBoxHandler = actionEvent -> this.difficultyComboBoxChanged();
 
     // Methods
+    public DifficultyEnum getDifficulty() {
+        return this.difficultyComboBox.getValue();
+    }
+
     private void insertHeader() {
         VBox scoreGridUsername = new VBox();
         CssClass.add(scoreGridUsername, "header");
