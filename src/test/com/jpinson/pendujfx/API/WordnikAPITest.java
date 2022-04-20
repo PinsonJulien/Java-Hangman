@@ -14,4 +14,8 @@ public class WordnikAPITest extends TestCase {
         assertEquals(4, word.length());
     }
 
+    public void testIsAvailable() {
+        assertTrue(api.isAvailable());
+    }
+
 }

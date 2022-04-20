@@ -1,14 +1,6 @@
 - Gestion difficulté
 
-- Check accès internet
-- Si accès : Fetch
-- Possibilité de ne pas utiliser de connexion internet
-(proposé si connexion seulement)
-
-- check durant refresh Options
-- en cas d'échec de fetch dans GamePresenter -> désactiver fetch,
-  et utilisation base de donnée.
-
+- Afficher mot dans le menu game over.
 
 Musique :
 - Jouer musique en fonction du menu

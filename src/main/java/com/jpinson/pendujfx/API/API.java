@@ -1,10 +1,7 @@
 package com.jpinson.pendujfx.API;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 
 public abstract class API {
     protected final URL url;
@@ -23,11 +20,12 @@ public abstract class API {
 
     public boolean isAvailable() {
         try {
-            final URLConnection conn = this.url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) this.url.openConnection();
+            conn.setRequestMethod("GET");
             conn.connect();
-            conn.getInputStream().close();
+            conn.disconnect();
             return true;
-        } catch (IOException e) {
+        } catch (IOException ignored) {
             return false;
         }
     }

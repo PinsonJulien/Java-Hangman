@@ -11,6 +11,7 @@ import com.jpinson.pendujfx.services.ScoreService;
 import com.jpinson.pendujfx.services.WordService;
 import com.jpinson.pendujfx.utils.EncryptedWord;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class GamePresenter
@@ -95,21 +96,13 @@ public class GamePresenter
 
     // Methods
     private void newGame() {
-        // Get a random word, difficulty increases length and complexity
-        String word = "";
+        // Get a random word, difficulty increases length.
+        WordModel wordModel = (this.optionsModel.isNetworkEnabled())
+            ? this.fetchRandomWordOnline()
+            : this.fetchRandomWord();
 
-        try {
-            // Get a random word and set the score of the game.
-            WordModel wordModel = this.wordService.getRandomWord(5, 6);
-
-            this.gameModel.setScore(wordModel.getScore());
-            word = wordModel.getWord();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        word = word.toUpperCase();
+        this.gameModel.setScore(wordModel.getScore());
+        String word = wordModel.getWord().toUpperCase();
 
         // Encrypt the word
         this.gameModel.setEncryptedWord(new EncryptedWord(word, encryptingCharacter));
@@ -149,6 +142,31 @@ public class GamePresenter
             );
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    private WordModel fetchRandomWord() {
+        try {
+            // Get a random word and set the score of the game.
+            return this.wordService.getRandomWord(5, 6);
+        } catch (SQLException ignored) {
+            // Database fetch had an issue, we put a placeholder.
+            return new WordModel(
+                0,
+                "I AM ERROR.",
+                0
+            );
+        }
+    }
+
+    private WordModel fetchRandomWordOnline() {
+        try {
+            return this.wordService.getRandomWordOnline(5,6);
+        } catch (IOException | InterruptedException e) {
+            // Failed -> Remove network and fetch from database.
+            this.optionsModel.setNetwork(false);
+
+            return this.fetchRandomWord();
         }
     }
 }

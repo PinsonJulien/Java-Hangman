@@ -1,5 +1,6 @@
 package com.jpinson.pendujfx.app.options;
 
+import com.jpinson.pendujfx.API.WordnikAPI;
 import com.jpinson.pendujfx.app.AppPresenterListener;
 import com.jpinson.pendujfx.enums.DifficultyEnum;
 import com.jpinson.pendujfx.enums.PresenterEnum;
@@ -38,6 +39,11 @@ public class OptionsPresenter
     // Interfaces
     @Override
     public void init() {
+        // Shows the toggle network button if API is available.
+        boolean apiAvailable = new WordnikAPI().isAvailable();
+        this.view.setNetworkVisibility(apiAvailable);
+        this.setNetwork(apiAvailable);
+
         this.optionsModel.setDifficulty(DifficultyEnum.EASY);
         this.reset();
     }
@@ -46,6 +52,7 @@ public class OptionsPresenter
     public void reset() {
         this.view.setUsername(this.userModel.getName());
         this.view.setDifficulty(this.optionsModel.getDifficulty());
+        this.view.setNetworkSelected(this.optionsModel.isNetworkEnabled());
         this.view.reset();
     }
 
@@ -92,6 +99,11 @@ public class OptionsPresenter
         }
     }
 
+    @Override
+    public void networkTogglePressed() {
+        this.setNetwork(!this.optionsModel.isNetworkEnabled());
+    }
+
     // Methods
     private String validateUsernameField(String username) {
         final int len = username.length();
@@ -116,9 +128,7 @@ public class OptionsPresenter
     private UserModel getOrAddUser(String username) {
         try {
             this.userService.addUser(username);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        } catch (SQLException ignored) {}
 
         try {
             return this.userService.getUser(username);
@@ -126,5 +136,9 @@ public class OptionsPresenter
             System.out.println(e.getMessage());
             return new UserModel();
         }
+    }
+
+    private void setNetwork(boolean state) {
+        this.optionsModel.setNetwork(state);
     }
 }

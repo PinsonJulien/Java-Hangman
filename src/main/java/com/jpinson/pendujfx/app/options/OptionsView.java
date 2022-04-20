@@ -10,6 +10,7 @@ import com.jpinson.pendujfx.utils.CssClass;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -23,6 +24,7 @@ public class OptionsView
     private final TextFormField usernameField = new TextFormField("Username");
     private final ComboBoxFormField<DifficultyComboBox> difficultyField
         = new ComboBoxFormField<>(new DifficultyComboBox(DifficultyEnum.EASY), "Difficulty");
+    private final CheckBox networkCheckbox = new CheckBox("Network");
 
     public OptionsView() {
         super(new ConstrainedGridPane());
@@ -32,10 +34,12 @@ public class OptionsView
     // Interfaces
     @Override
     public void init() {
+        this.pane.setId("options");
+
         // set actions
         this.playButton.setOnAction(this.playButtonHandler);
         this.returnButton.setOnAction(this.returnButtonHandler);
-        this.pane.setId("options");
+        this.networkCheckbox.setOnAction(this.networkToggleHandler);
 
         // Set placement
         this.pane.setColumns(100);
@@ -56,6 +60,11 @@ public class OptionsView
         CssClass.add(titleLabelPane, "title-label-pane");
         titleLabelPane.getChildren().add(this.titleLabel);
         titleGrid.add(titleLabelPane, 1, 0);
+
+        VBox titleNetworkPane = new VBox();
+        CssClass.add(titleNetworkPane, "title-network-pane");
+        titleNetworkPane.getChildren().add(this.networkCheckbox);
+        titleGrid.add(titleNetworkPane, 2, 0);
 
         this.pane.add(titleGrid, 0, 0);
 
@@ -101,9 +110,17 @@ public class OptionsView
         }
     }
 
+    @Override
+    public void networkTogglePressed() {
+        for (OptionsViewListener listener : getListeners()) {
+            listener.networkTogglePressed();
+        }
+    }
+
     // Events
     private final EventHandler<ActionEvent> playButtonHandler = actionEvent -> this.playButtonPressed();
     private final EventHandler<ActionEvent> returnButtonHandler = actionEvent -> this.returnButtonPressed();
+    private final EventHandler<ActionEvent> networkToggleHandler = actionEvent -> this.networkTogglePressed();
 
     // Methods
     public void setUsername(String username) {
@@ -136,5 +153,13 @@ public class OptionsView
 
     public void setUsernameInvalid (String message) {
         this.usernameField.setInvalid(message);
+    }
+
+    public void setNetworkVisibility(boolean visibility) {
+        this.networkCheckbox.setVisible(visibility);
+    }
+
+    public void setNetworkSelected(boolean selected) {
+        this.networkCheckbox.setSelected(selected);
     }
 }

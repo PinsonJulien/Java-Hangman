@@ -63,6 +63,7 @@ Key {
 
 #options .title-button-pane,
 #options .title-label-pane,
+#options .title-network-pane,
 #options .bottom-button-pane,
 #options .field {
     -fx-alignment: center;
@@ -71,6 +72,11 @@ Key {
 #options .title-label-pane Label {
     -fx-font-size: 25;
     -fx-font-family: "Stencil";
+}
+
+#options .title-network-pane {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 15;
 }
 
 #options TextField,

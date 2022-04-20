@@ -13,12 +13,12 @@ public class WordnikAPI extends API {
     private final String key = Config.wordnikKey;
 
     public WordnikAPI() {
-        super("https://api.wordnik.com/v4");
+        super("https://api.wordnik.com/v4/words.json");
     }
 
     public JSONObject fetchRandomWord (int minLength, int maxLength) throws IOException, InterruptedException {
         URI uri = this.buildURI(
-        "/words.json/randomWord",
+        "/randomWord",
     "minLength=" + minLength,
             "maxLength=" + maxLength,
             "api_key=" + this.key
