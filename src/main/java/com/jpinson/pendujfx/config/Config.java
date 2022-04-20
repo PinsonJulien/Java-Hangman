@@ -4,11 +4,11 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 // Contains some global variables.
 public abstract class Config {
-    public static final String dicolinkKey;
+    public static final String wordnikKey;
 
     static {
         // Get data from the .env file
         Dotenv dotenv = Dotenv.load();
-        dicolinkKey = dotenv.get("DICOLINK_KEY");
+        wordnikKey = dotenv.get("WORDNIK_KEY");
     }
 }

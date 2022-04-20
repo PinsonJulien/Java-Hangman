@@ -5,6 +5,11 @@
 - Possibilité de ne pas utiliser de connexion internet
 (proposé si connexion seulement)
 
+- check durant refresh Options
+- en cas d'échec de fetch dans GamePresenter -> désactiver fetch,
+  et utilisation base de donnée.
+
+
 Musique :
 - Jouer musique en fonction du menu
 - les child presenter ont accès aux listeners musique du parent
