@@ -8,6 +8,8 @@ public class OptionsModel extends Model {
     private DifficultyEnum difficulty;
     private boolean networkEnabled;
 
+    private final char encryptingCharacter = '?';
+
     // Getters / Setters
     public DifficultyEnum getDifficulty() {
         return difficulty;
@@ -23,5 +25,9 @@ public class OptionsModel extends Model {
 
     public boolean isNetworkEnabled() {
         return networkEnabled;
+    }
+
+    public char getEncryptingCharacter() {
+        return this.encryptingCharacter;
     }
 }

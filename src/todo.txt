@@ -1,5 +1,3 @@
-- Gestion difficulté
-
 - Afficher mot dans le menu game over.
 
 Musique :

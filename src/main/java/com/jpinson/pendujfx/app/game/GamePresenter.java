@@ -25,9 +25,6 @@ public class GamePresenter
     private final WordService wordService = new WordService();
     private final ScoreService scoreService = new ScoreService();
 
-    private static final char encryptingCharacter = '?';
-    private static final int maxHealth = 5;
-
     public GamePresenter(
         GameView gameView,
         AppPresenterListener listener,
@@ -73,7 +70,7 @@ public class GamePresenter
 
             this.gameModel.setHealth(health);
             // Set health in percentage.
-            double percentage = ((double) health/maxHealth)*100;
+            double percentage = ((double) health/this.gameModel.getMaxHealth())*100;
             this.view.setHealth(percentage);
             return;
         }
@@ -96,19 +93,46 @@ public class GamePresenter
 
     // Methods
     private void newGame() {
+        // Set variables by difficulty
+        final int minWordLength;
+        final int maxWordLength;
+        switch (this.optionsModel.getDifficulty()) {
+            default:
+            case EASY:
+                minWordLength = 4;
+                maxWordLength = 6;
+                break;
+
+            case NORMAL:
+                minWordLength = 8;
+                maxWordLength = 10;
+                break;
+
+            case HARD:
+                minWordLength = 12;
+                maxWordLength = 14;
+                break;
+
+            case INSANE:
+                minWordLength = 16;
+                maxWordLength = 20;
+                break;
+        }
+
+
         // Get a random word, difficulty increases length.
         WordModel wordModel = (this.optionsModel.isNetworkEnabled())
-            ? this.fetchRandomWordOnline()
-            : this.fetchRandomWord();
+            ? this.fetchRandomWordOnline(minWordLength, maxWordLength)
+            : this.fetchRandomWord(minWordLength, maxWordLength);
 
         this.gameModel.setScore(wordModel.getScore());
         String word = wordModel.getWord().toUpperCase();
 
         // Encrypt the word
-        this.gameModel.setEncryptedWord(new EncryptedWord(word, encryptingCharacter));
+        this.gameModel.setEncryptedWord(new EncryptedWord(word, optionsModel.getEncryptingCharacter()));
 
         // Set health to max
-        this.gameModel.setHealth(maxHealth);
+        this.gameModel.setHealth(this.gameModel.getMaxHealth());
 
         // Setup view
         this.view.setScoreValue(String.valueOf(this.gameModel.getScore()));
@@ -145,10 +169,10 @@ public class GamePresenter
         }
     }
 
-    private WordModel fetchRandomWord() {
+    private WordModel fetchRandomWord(int min, int max) {
         try {
             // Get a random word and set the score of the game.
-            return this.wordService.getRandomWord(5, 6);
+            return this.wordService.getRandomWord(min, max);
         } catch (SQLException ignored) {
             // Database fetch had an issue, we put a placeholder.
             return new WordModel(
@@ -159,14 +183,14 @@ public class GamePresenter
         }
     }
 
-    private WordModel fetchRandomWordOnline() {
+    private WordModel fetchRandomWordOnline(int min, int max) {
         try {
-            return this.wordService.getRandomWordOnline(5,6);
+            return this.wordService.getRandomWordOnline(min, max);
         } catch (IOException | InterruptedException e) {
             // Failed -> Remove network and fetch from database.
             this.optionsModel.setNetwork(false);
 
-            return this.fetchRandomWord();
+            return this.fetchRandomWord(min, max);
         }
     }
 }

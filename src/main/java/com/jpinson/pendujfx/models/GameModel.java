@@ -5,6 +5,7 @@ import com.jpinson.pendujfx.utils.EncryptedWord;
 
 // Model having game related variables
 public class GameModel extends Model {
+    private final int maxHealth = 5;
     private int health;
     private EncryptedWord encryptedWord;
     private int score;
@@ -31,5 +32,9 @@ public class GameModel extends Model {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public int getMaxHealth() {
+        return this.maxHealth;
     }
 }
