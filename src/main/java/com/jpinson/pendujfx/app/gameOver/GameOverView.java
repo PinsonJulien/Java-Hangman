@@ -16,6 +16,8 @@ public class GameOverView
 {
     private final Label resultLabel = new Label();
     private final Label scoreLabel = new Label();
+    private final Label wordRecapLabel = new Label("The word was:");
+    private final Label wordLabel = new Label();
     private final Button replayButton = new Button("REPLAY");
     private final Button menuButton =  new Button("MENU");
     private final Button scoreButton = new Button("SCORES");
@@ -44,9 +46,13 @@ public class GameOverView
         CssClass.add(resultPane, "result-pane");
         CssClass.add(resultLabel, "result-label");
         CssClass.add(scoreLabel, "score-label");
+        CssClass.add(wordRecapLabel, "word-recap-label");
+        CssClass.add(wordLabel, "word-label");
         resultPane.getChildren().addAll(
             this.resultLabel,
-            this.scoreLabel
+            this.scoreLabel,
+            this.wordRecapLabel,
+            this.wordLabel
         );
         this.pane.add(resultPane, 0, 0);
 
@@ -92,29 +98,19 @@ public class GameOverView
     }
 
     // Methods
+    public void setResults (boolean win, int score, String word) {
+        String resultText = (win)
+            ? "You won !"
+            : "You lost !";
 
-    public void setWin(int score) {
-        String resultText = "You won !";
         String scoreText =
-                "+ " +
-                score +
-                " points";
+            ((win) ? '+' : '-') +
+            " " +
+            score +
+            " points";
 
-        this.setResults(resultText, scoreText);
-    }
-
-    public void setLoose(int score) {
-        String resultText = "You lost !";
-        String scoreText =
-                "- " +
-                score +
-                " points";
-
-        this.setResults(resultText, scoreText);
-    }
-
-    private void setResults(String message, String score) {
-        this.resultLabel.setText(message);
-        this.scoreLabel.setText(score);
+        this.resultLabel.setText(resultText);
+        this.scoreLabel.setText(scoreText);
+        this.wordLabel.setText(word);
     }
 }

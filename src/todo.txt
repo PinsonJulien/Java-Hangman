@@ -1,15 +1,3 @@
-- Afficher mot dans le menu game over.
-
 Musique :
 - Jouer musique en fonction du menu
 - les child presenter ont accès aux listeners musique du parent
-
-
-
-
-
-
-
-
-
-

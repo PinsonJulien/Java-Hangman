@@ -18,8 +18,8 @@ public class WordnikAPI extends API {
 
     public JSONObject fetchRandomWord (int minLength, int maxLength) throws IOException, InterruptedException {
         URI uri = this.buildURI(
-        "/randomWord",
-    "minLength=" + minLength,
+            "/randomWord",
+            "minLength=" + minLength,
             "maxLength=" + maxLength,
             "api_key=" + this.key
         );

@@ -64,7 +64,7 @@ public class GamePresenter
             int health = this.gameModel.getHealth() - 1;
 
             if (health <= 0) {
-                this.gameLost();
+                this.gameOver(false);
                 return;
             }
 
@@ -81,14 +81,14 @@ public class GamePresenter
 
         // All letters are revealed : game over, win
         if (encryptedWord.isDecrypted()) {
-            this.gameWon();
+            this.gameOver(true);
         }
     }
 
     @Override
     public void forfeitButtonPressed() {
-        this.gameModel.setHealth(0);
-        this.gameLost();
+        //this.gameModel.setHealth(0);
+        this.gameOver(false);
     }
 
     // Methods
@@ -119,8 +119,7 @@ public class GamePresenter
                 break;
         }
 
-
-        // Get a random word, difficulty increases length.
+        // Get a random word, from either API or database.
         WordModel wordModel = (this.optionsModel.isNetworkEnabled())
             ? this.fetchRandomWordOnline(minWordLength, maxWordLength)
             : this.fetchRandomWord(minWordLength, maxWordLength);
@@ -140,19 +139,13 @@ public class GamePresenter
         this.view.setFullHealth();
     }
 
-    private void gameWon() {
-        this.insertScore(this.gameModel.getScore());
-        this.gameOver();
-    }
+    private void gameOver(boolean win) {
+        this.gameModel.setStatus(win);
 
-    private void gameLost() {
         int score = this.gameModel.getScore();
-        this.gameModel.setScore(-score);
-        this.insertScore(-score);
-        this.gameOver();
-    }
-
-    private void gameOver() {
+        if (!win) score *= -1;
+        this.insertScore(score);
+        
         // Switch to game-over view.
         this.parentListener.selectPresenter(PresenterEnum.GAMEOVER);
     }

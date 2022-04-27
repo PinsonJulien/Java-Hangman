@@ -188,9 +188,23 @@ Key {
     -fx-font-family: "Stencil";
 }
 
+#game-over .result-pane .score-label,
+#game-over .result-pane .word-recap-label,
+#game-over .result-pane .word-label {
+    -fx-font-family: "Roboto Condensed";
+}
+
 #game-over .result-pane .score-label {
     -fx-font-size: 25;
-    -fx-font-family: "Roboto Condensed";
+}
+
+#game-over .result-pane .word-recap-label,
+#game-over .result-pane .word-label {
+    -fx-font-size: 20;
+}
+
+#game-over .result-pane .word-label {
+    -fx-font-weight: bold;
 }
 
 #game-over .button-pane {

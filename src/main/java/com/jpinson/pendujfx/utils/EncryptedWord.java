@@ -11,15 +11,15 @@ public class EncryptedWord {
         this.encrypt();
     }
 
-    public String get() {
+    public String get () {
         return this.encryptedWord;
     }
 
-    public String getOriginal() {
+    public String getOriginal () {
         return this.originalWord;
     }
 
-    private void encrypt() {
+    private void encrypt () {
         char[] word = this.originalWord.toCharArray();
 
         int len = word.length;
@@ -32,17 +32,18 @@ public class EncryptedWord {
         this.encryptedWord = String.valueOf(word);
     }
 
-    public void decrypt (final char c) {
+    public void decrypt (char c) {
         if (!Alphabet.isAlpha(c)) return;
 
-        char lowC = Character.toLowerCase(c);
-        String lowWord = this.originalWord.toLowerCase();
+        c = Character.toLowerCase(c);
 
+        String original = this.originalWord.toLowerCase();
         char[] encrypted = this.encryptedWord.toCharArray();
+
         int len = encrypted.length;
 
         for (int i = 0 ; i < len ; ++i) {
-            if (lowWord.charAt(i) == lowC) {
+            if (original.charAt(i) == c) {
                 encrypted[i] = this.originalWord.charAt(i);
             }
         }
@@ -50,13 +51,15 @@ public class EncryptedWord {
         this.encryptedWord = String.valueOf(encrypted);
     }
 
-    public boolean isDecrypted() {
+    public boolean isDecrypted () {
         return this.originalWord.equals(this.encryptedWord);
     }
 
-    public boolean contains(char c) {
+    public boolean contains (char c) {
         if (!Alphabet.isAlpha(c)) return false;
-        char lowC = Character.toLowerCase(c);
-        return this.originalWord.toLowerCase().indexOf(lowC) >= 0;
+
+        c = Character.toLowerCase(c);
+
+        return this.originalWord.toLowerCase().indexOf(c) >= 0;
     }
 }

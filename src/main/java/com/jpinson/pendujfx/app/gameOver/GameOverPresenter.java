@@ -30,9 +30,13 @@ public class GameOverPresenter
     @Override
     public void reset() {
         int score = this.gameModel.getScore();
+        String word = this.gameModel.getEncryptedWord().getOriginal();
 
-        if (score >= 0) this.view.setWin(score);
-        else this.view.setLoose(-score);
+        this.view.setResults(
+            this.gameModel.getStatus(),
+             score,
+             word
+        );
     }
 
     // Listeners

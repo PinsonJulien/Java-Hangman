@@ -14,7 +14,8 @@ public abstract class Scrabble {
     }
 
     public static int getLetterScore(char letter) {
-        return switch (Character.toUpperCase(letter)) {
+        letter = Character.toUpperCase(letter);
+        return switch (letter) {
             case 'A', 'E', 'I', 'L', 'N', 'O', 'R', 'S', 'T', 'U'
                 -> 1;
             case 'D', 'G'
