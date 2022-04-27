@@ -5,7 +5,7 @@ import com.jpinson.pendujfx.app.AppPresenterListener;
 import com.jpinson.pendujfx.enums.DifficultyEnum;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
-import com.jpinson.pendujfx.models.OptionsModel;
+import com.jpinson.pendujfx.models.GameModel;
 import com.jpinson.pendujfx.models.UserModel;
 import com.jpinson.pendujfx.services.UserService;
 import com.jpinson.pendujfx.utils.Alphanumeric;
@@ -16,21 +16,18 @@ public class OptionsPresenter
     extends ChildPresenter<AppPresenterListener, OptionsView>
     implements OptionsViewListener
 {
-    private final OptionsModel optionsModel;
-    private final UserModel userModel;
-
-    private final UserService userService = new UserService();
+    private final GameModel gameModel;
+    private final UserService userService;
 
     public OptionsPresenter(
         OptionsView optionsView,
         AppPresenterListener listener,
-        OptionsModel optionsModel,
-        UserModel userModel
+        GameModel gameModel,
+        UserService userService
     ) {
         super(optionsView, listener);
-        this.optionsModel = optionsModel;
-        this.userModel = userModel;
-
+        this.gameModel = gameModel;
+        this.userService = userService;
         this.init();
     }
 
@@ -43,16 +40,19 @@ public class OptionsPresenter
         boolean apiAvailable = new WordnikAPI().isAvailable();
         this.view.setNetworkVisibility(apiAvailable);
         this.setNetwork(apiAvailable);
-
-        this.optionsModel.setDifficulty(DifficultyEnum.EASY);
         this.reset();
     }
 
     @Override
     public void reset() {
-        this.view.setUsername(this.userModel.getName());
-        this.view.setDifficulty(this.optionsModel.getDifficulty());
-        this.view.setNetworkSelected(this.optionsModel.isNetworkEnabled());
+        UserModel user = this.gameModel.getUser();
+        DifficultyEnum difficulty = this.gameModel.getOptions().getDifficulty();
+        boolean network = this.gameModel.getOptions().isNetworkEnabled();
+
+        if (user != null) this.view.setUsername(user.getName());
+
+        this.view.setDifficulty((difficulty != null) ? difficulty : DifficultyEnum.EASY);
+        this.view.setNetworkSelected(network);
         this.view.reset();
     }
 
@@ -88,12 +88,11 @@ public class OptionsPresenter
 
         // If all fields are validated, set the data and show the game.
         if (formValidity) {
-            this.optionsModel.setDifficulty(difficulty);
+            this.gameModel.getOptions().setDifficulty(difficulty);
 
             // Get the user model, if the user doesn't exist yet, create it.
             UserModel userModel = this.getOrAddUser(username);
-            this.userModel.setName(userModel.getName());
-            this.userModel.setId(userModel.getId());
+            this.gameModel.setUser(userModel);
 
             this.parentListener.selectPresenter(PresenterEnum.GAME);
         }
@@ -101,7 +100,7 @@ public class OptionsPresenter
 
     @Override
     public void networkTogglePressed() {
-        this.setNetwork(!this.optionsModel.isNetworkEnabled());
+        this.setNetwork(!this.gameModel.getOptions().isNetworkEnabled());
     }
 
     // Methods
@@ -139,6 +138,6 @@ public class OptionsPresenter
     }
 
     private void setNetwork(boolean state) {
-        this.optionsModel.setNetwork(state);
+        this.gameModel.getOptions().setNetwork(state);
     }
 }

@@ -3,22 +3,22 @@ package com.jpinson.pendujfx.app.menu;
 import com.jpinson.pendujfx.app.AppPresenterListener;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
-import com.jpinson.pendujfx.models.UserModel;
+import com.jpinson.pendujfx.models.GameModel;
 import javafx.application.Platform;
 
 public class MenuPresenter
     extends ChildPresenter<AppPresenterListener, MenuView>
     implements MenuViewListener
 {
-    private final UserModel userModel;
+    private final GameModel gameModel;
 
     public MenuPresenter(
         MenuView menuView,
         AppPresenterListener listener,
-        UserModel userModel
+        GameModel gameModel
     ) {
         super(menuView, listener);
-        this.userModel = userModel;
+        this.gameModel = gameModel;
         this.init();
     }
 
@@ -31,7 +31,7 @@ public class MenuPresenter
     @Override
     public void reset() {
         // When a game has been played, show the quickplay button.
-        if (!this.userModel.getName().equals("")) {
+        if (this.gameModel.getUser() != null) {
             this.view.revealQuickPlayButton();
         }
     }

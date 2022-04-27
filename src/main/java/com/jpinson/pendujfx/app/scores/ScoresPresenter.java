@@ -14,15 +14,16 @@ public class ScoresPresenter
     extends ChildPresenter<AppPresenterListener, ScoresView>
     implements ScoresViewListener
 {
-    private final ScoreService scoreService = new ScoreService();
-
+    private final ScoreService scoreService;
     private DifficultyEnum selectedDifficulty = DifficultyEnum.EASY;
 
     public ScoresPresenter(
         ScoresView scoresView,
-        AppPresenterListener listener
+        AppPresenterListener listener,
+        ScoreService scoreService
     ) {
         super(scoresView, listener);
+        this.scoreService = scoreService;
         this.init();
     }
 

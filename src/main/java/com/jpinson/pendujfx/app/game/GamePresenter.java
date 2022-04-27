@@ -2,10 +2,8 @@ package com.jpinson.pendujfx.app.game;
 
 import com.jpinson.pendujfx.app.AppPresenterListener;
 import com.jpinson.pendujfx.enums.PresenterEnum;
-import com.jpinson.pendujfx.models.GameModel;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
-import com.jpinson.pendujfx.models.OptionsModel;
-import com.jpinson.pendujfx.models.UserModel;
+import com.jpinson.pendujfx.models.GameModel;
 import com.jpinson.pendujfx.models.WordModel;
 import com.jpinson.pendujfx.services.ScoreService;
 import com.jpinson.pendujfx.services.WordService;
@@ -19,24 +17,20 @@ public class GamePresenter
     implements GameViewListener
 {
     private final GameModel gameModel;
-    private final UserModel userModel;
-    private final OptionsModel optionsModel;
-
-    private final WordService wordService = new WordService();
-    private final ScoreService scoreService = new ScoreService();
+    private final WordService wordService;
+    private final ScoreService scoreService;
 
     public GamePresenter(
         GameView gameView,
         AppPresenterListener listener,
         GameModel gameModel,
-        OptionsModel optionsModel,
-        UserModel userModel
+        WordService wordService,
+        ScoreService scoreService
     ) {
         super(gameView, listener);
         this.gameModel = gameModel;
-        this.optionsModel = optionsModel;
-        this.userModel = userModel;
-
+        this.wordService = wordService;
+        this.scoreService = scoreService;
         this.init();
     }
 
@@ -96,7 +90,7 @@ public class GamePresenter
         // Set variables by difficulty
         final int minWordLength;
         final int maxWordLength;
-        switch (this.optionsModel.getDifficulty()) {
+        switch (this.gameModel.getOptions().getDifficulty()) {
             default:
             case EASY:
                 minWordLength = 4;
@@ -120,21 +114,23 @@ public class GamePresenter
         }
 
         // Get a random word, from either API or database.
-        WordModel wordModel = (this.optionsModel.isNetworkEnabled())
+        WordModel wordModel = (this.gameModel.getOptions().isNetworkEnabled())
             ? this.fetchRandomWordOnline(minWordLength, maxWordLength)
             : this.fetchRandomWord(minWordLength, maxWordLength);
 
-        this.gameModel.setScore(wordModel.getScore());
+        this.gameModel.setWord(wordModel);
+
         String word = wordModel.getWord().toUpperCase();
 
         // Encrypt the word
-        this.gameModel.setEncryptedWord(new EncryptedWord(word, optionsModel.getEncryptingCharacter()));
+        char encryptingCharacter = this.gameModel.getOptions().getEncryptingCharacter();
+        this.gameModel.setEncryptedWord(new EncryptedWord(word, encryptingCharacter));
 
         // Set health to max
         this.gameModel.setHealth(this.gameModel.getMaxHealth());
 
         // Setup view
-        this.view.setScoreValue(String.valueOf(this.gameModel.getScore()));
+        this.view.setScoreValue(String.valueOf(wordModel.getScore()));
         this.view.setWord(this.gameModel.getEncryptedWord().get());
         this.view.setFullHealth();
     }
@@ -142,10 +138,10 @@ public class GamePresenter
     private void gameOver(boolean win) {
         this.gameModel.setStatus(win);
 
-        int score = this.gameModel.getScore();
+        int score = this.gameModel.getWord().getScore();
         if (!win) score *= -1;
         this.insertScore(score);
-        
+
         // Switch to game-over view.
         this.parentListener.selectPresenter(PresenterEnum.GAMEOVER);
     }
@@ -154,8 +150,8 @@ public class GamePresenter
         try {
             this.scoreService.addScore(
                 score,
-                this.optionsModel.getDifficulty(),
-                this.userModel
+                this.gameModel.getOptions().getDifficulty(),
+                this.gameModel.getUser()
             );
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -181,7 +177,7 @@ public class GamePresenter
             return this.wordService.getRandomWordOnline(min, max);
         } catch (IOException | InterruptedException e) {
             // Failed -> Remove network and fetch from database.
-            this.optionsModel.setNetwork(false);
+            this.gameModel.getOptions().setNetwork(false);
 
             return this.fetchRandomWord(min, max);
         }

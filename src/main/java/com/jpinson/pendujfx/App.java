@@ -12,10 +12,13 @@ import com.jpinson.pendujfx.app.options.OptionsPresenter;
 import com.jpinson.pendujfx.app.options.OptionsView;
 import com.jpinson.pendujfx.app.scores.ScoresPresenter;
 import com.jpinson.pendujfx.app.scores.ScoresView;
+import com.jpinson.pendujfx.enums.DifficultyEnum;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.models.GameModel;
 import com.jpinson.pendujfx.models.OptionsModel;
-import com.jpinson.pendujfx.models.UserModel;
+import com.jpinson.pendujfx.services.ScoreService;
+import com.jpinson.pendujfx.services.UserService;
+import com.jpinson.pendujfx.services.WordService;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -36,9 +39,17 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // Generate all models
-        GameModel gameModel = new GameModel();
         OptionsModel optionsModel = new OptionsModel();
-        UserModel userModel = new UserModel();
+        optionsModel.setDifficulty(DifficultyEnum.EASY);
+        optionsModel.setEncryptingCharacter('?');
+
+        GameModel gameModel = new GameModel(optionsModel);
+        gameModel.setMaxHealth(6);
+
+        // Generate services
+        ScoreService scoreService = new ScoreService();
+        UserService userService = new UserService();
+        WordService wordService = new WordService();
 
         // Generate the main presenter, and all child views / presenters.
         AppView appView = new AppView();
@@ -48,7 +59,7 @@ public class App extends Application {
         MenuPresenter menuPresenter = new MenuPresenter(
             menuView,
             appPresenter,
-            userModel
+            gameModel
         );
         menuView.addListener(menuPresenter);
 
@@ -56,8 +67,8 @@ public class App extends Application {
         OptionsPresenter optionsPresenter = new OptionsPresenter(
             optionsView,
             appPresenter,
-            optionsModel,
-            userModel
+            gameModel,
+            userService
         );
         optionsView.addListener(optionsPresenter);
 
@@ -66,8 +77,8 @@ public class App extends Application {
             gameView,
             appPresenter,
             gameModel,
-            optionsModel,
-            userModel
+            wordService,
+            scoreService
         );
         gameView.addListener(gamePresenter);
 
@@ -82,7 +93,8 @@ public class App extends Application {
         ScoresView scoresView = new ScoresView();
         ScoresPresenter scoresPresenter = new ScoresPresenter(
             scoresView,
-            appPresenter
+            appPresenter,
+            scoreService
         );
         scoresView.addListener(scoresPresenter);
 

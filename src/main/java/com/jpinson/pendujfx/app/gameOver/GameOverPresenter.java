@@ -29,7 +29,7 @@ public class GameOverPresenter
 
     @Override
     public void reset() {
-        int score = this.gameModel.getScore();
+        int score = this.gameModel.getWord().getScore();
         String word = this.gameModel.getEncryptedWord().getOriginal();
 
         this.view.setResults(

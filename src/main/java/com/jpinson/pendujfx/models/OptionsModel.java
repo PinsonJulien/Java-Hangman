@@ -7,8 +7,7 @@ import com.jpinson.pendujfx.framework.model.Model;
 public class OptionsModel extends Model {
     private DifficultyEnum difficulty;
     private boolean networkEnabled;
-
-    private final char encryptingCharacter = '?';
+    private char encryptingCharacter;
 
     // Getters / Setters
     public DifficultyEnum getDifficulty() {
@@ -29,5 +28,9 @@ public class OptionsModel extends Model {
 
     public char getEncryptingCharacter() {
         return this.encryptingCharacter;
+    }
+
+    public void setEncryptingCharacter(char encryptingCharacter) {
+        this.encryptingCharacter = encryptingCharacter;
     }
 }
