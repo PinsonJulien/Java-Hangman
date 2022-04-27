@@ -28,17 +28,24 @@ import java.io.IOException;
 import java.net.URL;
 
 public class App extends Application {
+    final AppPresenter appPresenter;
 
-    public App() {}
+    public App() {
+        // Generate the main presenter
+        this.appPresenter = new AppPresenter(
+            new AppView()
+        );
+
+        this.init();
+    }
 
     public static void main(String[] args) {
         new App();
         launch();
     }
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        // Generate all models
+    public void init() {
+        // Generate models and default values
         OptionsModel optionsModel = new OptionsModel();
         optionsModel.setDifficulty(DifficultyEnum.EASY);
         optionsModel.setEncryptingCharacter('?');
@@ -51,14 +58,11 @@ public class App extends Application {
         UserService userService = new UserService();
         WordService wordService = new WordService();
 
-        // Generate the main presenter, and all child views / presenters.
-        AppView appView = new AppView();
-        AppPresenter appPresenter = new AppPresenter(appView);
-
+        // Generate all child views / presenters.
         MenuView menuView = new MenuView();
         MenuPresenter menuPresenter = new MenuPresenter(
             menuView,
-            appPresenter,
+            this.appPresenter,
             gameModel
         );
         menuView.addListener(menuPresenter);
@@ -66,7 +70,7 @@ public class App extends Application {
         OptionsView optionsView = new OptionsView();
         OptionsPresenter optionsPresenter = new OptionsPresenter(
             optionsView,
-            appPresenter,
+            this.appPresenter,
             gameModel,
             userService
         );
@@ -75,7 +79,7 @@ public class App extends Application {
         GameView gameView = new GameView();
         GamePresenter gamePresenter = new GamePresenter(
             gameView,
-            appPresenter,
+            this.appPresenter,
             gameModel,
             wordService,
             scoreService
@@ -85,7 +89,7 @@ public class App extends Application {
         GameOverView gameOverView = new GameOverView();
         GameOverPresenter gameOverPresenter = new GameOverPresenter(
             gameOverView,
-            appPresenter,
+            this.appPresenter,
             gameModel
         );
         gameOverView.addListener(gameOverPresenter);
@@ -93,23 +97,26 @@ public class App extends Application {
         ScoresView scoresView = new ScoresView();
         ScoresPresenter scoresPresenter = new ScoresPresenter(
             scoresView,
-            appPresenter,
+            this.appPresenter,
             scoreService
         );
         scoresView.addListener(scoresPresenter);
 
         // Adding all child presenters to the parent one.
-        appPresenter.addChildPresenter(PresenterEnum.MENU, menuPresenter);
-        appPresenter.addChildPresenter(PresenterEnum.OPTIONS, optionsPresenter);
-        appPresenter.addChildPresenter(PresenterEnum.GAME, gamePresenter);
-        appPresenter.addChildPresenter(PresenterEnum.GAMEOVER, gameOverPresenter);
-        appPresenter.addChildPresenter(PresenterEnum.SCORES, scoresPresenter);
+        this.appPresenter.addChildPresenter(PresenterEnum.MENU, menuPresenter);
+        this.appPresenter.addChildPresenter(PresenterEnum.OPTIONS, optionsPresenter);
+        this.appPresenter.addChildPresenter(PresenterEnum.GAME, gamePresenter);
+        this.appPresenter.addChildPresenter(PresenterEnum.GAMEOVER, gameOverPresenter);
+        this.appPresenter.addChildPresenter(PresenterEnum.SCORES, scoresPresenter);
 
         // Setup the first visible presenter
         appPresenter.changeView(PresenterEnum.MENU);
+    }
 
+    @Override
+    public void start(Stage stage) throws IOException {
         // Setup scene
-        Scene scene = new Scene(appPresenter.getView().getPane(), 896, 414);
+        Scene scene = new Scene(this.appPresenter.getView().getPane(), 896, 414);
 
         // Setup style
         final URL style = this.getClass().getResource("app.css");
