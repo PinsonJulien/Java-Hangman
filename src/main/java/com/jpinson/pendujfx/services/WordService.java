@@ -18,7 +18,7 @@ public class WordService extends Service<WordModel> {
     protected WordModel generateModel(ResultSet rs) throws SQLException {
         final int id = rs.getInt("word_id");
         final String word = rs.getString("word_word");
-        final int score = Scrabble.getWordScore(word);
+        final int score = Scrabble.getScore(word);
 
         return new WordModel(
             id,
@@ -54,7 +54,7 @@ public class WordService extends Service<WordModel> {
         final JSONObject json = wordnikAPI.fetchRandomWord(minLength, maxLength);
         final String word = json.getString("word");
         final int id = json.getInt("id");
-        final int score = Scrabble.getWordScore(word);
+        final int score = Scrabble.getScore(word);
 
         return new WordModel(
             id,

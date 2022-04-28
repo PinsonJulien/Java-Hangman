@@ -2,18 +2,18 @@ package com.jpinson.pendujfx.utils;
 
 public abstract class Scrabble {
 
-    public static int getWordScore(String word) {
+    public static int getScore(String word) {
         char[] arr = word.toCharArray();
 
         int score = 0;
         for (char c : arr ) {
-            score += getLetterScore(c);
+            score += getScore(c);
         }
 
         return score;
     }
 
-    public static int getLetterScore(char letter) {
+    public static int getScore(char letter) {
         letter = Character.toUpperCase(letter);
         return switch (letter) {
             case 'A', 'E', 'I', 'L', 'N', 'O', 'R', 'S', 'T', 'U'
