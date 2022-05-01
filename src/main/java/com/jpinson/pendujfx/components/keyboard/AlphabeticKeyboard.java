@@ -9,13 +9,4 @@ public class AlphabeticKeyboard extends Keyboard {
             Alphabet.length/2
         );
     }
-
-    public AlphabeticKeyboard (KeyboardKeyListener listener, boolean disableKeyOnUse) {
-        super(
-            listener,
-            Alphabet.array,
-            Alphabet.length/2,
-            disableKeyOnUse
-        );
-    }
 }

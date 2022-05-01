@@ -18,7 +18,7 @@ public class GameView
     extends View<ConstrainedGridPane, GameViewListener>
     implements GameViewListener
 {
-    private final AlphabeticKeyboard keyboard = new AlphabeticKeyboard(this, true);
+    private final AlphabeticKeyboard keyboard = new AlphabeticKeyboard(this);
     private final Word word = new Word();
     private final HealthBar healthBar = new HealthBar();
     private final Button forfeitButton = new Button("FORFEIT");
@@ -111,6 +111,9 @@ public class GameView
         // Must not have been used yet.
         if (this.keyboard.isKeyDisabled(c)) return;
 
+        // Disable key
+        this.keyboard.toggleKey(c, false);
+        // trigger listener
         this.keyboardPressedKey(c);
     };
 

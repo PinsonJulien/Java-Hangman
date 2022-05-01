@@ -1,7 +1,6 @@
 package com.jpinson.pendujfx.components.keyboard;
 
 import com.jpinson.pendujfx.interfaces.InitResetInterface;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 // Key of a Keyboard
@@ -10,12 +9,6 @@ public class Key extends Button implements InitResetInterface {
 
     public Key(char c) {
         super(String.valueOf(c));
-        this.value = c;
-        this.init();
-    }
-
-    public Key(char c, Node graphic) {
-        super(String.valueOf(c), graphic);
         this.value = c;
         this.init();
     }

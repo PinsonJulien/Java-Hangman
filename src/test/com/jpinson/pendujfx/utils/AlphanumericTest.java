@@ -9,7 +9,9 @@ public class AlphanumericTest extends TestCase {
         assertTrue(Alphanumeric.validate('A'));
         assertTrue(Alphanumeric.validate('a'));
         assertFalse(Alphanumeric.validate('+'));
-        
+    }
+
+    public void testValidateString() {
         assertTrue(Alphanumeric.validate("1a0B"));
         assertFalse(Alphanumeric.validate("1a0+"));
     }

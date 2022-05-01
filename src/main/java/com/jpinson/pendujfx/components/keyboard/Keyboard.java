@@ -14,19 +14,9 @@ public class Keyboard extends GridPane implements InitResetInterface {
     private final char[] characters;
     private final Map<Character, Key> keys = new HashMap<>();
     private final int columns;
-    private final boolean disableKeyOnUse;
 
     public Keyboard(KeyboardKeyListener listener, char[] characters, int columns) {
         this.listener = listener;
-        this.disableKeyOnUse = false;
-        this.characters = characters;
-        this.columns = columns;
-        this.init();
-    }
-
-    public Keyboard(KeyboardKeyListener listener, char[] characters, int columns, boolean disableKeyOnUse) {
-        this.listener = listener;
-        this.disableKeyOnUse = disableKeyOnUse;
         this.characters = characters;
         this.columns = columns;
         this.init();
@@ -79,8 +69,6 @@ public class Keyboard extends GridPane implements InitResetInterface {
         @Override
         public void handle(ActionEvent actionEvent) {
             Key key = (Key) actionEvent.getSource();
-            if (disableKeyOnUse) key.setDisable(true);
-
             listener.keyboardPressedKey(key.getValue());
         }
     };
