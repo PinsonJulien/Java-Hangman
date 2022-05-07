@@ -71,7 +71,7 @@ public class GamePresenter
 
         // Reveal letter in view
         encryptedWord.decrypt(c);
-        this.view.setWord(encryptedWord.get());
+        this.view.updateWord(this.gameModel.getEncryptedWord().getLetters());
 
         // All letters are revealed : game over, win
         if (encryptedWord.isDecrypted()) {
@@ -120,18 +120,17 @@ public class GamePresenter
 
         this.gameModel.setWord(wordModel);
 
-        String word = wordModel.getWord().toUpperCase();
+        String word = wordModel.get().toUpperCase();
 
         // Encrypt the word
-        char encryptingCharacter = this.gameModel.getOptions().getEncryptingCharacter();
-        this.gameModel.setEncryptedWord(new EncryptedWord(word, encryptingCharacter));
+        this.gameModel.getEncryptedWord().newEncryption(word);
 
         // Set health to max
         this.gameModel.setHealth(this.gameModel.getMaxHealth());
 
         // Setup view
         this.view.setScoreValue(String.valueOf(wordModel.getScore()));
-        this.view.setWord(this.gameModel.getEncryptedWord().get());
+        this.view.setWord(this.gameModel.getEncryptedWord().getLetters());
         this.view.setFullHealth();
     }
 

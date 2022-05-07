@@ -1,14 +1,18 @@
 package com.jpinson.pendujfx.app.gameOver;
 
 import com.jpinson.pendujfx.components.panes.constrainedGridPane.ConstrainedGridPane;
+import com.jpinson.pendujfx.components.word.Word;
 import com.jpinson.pendujfx.framework.view.View;
 import com.jpinson.pendujfx.utils.CssClass;
+import com.jpinson.pendujfx.utils.EncryptedLetter;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
 
 public class GameOverView
     extends View<ConstrainedGridPane, GameOverViewListener>
@@ -17,7 +21,7 @@ public class GameOverView
     private final Label resultLabel = new Label();
     private final Label scoreLabel = new Label();
     private final Label wordRecapLabel = new Label("The word was:");
-    private final Label wordLabel = new Label();
+    private final Word word = new Word();
     private final Button replayButton = new Button("REPLAY");
     private final Button menuButton =  new Button("MENU");
     private final Button scoreButton = new Button("SCORES");
@@ -38,7 +42,7 @@ public class GameOverView
         this.scoreButton.setOnAction(this.scoreButtonHandler);
 
         // Setup grid
-        this.pane.setColumns(100);
+        this.pane.setColumns(15, 70, 15);
         this.pane.setRows(70, 30);
 
         // Result pane
@@ -47,14 +51,14 @@ public class GameOverView
         CssClass.add(resultLabel, "result-label");
         CssClass.add(scoreLabel, "score-label");
         CssClass.add(wordRecapLabel, "word-recap-label");
-        CssClass.add(wordLabel, "word-label");
+
         resultPane.getChildren().addAll(
             this.resultLabel,
             this.scoreLabel,
             this.wordRecapLabel,
-            this.wordLabel
+            this.word
         );
-        this.pane.add(resultPane, 0, 0);
+        this.pane.add(resultPane, 1, 0);
 
         // Button pane
         HBox buttonPane = new HBox();
@@ -64,7 +68,7 @@ public class GameOverView
             this.replayButton,
             this.scoreButton
         );
-        this.pane.add(buttonPane, 0, 1);
+        this.pane.add(buttonPane, 1, 1);
     }
 
     @Override
@@ -98,7 +102,7 @@ public class GameOverView
     }
 
     // Methods
-    public void setResults (boolean win, int score, String word) {
+    public void setResults (boolean win, int score, ArrayList<EncryptedLetter> letters) {
         String resultText = (win)
             ? "You won !"
             : "You lost !";
@@ -111,6 +115,6 @@ public class GameOverView
 
         this.resultLabel.setText(resultText);
         this.scoreLabel.setText(scoreText);
-        this.wordLabel.setText(word);
+        this.word.newWord(letters);
     }
 }

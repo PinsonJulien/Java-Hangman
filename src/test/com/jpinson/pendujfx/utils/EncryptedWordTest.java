@@ -2,49 +2,69 @@ package com.jpinson.pendujfx.utils;
 
 import junit.framework.TestCase;
 
+import java.util.ArrayList;
+
 public class EncryptedWordTest extends TestCase {
-    private static final char encryptingCharacter = '?';
-    private static final String word = "Aujourd'hui";
+    private static final String word = "A+Za";
+    private static final String word2 = "C?";
+    EncryptedWord encryptedWord = new EncryptedWord();
 
-    public void testEncrypt() {
-        EncryptedWord encryptedWord = new EncryptedWord(word, encryptingCharacter);
+    public void testNewEncryption() {
+        encryptedWord.newEncryption(word);
+        ArrayList<EncryptedLetter> letters = encryptedWord.getLetters();
 
-        // Insert the original word properly.
-        assertEquals(word, encryptedWord.getOriginal());
+        // It register values properly
+        assertEquals('A', letters.get(0).getValue());
+        assertEquals('+', letters.get(1).getValue());
+        assertEquals('Z', letters.get(2).getValue());
+        assertEquals('a', letters.get(3).getValue());
 
-        // Encrypt properly the given word, but not the special characters.
-        assertEquals("???????'???", encryptedWord.get());
+        // It encrypt only letters.
+        assertTrue(letters.get(0).isEncrypted());
+        assertFalse(letters.get(1).isEncrypted());
+        assertTrue(letters.get(2).isEncrypted());
+        assertTrue(letters.get(3).isEncrypted());
+
+        // It works the same even if renewed.
+        encryptedWord.newEncryption(word2);
+        letters = encryptedWord.getLetters();
+        assertEquals('C', letters.get(0).getValue());
+        assertEquals('?', letters.get(1).getValue());
+        assertTrue(letters.get(0).isEncrypted());
+        assertFalse(letters.get(1).isEncrypted());
     }
 
     public void testDecrypt() {
-        EncryptedWord encryptedWord = new EncryptedWord(word, encryptingCharacter);
-        encryptedWord.decrypt('a');
-        encryptedWord.decrypt('U');
+        encryptedWord.newEncryption(word);
+        ArrayList<EncryptedLetter> letters = encryptedWord.getLetters();
 
-        // Decrypt regardless of case, can decrypt multiple letters.
-        assertEquals("Au??u??'?u?", encryptedWord.get());
+        // Decrypts regardless of case and all duplicates.
+        encryptedWord.decrypt('A');
+        encryptedWord.decrypt('Z');
+
+        assertFalse(letters.get(0).isEncrypted());
+        assertFalse(letters.get(1).isEncrypted());
+        assertFalse(letters.get(2).isEncrypted());
+        assertFalse(letters.get(3).isEncrypted());
     }
 
     public void testIsDecrypted() {
-        EncryptedWord encryptedWord = new EncryptedWord(word, encryptingCharacter);
-        encryptedWord.decrypt('a');
-        encryptedWord.decrypt('u');
-        encryptedWord.decrypt('j');
-        encryptedWord.decrypt('o');
-        encryptedWord.decrypt('r');
-        encryptedWord.decrypt('d');
-        encryptedWord.decrypt('h');
-        // Can tell if the word is completely decrypted or not.
+        encryptedWord.newEncryption(word);
+
+        // Decrypts regardless of case and all duplicates.
+        encryptedWord.decrypt('A');
         assertFalse(encryptedWord.isDecrypted());
-        encryptedWord.decrypt('i');
+
+        encryptedWord.decrypt('Z');
         assertTrue(encryptedWord.isDecrypted());
     }
 
     public void testContains() {
-        EncryptedWord encryptedWord = new EncryptedWord(word, encryptingCharacter);
+        encryptedWord.newEncryption(word);
         // Can tell if a given char exist in said word, regardless of case.
         assertTrue(encryptedWord.contains('a'));
-        assertTrue(encryptedWord.contains('U'));
-        assertFalse(encryptedWord.contains('z'));
+        assertTrue(encryptedWord.contains('A'));
+        assertFalse(encryptedWord.contains('b'));
+        assertTrue(encryptedWord.contains('z'));
     }
 }

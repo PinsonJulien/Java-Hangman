@@ -11,7 +11,8 @@ public class GameModel extends Model {
 
     private int maxHealth;
     private int health;
-    private EncryptedWord encryptedWord;
+
+    private final EncryptedWord encryptedWord = new EncryptedWord();
     // Determine if the game is win / loose
     private boolean status;
 
@@ -46,10 +47,6 @@ public class GameModel extends Model {
 
     public void setHealth(int health) {
         this.health = health;
-    }
-
-    public void setEncryptedWord(EncryptedWord encryptedWord) {
-        this.encryptedWord = encryptedWord;
     }
 
     public EncryptedWord getEncryptedWord () {

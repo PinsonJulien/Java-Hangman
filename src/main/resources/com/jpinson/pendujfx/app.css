@@ -5,13 +5,30 @@ Key:hover {
 }
 
 Button,
-Key {
+Key,
+Letter {
     -fx-background-color: #D7AF72;
     -fx-text-fill: #3B3B3A;
     -fx-font-family: "Roboto Condensed";
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
 }
+
+Word {
+    -fx-vgap: 10;
+    -fx-hgap: 10;
+    -fx-alignment: center;
+}
+
+Word Letter {
+    -fx-font-size: 30;
+    -fx-padding: 1 10 1 10;
+}
+
+Word Letter.hidden {
+    -fx-text-fill: #D7AF72;
+}
+
 
 /* MENU VIEW */
 #menu {
@@ -162,11 +179,6 @@ Key {
     -fx-font-family: "Roboto Condensed";
 }
 
-#game Word {
-    -fx-font-size: 35;
-    -fx-font-family: "Roboto Condensed";
-}
-
 #game Button {
     -fx-font-size: 13;
     -fx-pref-width: 80;
@@ -189,8 +201,7 @@ Key {
 }
 
 #game-over .result-pane .score-label,
-#game-over .result-pane .word-recap-label,
-#game-over .result-pane .word-label {
+#game-over .result-pane .word-recap-label {
     -fx-font-family: "Roboto Condensed";
 }
 
@@ -198,13 +209,8 @@ Key {
     -fx-font-size: 25;
 }
 
-#game-over .result-pane .word-recap-label,
-#game-over .result-pane .word-label {
+#game-over .result-pane .word-recap-label {
     -fx-font-size: 20;
-}
-
-#game-over .result-pane .word-label {
-    -fx-font-weight: bold;
 }
 
 #game-over .button-pane {

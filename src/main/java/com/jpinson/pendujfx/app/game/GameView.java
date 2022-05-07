@@ -7,12 +7,15 @@ import com.jpinson.pendujfx.components.word.Word;
 import com.jpinson.pendujfx.framework.view.View;
 import com.jpinson.pendujfx.utils.Alphabet;
 import com.jpinson.pendujfx.utils.CssClass;
+import com.jpinson.pendujfx.utils.EncryptedLetter;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
 
 public class GameView
     extends View<ConstrainedGridPane, GameViewListener>
@@ -49,10 +52,8 @@ public class GameView
         middleGrid.setRows(50, 50);
         this.pane.add(middleGrid, 1, 0);
 
-        VBox wordPane = new VBox();
-        CssClass.add(wordPane, "word-pane");
-        wordPane.getChildren().add(this.word);
-        middleGrid.add(wordPane, 0,0);
+        CssClass.add(this.word, "word-pane");
+        middleGrid.add(this.word, 0,0);
         middleGrid.add(this.keyboard, 0, 1);
 
         // Left pane
@@ -84,6 +85,9 @@ public class GameView
     // Listeners
     @Override
     public void keyboardPressedKey(char c) {
+        // Disable key
+        this.keyboard.toggleKey(c, false);
+
         for (GameViewListener listener : this.getListeners()) {
             listener.keyboardPressedKey(c);
         }
@@ -123,8 +127,12 @@ public class GameView
         this.scoreValueLabel.setText(score);
     }
 
-    public void setWord(String word) {
-        this.word.set(word);
+    public void setWord(ArrayList<EncryptedLetter> letters) {
+        this.word.newWord(letters);
+    }
+
+    public void updateWord(ArrayList<EncryptedLetter> letters) {
+        this.word.update(letters);
     }
 
     public void setHealth(double percentage) {

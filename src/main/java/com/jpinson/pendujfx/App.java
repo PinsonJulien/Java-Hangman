@@ -48,7 +48,6 @@ public class App extends Application {
         // Generate models and default values
         OptionsModel optionsModel = new OptionsModel();
         optionsModel.setDifficulty(DifficultyEnum.EASY);
-        optionsModel.setEncryptingCharacter('?');
 
         GameModel gameModel = new GameModel(optionsModel);
         gameModel.setMaxHealth(6);

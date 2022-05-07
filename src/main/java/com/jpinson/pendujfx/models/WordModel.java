@@ -17,15 +17,15 @@ public class WordModel extends Model {
         this.word = word;
     }
 
+    public String get() {
+        return word;
+    }
+
     public int getId() {
         return id;
     }
 
     public int getScore() {
         return score;
-    }
-
-    public String getWord() {
-        return word;
     }
 }

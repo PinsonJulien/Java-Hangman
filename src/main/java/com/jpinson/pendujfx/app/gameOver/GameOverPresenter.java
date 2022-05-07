@@ -29,13 +29,13 @@ public class GameOverPresenter
 
     @Override
     public void reset() {
-        int score = this.gameModel.getWord().getScore();
-        String word = this.gameModel.getEncryptedWord().getOriginal();
+        // Reveals whole encrypted word to show it.
+        this.gameModel.getEncryptedWord().decrypt();
 
         this.view.setResults(
             this.gameModel.getStatus(),
-             score,
-             word
+            this.gameModel.getWord().getScore(),
+            this.gameModel.getEncryptedWord().getLetters()
         );
     }
 
