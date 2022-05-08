@@ -1,3 +1,9 @@
 Musique :
 - Jouer musique en fonction du menu
 - les child presenter ont accès aux listeners musique du parent
+
+Ajouter bonhomme pendu
+-> si trop de vie, afficher la vie restante dans un label.
+
+-> Possibilité de choisir entre barre et bonhomme ?
+-> Ou afficher l'un ou l'autre en fonction de la taille ?

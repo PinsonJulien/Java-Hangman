@@ -22,7 +22,9 @@ Word {
 
 Word Letter {
     -fx-font-size: 30;
-    -fx-padding: 1 10 1 10;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+    -fx-alignment: center;
 }
 
 Word Letter.hidden {
