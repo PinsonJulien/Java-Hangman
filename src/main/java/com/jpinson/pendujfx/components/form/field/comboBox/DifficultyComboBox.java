@@ -1,11 +1,10 @@
-package com.jpinson.pendujfx.components.difficultyComboBox;
+package com.jpinson.pendujfx.components.form.field.comboBox;
 
 import com.jpinson.pendujfx.enums.DifficultyEnum;
-import javafx.scene.control.ComboBox;
 
-public class DifficultyComboBox extends ComboBox<DifficultyEnum> {
+public class DifficultyComboBox extends EnumComboBox<DifficultyEnum> {
     public DifficultyComboBox (DifficultyEnum defaultDifficulty) {
-        this.setValue(defaultDifficulty);
+        super(defaultDifficulty);
         this.generate();
     }
 

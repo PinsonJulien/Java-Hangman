@@ -24,11 +24,8 @@ public class EncryptedWord {
         this.letters.clear();
 
         char[] chars = word.toCharArray();
-        int len = chars.length;
 
-        for (int i =0; i < len; ++i) {
-            char c = chars[i];
-
+        for (char c : chars) {
             EncryptedLetter letter = new EncryptedLetter(
                 c,
                 Alphabet.isAlpha(c)

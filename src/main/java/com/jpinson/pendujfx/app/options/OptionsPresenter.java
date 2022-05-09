@@ -3,6 +3,7 @@ package com.jpinson.pendujfx.app.options;
 import com.jpinson.pendujfx.API.WordnikAPI;
 import com.jpinson.pendujfx.app.AppPresenterListener;
 import com.jpinson.pendujfx.enums.DifficultyEnum;
+import com.jpinson.pendujfx.enums.HealthComponentEnum;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
 import com.jpinson.pendujfx.models.GameModel;
@@ -47,11 +48,13 @@ public class OptionsPresenter
     public void reset() {
         UserModel user = this.gameModel.getUser();
         DifficultyEnum difficulty = this.gameModel.getOptions().getDifficulty();
+        HealthComponentEnum healthComponent = this.gameModel.getOptions().getHealthComponent();
         boolean network = this.gameModel.getOptions().isNetworkEnabled();
 
         if (user != null) this.view.setUsername(user.getName());
 
         this.view.setDifficulty((difficulty != null) ? difficulty : DifficultyEnum.EASY);
+        this.view.setHealthComponent((healthComponent != null) ? healthComponent : HealthComponentEnum.CLASSIC);
         this.view.setNetworkSelected(network);
         this.view.reset();
     }
@@ -69,8 +72,10 @@ public class OptionsPresenter
 
         final String username = this.view.getUsername();
         final DifficultyEnum difficulty = this.view.getDifficulty();
+        final HealthComponentEnum healthComponent = this.view.getHealthComponent();
         final String usernameMessage = this.validateUsernameField(username);
         final String difficultyMessage = this.validateDifficultyField(difficulty);
+        final String healthComponentMessage = this.validateHealthComponentField(healthComponent);
 
         if (usernameMessage != null) {
             this.view.setUsernameInvalid(usernameMessage);
@@ -86,9 +91,17 @@ public class OptionsPresenter
             this.view.setDifficultyValid();
         }
 
+        if (healthComponentMessage != null) {
+            this.view.setHealthComponentInvalid(healthComponentMessage);
+            formValidity = false;
+        } else {
+            this.view.setHealthComponentValid();
+        }
+
         // If all fields are validated, set the data and show the game.
         if (formValidity) {
             this.gameModel.getOptions().setDifficulty(difficulty);
+            this.gameModel.getOptions().setHealthComponent(healthComponent);
 
             // Get the user model, if the user doesn't exist yet, create it.
             UserModel userModel = this.getOrAddUser(username);
@@ -121,6 +134,10 @@ public class OptionsPresenter
     }
 
     private String validateDifficultyField(DifficultyEnum difficulty) {
+        return null;
+    }
+
+    private String validateHealthComponentField(HealthComponentEnum healthComponent) {
         return null;
     }
 

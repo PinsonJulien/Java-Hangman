@@ -1,10 +1,12 @@
 package com.jpinson.pendujfx.app.options;
 
-import com.jpinson.pendujfx.components.difficultyComboBox.DifficultyComboBox;
-import com.jpinson.pendujfx.components.formFields.ComboBoxFormField;
-import com.jpinson.pendujfx.components.formFields.TextFormField;
-import com.jpinson.pendujfx.components.panes.constrainedGridPane.ConstrainedGridPane;
+import com.jpinson.pendujfx.components.form.field.comboBox.DifficultyComboBox;
+import com.jpinson.pendujfx.components.form.field.comboBox.HealthComponentComboBox;
+import com.jpinson.pendujfx.components.form.control.ComboBoxFormField;
+import com.jpinson.pendujfx.components.form.control.TextFormField;
+import com.jpinson.pendujfx.components.pane.ConstrainedGridPane;
 import com.jpinson.pendujfx.enums.DifficultyEnum;
+import com.jpinson.pendujfx.enums.HealthComponentEnum;
 import com.jpinson.pendujfx.framework.view.View;
 import com.jpinson.pendujfx.utils.CssClass;
 import javafx.event.ActionEvent;
@@ -24,6 +26,8 @@ public class OptionsView
     private final TextFormField usernameField = new TextFormField("Username");
     private final ComboBoxFormField<DifficultyComboBox> difficultyField
         = new ComboBoxFormField<>(new DifficultyComboBox(DifficultyEnum.EASY), "Difficulty");
+    private final ComboBoxFormField<HealthComponentComboBox> healthComponentField
+        = new ComboBoxFormField<>(new HealthComponentComboBox(HealthComponentEnum.CLASSIC), "Health style");
     private final CheckBox networkCheckbox = new CheckBox("Network");
 
     public OptionsView() {
@@ -73,12 +77,22 @@ public class OptionsView
         CssClass.add(fieldsGrid, "field-pane");
         fieldsGrid.setColumns(50, 50);
         fieldsGrid.setRows(100);
-        fieldsGrid.add(this.usernameField, 0, 0);
-        fieldsGrid.add(this.difficultyField, 1, 0);
+        VBox leftFieldsPane = new VBox();
+        leftFieldsPane.getChildren().add(this.usernameField);
+        CssClass.add(leftFieldsPane, "left-field-pane");
+        VBox rightFieldsPane = new VBox();
+        rightFieldsPane.getChildren().addAll(
+            this.difficultyField,
+            this.healthComponentField
+        );
+        CssClass.add(rightFieldsPane, "right-field-pane");
+        fieldsGrid.add(leftFieldsPane, 0, 0);
+        fieldsGrid.add(rightFieldsPane, 1, 0);
         this.pane.add(fieldsGrid, 0, 1);
 
         CssClass.add(this.usernameField, "field");
         CssClass.add(this.difficultyField, "field");
+        CssClass.add(this.healthComponentField, "field");
 
         // Bottom grid
         VBox bottomButtonPane = new VBox();
@@ -91,6 +105,7 @@ public class OptionsView
     @Override
     public void reset() {
         this.difficultyField.setNeutral();
+        this.healthComponentField.setNeutral();
         this.usernameField.setNeutral();
     }
 
@@ -145,6 +160,22 @@ public class OptionsView
 
     public void setDifficultyInvalid (String message) {
         this.difficultyField.setInvalid(message);
+    }
+
+    public void setHealthComponent (HealthComponentEnum healthComponent) {
+        this.healthComponentField.getField().setValue(healthComponent);
+    }
+
+    public HealthComponentEnum getHealthComponent() {
+        return this.healthComponentField.getField().getValue();
+    }
+
+    public void setHealthComponentValid () {
+        this.healthComponentField.setValid();
+    }
+
+    public void setHealthComponentInvalid(String message) {
+        this.healthComponentField.setInvalid(message);
     }
 
     public void setUsernameValid () {

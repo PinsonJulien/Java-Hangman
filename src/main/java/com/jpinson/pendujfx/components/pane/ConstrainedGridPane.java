@@ -1,4 +1,4 @@
-package com.jpinson.pendujfx.components.panes.constrainedGridPane;
+package com.jpinson.pendujfx.components.pane;
 
 import javafx.collections.ObservableList;
 import javafx.scene.layout.ColumnConstraints;

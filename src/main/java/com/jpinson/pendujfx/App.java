@@ -13,6 +13,7 @@ import com.jpinson.pendujfx.app.options.OptionsView;
 import com.jpinson.pendujfx.app.scores.ScoresPresenter;
 import com.jpinson.pendujfx.app.scores.ScoresView;
 import com.jpinson.pendujfx.enums.DifficultyEnum;
+import com.jpinson.pendujfx.enums.HealthComponentEnum;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.models.GameModel;
 import com.jpinson.pendujfx.models.OptionsModel;
@@ -48,6 +49,7 @@ public class App extends Application {
         // Generate models and default values
         OptionsModel optionsModel = new OptionsModel();
         optionsModel.setDifficulty(DifficultyEnum.EASY);
+        optionsModel.setHealthComponent(HealthComponentEnum.CLASSIC);
 
         GameModel gameModel = new GameModel(optionsModel);
         gameModel.setMaxHealth(6);

@@ -1,6 +1,6 @@
 package com.jpinson.pendujfx.app.menu;
 
-import com.jpinson.pendujfx.components.panes.constrainedGridPane.ConstrainedGridPane;
+import com.jpinson.pendujfx.components.pane.ConstrainedGridPane;
 import com.jpinson.pendujfx.framework.view.View;
 import com.jpinson.pendujfx.utils.CssClass;
 import javafx.event.ActionEvent;

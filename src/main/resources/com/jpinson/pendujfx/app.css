@@ -31,6 +31,21 @@ Word Letter.hidden {
     -fx-text-fill: #D7AF72;
 }
 
+HangedGuy {
+    -fx-alignment: center;
+}
+
+HangedGuy Line,
+HangedGuy Circle,
+HangedGuy Text {
+    -fx-stroke: #3B3B3A;
+}
+
+HangedGuy Text {
+    -fx-font-size: 15;
+    -fx-font-family: "Roboto Condensed";
+}
+
 
 /* MENU VIEW */
 #menu {
@@ -84,6 +99,8 @@ Word Letter.hidden {
 #options .title-label-pane,
 #options .title-network-pane,
 #options .bottom-button-pane,
+#options .left-field-pane,
+#options .right-field-pane,
 #options .field {
     -fx-alignment: center;
 }

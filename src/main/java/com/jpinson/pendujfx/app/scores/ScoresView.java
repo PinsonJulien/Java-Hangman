@@ -1,7 +1,7 @@
 package com.jpinson.pendujfx.app.scores;
 
-import com.jpinson.pendujfx.components.difficultyComboBox.DifficultyComboBox;
-import com.jpinson.pendujfx.components.panes.constrainedGridPane.ConstrainedGridPane;
+import com.jpinson.pendujfx.components.form.field.comboBox.DifficultyComboBox;
+import com.jpinson.pendujfx.components.pane.ConstrainedGridPane;
 import com.jpinson.pendujfx.enums.DifficultyEnum;
 import com.jpinson.pendujfx.framework.view.View;
 import com.jpinson.pendujfx.models.ScoreModel;

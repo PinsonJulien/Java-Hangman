@@ -1,4 +1,4 @@
-package com.jpinson.pendujfx.components.healthBar;
+package com.jpinson.pendujfx.components.health;
 
 import com.jpinson.pendujfx.interfaces.InitResetInterface;
 import javafx.collections.ObservableList;

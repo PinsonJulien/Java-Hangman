@@ -1,10 +1,8 @@
 package com.jpinson.pendujfx.utils;
 
 public class EncryptedLetter {
-    private char value;
+    private final char value;
     private boolean encrypted;
-
-    public EncryptedLetter () {}
 
     public EncryptedLetter (char value, boolean encrypted) {
         this.value = value;
@@ -19,11 +17,7 @@ public class EncryptedLetter {
     public char getValue() {
         return value;
     }
-
-    public void setValue(char value) {
-        this.value = value;
-    }
-
+    
     public void setEncrypted (boolean encrypted) {
         this.encrypted = encrypted;
     }

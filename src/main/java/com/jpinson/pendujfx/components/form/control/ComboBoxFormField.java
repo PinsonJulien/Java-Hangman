@@ -1,4 +1,4 @@
-package com.jpinson.pendujfx.components.formFields;
+package com.jpinson.pendujfx.components.form.control;
 
 import javafx.scene.control.ComboBox;
 

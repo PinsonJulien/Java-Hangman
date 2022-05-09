@@ -1,9 +1,11 @@
 package com.jpinson.pendujfx.app.game;
 
-import com.jpinson.pendujfx.components.healthBar.HealthBar;
+import com.jpinson.pendujfx.components.health.HangedGuy;
+import com.jpinson.pendujfx.components.health.HealthBar;
 import com.jpinson.pendujfx.components.keyboard.AlphabeticKeyboard;
-import com.jpinson.pendujfx.components.panes.constrainedGridPane.ConstrainedGridPane;
+import com.jpinson.pendujfx.components.pane.ConstrainedGridPane;
 import com.jpinson.pendujfx.components.word.Word;
+import com.jpinson.pendujfx.enums.HealthComponentEnum;
 import com.jpinson.pendujfx.framework.view.View;
 import com.jpinson.pendujfx.utils.Alphabet;
 import com.jpinson.pendujfx.utils.CssClass;
@@ -24,9 +26,13 @@ public class GameView
     private final AlphabeticKeyboard keyboard = new AlphabeticKeyboard(this);
     private final Word word = new Word();
     private final HealthBar healthBar = new HealthBar();
+    private final HangedGuy hangedGuy = new HangedGuy(125, 200);
     private final Button forfeitButton = new Button("FORFEIT");
     private final Label scoreLabel = new Label("SCORE");
     private final Label scoreValueLabel = new Label("0");
+    private final VBox rightPane = new VBox();
+
+    private HealthComponentEnum currentHealthComponent;
 
     public GameView() {
         super(new ConstrainedGridPane());
@@ -65,10 +71,8 @@ public class GameView
         );
         this.pane.add(leftPane, 0, 0);
 
-        VBox rightPane = new VBox();
-        CssClass.add(rightPane, "right-pane");
-        rightPane.getChildren().add(this.healthBar);
-        this.pane.add(rightPane, 2, 0);
+        CssClass.add(this.rightPane, "right-pane");
+        this.pane.add(this.rightPane, 2, 0);
 
         VBox buttonPane = new VBox();
         CssClass.add(buttonPane, "button-pane");
@@ -135,11 +139,32 @@ public class GameView
         this.word.update(letters);
     }
 
-    public void setHealth(double percentage) {
-        this.healthBar.setHealth(percentage);
+    public void setHealthComponent(HealthComponentEnum healthComponent) {
+        this.currentHealthComponent = healthComponent;
+
+        // Remove current component from right pane.
+        this.rightPane.getChildren().clear();
+
+        // Shows relevant component
+        switch (this.currentHealthComponent) {
+            case CLASSIC -> this.rightPane.getChildren().add(this.hangedGuy);
+
+            case BAR -> this.rightPane.getChildren().add(this.healthBar);
+        }
     }
 
-    public void setFullHealth() {
-        this.healthBar.setFullHealth();
+    public void setHealth(int currentHealth, int maxHealth) {
+        switch (this.currentHealthComponent) {
+            case CLASSIC -> this.hangedGuy.setHealth(currentHealth);
+
+            case BAR -> {
+                double percentage = ((double) currentHealth/maxHealth)*100;
+                this.healthBar.setHealth((percentage));
+            }
+        }
+    }
+
+    public void setFullHealth(int maxHealth) {
+        this.setHealth(maxHealth, maxHealth);
     }
 }

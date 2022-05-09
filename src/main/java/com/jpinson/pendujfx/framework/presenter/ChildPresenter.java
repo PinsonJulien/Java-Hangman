@@ -17,9 +17,4 @@ public abstract class ChildPresenter <
         super(view);
         this.parentListener = parentListener;
     }
-
-    // getters / setters
-    public L getParentListener() {
-        return this.parentListener;
-    }
 }

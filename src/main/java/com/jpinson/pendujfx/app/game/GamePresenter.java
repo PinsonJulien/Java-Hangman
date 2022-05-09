@@ -64,8 +64,7 @@ public class GamePresenter
 
             this.gameModel.setHealth(health);
             // Set health in percentage.
-            double percentage = ((double) health/this.gameModel.getMaxHealth())*100;
-            this.view.setHealth(percentage);
+            this.view.setHealth(health, this.gameModel.getMaxHealth());
             return;
         }
 
@@ -81,7 +80,6 @@ public class GamePresenter
 
     @Override
     public void forfeitButtonPressed() {
-        //this.gameModel.setHealth(0);
         this.gameOver(false);
     }
 
@@ -131,7 +129,8 @@ public class GamePresenter
         // Setup view
         this.view.setScoreValue(String.valueOf(wordModel.getScore()));
         this.view.setWord(this.gameModel.getEncryptedWord().getLetters());
-        this.view.setFullHealth();
+        this.view.setHealthComponent(this.gameModel.getOptions().getHealthComponent());
+        this.view.setFullHealth(this.gameModel.getMaxHealth());
     }
 
     private void gameOver(boolean win) {
