@@ -1,1 +1,0 @@
--- Ne pas oublier d'ajouter des mots à la DB et cleanup !
