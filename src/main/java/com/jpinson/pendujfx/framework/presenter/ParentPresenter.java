@@ -28,16 +28,13 @@ public abstract class ParentPresenter
     // Listeners
     @Override
     public void selectPresenter(E alias) {
-        this.changeView(alias);
-    }
-
-    // Methods
-    public void changeView(E alias) {
         this.removeCurrentPresenter();
         P presenter = this.getChildPresenter(alias);
         presenter.reset();
         this.getView().insertNode(presenter.getView().getPane());
     }
+
+    // Methods
 
     public void removeCurrentPresenter() {
         this.getView().removeNodes();

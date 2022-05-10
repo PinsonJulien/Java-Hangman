@@ -2,6 +2,7 @@ package com.jpinson.pendujfx.app.scores;
 
 import com.jpinson.pendujfx.app.AppPresenterListener;
 import com.jpinson.pendujfx.enums.DifficultyEnum;
+import com.jpinson.pendujfx.enums.MusicEnum;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
 import com.jpinson.pendujfx.models.ScoreModel;
@@ -33,18 +34,8 @@ public class ScoresPresenter
 
     @Override
     public void reset() {
-        try {
-            ArrayList<ScoreModel> scores = this.scoreService.getTotalScores(
-                10,
-                this.selectedDifficulty
-            );
-
-            this.view.reset();
-            this.view.insertRows(scores);
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        this.refreshTable();
+        this.parentListener.selectMusic(MusicEnum.SCORES);
     }
 
     // Listeners
@@ -56,8 +47,22 @@ public class ScoresPresenter
     @Override
     public void difficultyComboBoxChanged() {
         this.selectedDifficulty = this.view.getDifficulty();
-        this.reset();
+        this.refreshTable();
     }
 
     // Methods
+    public void refreshTable () {
+        try {
+            ArrayList<ScoreModel> scores = this.scoreService.getTotalScores(
+                    10,
+                    this.selectedDifficulty
+            );
+
+            this.view.reset();
+            this.view.insertRows(scores);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

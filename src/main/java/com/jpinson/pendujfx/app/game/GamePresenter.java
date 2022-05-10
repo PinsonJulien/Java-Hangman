@@ -1,6 +1,7 @@
 package com.jpinson.pendujfx.app.game;
 
 import com.jpinson.pendujfx.app.AppPresenterListener;
+import com.jpinson.pendujfx.enums.MusicEnum;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
 import com.jpinson.pendujfx.models.GameModel;
@@ -45,6 +46,7 @@ public class GamePresenter
     public void reset() {
         this.newGame();
         this.view.reset();
+        this.parentListener.selectMusic(MusicEnum.GAME);
     }
 
     // Listeners

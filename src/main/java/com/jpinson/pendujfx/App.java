@@ -14,6 +14,7 @@ import com.jpinson.pendujfx.app.scores.ScoresPresenter;
 import com.jpinson.pendujfx.app.scores.ScoresView;
 import com.jpinson.pendujfx.enums.DifficultyEnum;
 import com.jpinson.pendujfx.enums.HealthComponentEnum;
+import com.jpinson.pendujfx.enums.MusicEnum;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.models.GameModel;
 import com.jpinson.pendujfx.models.OptionsModel;
@@ -22,6 +23,7 @@ import com.jpinson.pendujfx.services.UserService;
 import com.jpinson.pendujfx.services.WordService;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -29,23 +31,15 @@ import java.io.IOException;
 import java.net.URL;
 
 public class App extends Application {
-    final AppPresenter appPresenter;
-
-    public App() {
-        // Generate the main presenter
-        this.appPresenter = new AppPresenter(
-            new AppView()
-        );
-
-        this.init();
-    }
+    final AppPresenter appPresenter = new AppPresenter(
+        new AppView()
+    );
 
     public static void main(String[] args) {
-        new App();
         launch();
     }
 
-    public void init() {
+    public void initApplication() {
         // Generate models and default values
         OptionsModel optionsModel = new OptionsModel();
         optionsModel.setDifficulty(DifficultyEnum.EASY);
@@ -110,17 +104,27 @@ public class App extends Application {
         this.appPresenter.addChildPresenter(PresenterEnum.GAMEOVER, gameOverPresenter);
         this.appPresenter.addChildPresenter(PresenterEnum.SCORES, scoresPresenter);
 
+        // Adding all musics
+        this.appPresenter.addMusic(MusicEnum.MENU, this.getMedia("musics/menu.mp3"));
+        this.appPresenter.addMusic(MusicEnum.OPTIONS, this.getMedia("musics/options.mp3"));
+        this.appPresenter.addMusic(MusicEnum.GAME, this.getMedia("musics/game.mp3"));
+        this.appPresenter.addMusic(MusicEnum.GAMEOVER, this.getMedia("musics/gameOver.mp3"));
+        this.appPresenter.addMusic(MusicEnum.SCORES, this.getMedia("musics/scores.mp3"));
+
         // Setup the first visible presenter
-        appPresenter.changeView(PresenterEnum.MENU);
+        appPresenter.selectPresenter(PresenterEnum.MENU);
     }
 
     @Override
     public void start(Stage stage) throws IOException {
+        // Set and generate
+        this.initApplication();
+
         // Setup scene
         Scene scene = new Scene(this.appPresenter.getView().getPane(), 896, 414);
 
         // Setup style
-        final URL style = this.getClass().getResource("app.css");
+        final URL style = this.getResourceURL("styles/app.css");
         if (style != null ) scene.getStylesheets().add(style.toString());
 
         // remove top bar
@@ -132,4 +136,11 @@ public class App extends Application {
         stage.show();
     }
 
+    private URL getResourceURL (String resource) {
+        return this.getClass().getResource(resource);
+    }
+
+    private Media getMedia (String resource) {
+        return new Media(this.getResourceURL(resource).toString());
+    }
 }

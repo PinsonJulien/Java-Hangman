@@ -1,5 +1,6 @@
 module com.jpinson.pendujfx {
     requires javafx.controls;
+    requires javafx.media;
 
     requires dotenv.java;
     requires java.net.http;

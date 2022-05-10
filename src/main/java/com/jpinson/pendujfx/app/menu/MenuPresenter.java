@@ -1,6 +1,7 @@
 package com.jpinson.pendujfx.app.menu;
 
 import com.jpinson.pendujfx.app.AppPresenterListener;
+import com.jpinson.pendujfx.enums.MusicEnum;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
 import com.jpinson.pendujfx.models.GameModel;
@@ -34,6 +35,8 @@ public class MenuPresenter
         if (this.gameModel.getUser() != null) {
             this.view.revealQuickPlayButton();
         }
+
+        this.parentListener.selectMusic(MusicEnum.MENU);
     }
 
     // Listeners

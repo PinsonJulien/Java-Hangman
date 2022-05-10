@@ -4,6 +4,7 @@ import com.jpinson.pendujfx.API.WordnikAPI;
 import com.jpinson.pendujfx.app.AppPresenterListener;
 import com.jpinson.pendujfx.enums.DifficultyEnum;
 import com.jpinson.pendujfx.enums.HealthComponentEnum;
+import com.jpinson.pendujfx.enums.MusicEnum;
 import com.jpinson.pendujfx.enums.PresenterEnum;
 import com.jpinson.pendujfx.framework.presenter.ChildPresenter;
 import com.jpinson.pendujfx.models.GameModel;
@@ -36,16 +37,15 @@ public class OptionsPresenter
 
     // Interfaces
     @Override
-    public void init() {
+    public void init() {}
+
+    @Override
+    public void reset() {
         // Shows the toggle network button if API is available.
         boolean apiAvailable = new WordnikAPI().isAvailable();
         this.view.setNetworkVisibility(apiAvailable);
         this.setNetwork(apiAvailable);
-        this.reset();
-    }
 
-    @Override
-    public void reset() {
         UserModel user = this.gameModel.getUser();
         DifficultyEnum difficulty = this.gameModel.getOptions().getDifficulty();
         HealthComponentEnum healthComponent = this.gameModel.getOptions().getHealthComponent();
@@ -57,6 +57,8 @@ public class OptionsPresenter
         this.view.setHealthComponent((healthComponent != null) ? healthComponent : HealthComponentEnum.CLASSIC);
         this.view.setNetworkSelected(network);
         this.view.reset();
+
+        this.parentListener.selectMusic(MusicEnum.OPTIONS);
     }
 
     // Listeners
