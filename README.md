@@ -8,10 +8,10 @@ A Java based Hangman game first planned to use a Swing GUI, for the first year o
 - Music player
 - MVP pattern
 - Unit testing
-- Environment variables (JSON)
+- Environment variables (dotenv)
 - API fetching (Wordnik API)
 
 ## What I would improve
 - SQLite database should not be in the repository, there should be migrations instead.
 - I would consider creating a router instead of the "appPresenter"
-- MVP might not be the best pattern for a GUI application, it would probably be better to inspire from Angular workflow with only services and models.
+- MVP might not be the best pattern for a GUI application, it would probably be better to inspire from Angular workflow with only services and entities
